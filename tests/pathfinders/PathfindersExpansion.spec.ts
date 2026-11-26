@@ -35,8 +35,7 @@ describe('PathfindersExpansion', () => {
 
   it('Venus track', () => {
     const [game, player1, player2] = testGame(2, {
-      pathfindersExpansion: true,
-      venusNextExtension: true,
+      expansions: {pathfinders: true, venus: true},
     });
     const pathfindersData = game.pathfindersData!;
 
@@ -57,8 +56,7 @@ describe('PathfindersExpansion', () => {
 
   it('Most tags', () => {
     const [game, player1, player2] = testGame(2, {
-      pathfindersExpansion: true,
-      venusNextExtension: true,
+      expansions: {pathfinders: true, venus: true},
     });
     const pathfindersData = game.pathfindersData!;
 
@@ -162,8 +160,7 @@ describe('PathfindersExpansion', () => {
 
   it('grant delegate reward', () => {
     const [game, player] = testGame(1, {
-      pathfindersExpansion: true,
-      turmoilExtension: true,
+      expansions: {pathfinders: true, turmoil: true},
     });
 
     PathfindersExpansion.grant('delegate', player, Tag.EARTH);
@@ -173,8 +170,7 @@ describe('PathfindersExpansion', () => {
 
   it('grant delegate reward - no grant when player has no available delegates', () => {
     const [game, player] = testGame(1, {
-      pathfindersExpansion: true,
-      turmoilExtension: true,
+      expansions: {pathfinders: true, turmoil: true},
     });
 
     const turmoil = Turmoil.getTurmoil(game);
@@ -252,8 +248,7 @@ describe('PathfindersExpansion', () => {
 
   it('grant - moon_road', () => {
     const [game, player] = testGame(1, {
-      pathfindersExpansion: true,
-      moonExpansion: true,
+      expansions: {pathfinders: true, moon: true},
     });
 
     PathfindersExpansion.grant('moon_road', player, Tag.EARTH);
@@ -264,8 +259,7 @@ describe('PathfindersExpansion', () => {
 
   it('grant - moon_mine', () => {
     const [game, player] = testGame(1, {
-      pathfindersExpansion: true,
-      moonExpansion: true,
+      expansions: {pathfinders: true, moon: true},
     });
 
     PathfindersExpansion.grant('moon_mine', player, Tag.EARTH);
@@ -359,8 +353,7 @@ describe('PathfindersExpansion', () => {
 
   it('grant - venus_scale', () => {
     const [game, player] = testGame(1, {
-      pathfindersExpansion: true,
-      venusNextExtension: true,
+      expansions: {pathfinders: true, venus: true},
     });
 
     PathfindersExpansion.grant('venus_scale', player, Tag.EARTH);

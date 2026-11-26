@@ -11,7 +11,7 @@ describe('GrayEminence', () => {
     {reserve: 0, expected: {placed: 0, calls: ['gainMc(2)', 'gainMc(2)']}},
   ] as const) {
     it('places 2 delegates, gaining 2 M€ for each it cannot place: ' + JSON.stringify(run), () => {
-      const [game, human] = testGame(1, {automa: true, turmoilExtension: true});
+      const [game, human] = testGame(1, {automa: true, expansions: {turmoil: true}});
       const botPlayer = game.marsBotPlayer!;
       const {marsBot, calls} = recordingMarsBot({game, player: botPlayer, humanPlayer: human});
       const turmoil = Turmoil.getTurmoil(game);
@@ -26,7 +26,7 @@ describe('GrayEminence', () => {
   }
 
   it('sends each delegate to a party with the fewest MarsBot delegates', () => {
-    const [game, human] = testGame(1, {automa: true, turmoilExtension: true});
+    const [game, human] = testGame(1, {automa: true, expansions: {turmoil: true}});
     const botPlayer = game.marsBotPlayer!;
     const {marsBot} = recordingMarsBot({game, player: botPlayer, humanPlayer: human});
     const turmoil = Turmoil.getTurmoil(game);

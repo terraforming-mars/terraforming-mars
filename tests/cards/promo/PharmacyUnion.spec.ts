@@ -298,7 +298,7 @@ describe('PharmacyUnion', () => {
 
   it('Compatible with GMO Contract', () => {
     const card = new PharmacyUnion();
-    const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true}});
 
     player.playedCards.push(card);
     player.playedCards.push(new GMOContract());
@@ -313,7 +313,7 @@ describe('PharmacyUnion', () => {
 
   it('Compatible with Greens policy gp03', () => {
     const card = new PharmacyUnion();
-    const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true}});
 
     player.playedCards.push(card);
     setRulingParty(game, PartyName.GREENS, 'gp03');
@@ -328,7 +328,7 @@ describe('PharmacyUnion', () => {
 
   it('Pharmacy Union, Splice, Reds, Microbe tag, Science tag #3126', () => {
     const pharmacyUnion = new PharmacyUnion();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
 
     player.playedCards.push(pharmacyUnion);
     player.megaCredits = 12;
@@ -381,7 +381,7 @@ describe('PharmacyUnion', () => {
 
   it('Reds + Science, #1670', () => {
     const pharmacyUnion = new PharmacyUnion();
-    const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true}});
     pharmacyUnion.resourceCount = 2;
     player.playedCards.push(pharmacyUnion);
 
@@ -422,7 +422,7 @@ describe('PharmacyUnion', () => {
   it('Reds + Leavitt + Pharmacy Union, #1670', () => {
     const pharmacyUnion = new PharmacyUnion();
     const leavitt = new Leavitt();
-    const [game, player/* , player2 */] = testGame(2, {coloniesExtension: true, turmoilExtension: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {colonies: true, turmoil: true}});
     pharmacyUnion.resourceCount = 2;
     player.playedCards.push(pharmacyUnion);
 

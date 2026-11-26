@@ -75,7 +75,8 @@ describe('DeepFoundations', () => {
 
   it('Will not excavate on a space with a tile', () => {
     const card = new DeepFoundations();
-    const [game, player] = testGame(1, {underworldExpansion: true, aresExtension: true});
+    // aresHazards is only here because the old test had it.
+    const [game, player] = testGame(1, {expansions: {underworld: true, ares: true}, aresHazards: true});
     player.playedCards.push(card);
 
     player.megaCredits = 20 + 8; // 22 for the action, 8 for the dust storm

@@ -8,7 +8,7 @@ import {Odyssey} from '../../src/server/cards/pathfinders/Odyssey';
 describe('InterplanetaryTrade', () => {
   it('resolve play', () => {
     const card = new InterplanetaryTrade();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.tagsForTest = {space: 1};
     player2.tagsForTest = {space: 2};
@@ -26,7 +26,7 @@ describe('InterplanetaryTrade', () => {
 
   it('counts event tags when the player has Odyssey', () => {
     const card = new InterplanetaryTrade();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
     player.playedCards.push(new Asteroid()); // Event, Space
 
     card.resolve(game);

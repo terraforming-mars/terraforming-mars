@@ -46,7 +46,7 @@ describe('LakeMarineris', () => {
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
       const card = new LakeMarineris();
-      const [game, player, player2] = testGame(2, {turmoilExtension: true});
+      const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
 
       // Card requirements.
       setTemperature(game, 0);

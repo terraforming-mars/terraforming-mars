@@ -77,7 +77,7 @@ describe('LaborTrafficking', () => {
   // but it works just fine here since this was the source of its report.
   it('Cost does not go negative', () => {
     const card = new LaborTrafficking();
-    const [game, player] = testGame(1, {turmoilExtension: true, underworldExpansion: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true, underworld: true}});
     player.playedCards.push(card);
 
     const collusionStandardProject = new CollusionStandardProject();

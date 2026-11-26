@@ -14,7 +14,7 @@ describe('CorridorsOfPower', () => {
   let card: CorridorsOfPower;
 
   beforeEach(() => {
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
     turmoil = game.turmoil!;
     card = new CorridorsOfPower();
   });

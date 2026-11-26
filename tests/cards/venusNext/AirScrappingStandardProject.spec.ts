@@ -14,7 +14,7 @@ describe('AirScrappingStandardProject', () => {
 
   beforeEach(() => {
     card = new AirScrappingStandardProject();
-    [game, player/* , player2 */] = testGame(2, {venusNextExtension: true, altVenusBoard: false, turmoilExtension: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {venus: true, turmoil: true}, altVenusBoard: false});
   });
 
   it('Can act', () => {

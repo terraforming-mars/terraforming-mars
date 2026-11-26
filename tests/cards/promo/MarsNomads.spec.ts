@@ -171,7 +171,7 @@ describe('MarsNomads', () => {
     {bonus: SpaceBonus.TEMPERATURE_4MC, mc: 7, expected: true},
   ] as const) {
     it('Destination filter includes Reds TR tax' + JSON.stringify(run), () => {
-      const [game, player] = testGame(2, {turmoilExtension: true});
+      const [game, player] = testGame(2, {expansions: {turmoil: true}});
       const card = new MarsNomads();
       const board = game.board;
       setRulingParty(game, PartyName.REDS);
@@ -441,7 +441,7 @@ describe('MarsNomads', () => {
     });
 
     it('Moving onto a hazard does not trigger tile placement policies', () => {
-      const [game, player] = testGame(2, {aresExtension: true, aresHazards: true, turmoilExtension: true});
+      const [game, player] = testGame(2, {expansions: {ares: true, turmoil: true}, aresHazards: true});
       setRulingParty(game, PartyName.GREENS, 'gp02');
 
       const firstSpace = game.board.getSpaceOrThrow('05');

@@ -6,7 +6,7 @@ import {recordingMarsBot} from '../RecordingMarsBot';
 
 describe('SeptumTribusMarsBot', () => {
   it('setup swaps Party Politics for Gray Eminence and adds the delegates of an unused colour to MarsBot', () => {
-    const [game] = testGame(1, {automa: true, turmoilExtension: true});
+    const [game] = testGame(1, {automa: true, expansions: {turmoil: true}});
     const {marsBot, calls} = recordingMarsBot({game, player: game.marsBotPlayer});
 
     new SeptumTribusMarsBot().setup(marsBot);

@@ -27,7 +27,7 @@ describe('FabricatedScandal', () => {
 
   it('Reds: lowest-TR player gains TR based on their own ability to pay', () => {
     const card = new FabricatedScandal();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
 
     setRulingParty(game, PartyName.REDS);
 

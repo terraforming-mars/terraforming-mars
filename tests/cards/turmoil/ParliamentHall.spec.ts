@@ -10,7 +10,7 @@ describe('ParliamentHall', () => {
     const card = new ParliamentHall();
     const card2 = new DeepWellHeating();
     const card3 = new MartianRails();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
 
     expect(card.canPlay(player)).is.not.true;
 

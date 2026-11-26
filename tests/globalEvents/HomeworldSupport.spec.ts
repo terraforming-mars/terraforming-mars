@@ -9,7 +9,7 @@ import {Tag} from '../../src/common/cards/Tag';
 describe('HomeworldSupport', () => {
   it('resolve play', () => {
     const card = new HomeworldSupport();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.tagsForTest = {earth: 1};
     player2.tagsForTest = {earth: 2};
@@ -27,7 +27,7 @@ describe('HomeworldSupport', () => {
 
   it('does not count wild tags', () => {
     const card = new HomeworldSupport();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
     player.tagsForTest = {earth: 1, wild: 1};
 
     card.resolve(game);
@@ -39,7 +39,7 @@ describe('HomeworldSupport', () => {
 
   it('does not count Moon tags as Earth tags with Earth Embassy', () => {
     const card = new HomeworldSupport();
-    const [game, player] = testGame(2, {turmoilExtension: true, moonExpansion: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true, moon: true}});
     player.playedCards.push(new EarthEmbassy());
     player.tagsForTest = {earth: 1, moon: 2};
 
@@ -51,7 +51,7 @@ describe('HomeworldSupport', () => {
 
   it('does not count Chimera wild tags', () => {
     const card = new HomeworldSupport();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
     player.playedCards.push(new Chimera(), fakeCard({tags: [Tag.EARTH]}));
 
     card.resolve(game);

@@ -22,7 +22,7 @@ describe('CollusionStandardProject', () => {
   let turmoil: Turmoil;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     card = new CollusionStandardProject();
     turmoil = Turmoil.getTurmoil(game);
     turmoil.parties.forEach((party) => {

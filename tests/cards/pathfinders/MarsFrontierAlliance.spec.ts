@@ -22,7 +22,7 @@ describe('MarsFrontierAlliance', () => {
 
   beforeEach(() => {
     card = new MarsFrontierAlliance();
-    [game, player] = testGame(1, {pathfindersExpansion: true, turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {pathfinders: true, turmoil: true}});
     turmoil = game.turmoil!;
   });
 

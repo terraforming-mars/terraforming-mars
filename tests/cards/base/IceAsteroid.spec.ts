@@ -20,7 +20,7 @@ describe('IceAsteroid', () => {
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
       const card = new IceAsteroid();
-      const [/* game */, player, player2] = testGame(2, {turmoilExtension: true});
+      const [/* game */, player, player2] = testGame(2, {expansions: {turmoil: true}});
       maxOutOceans(player2, run.oceans);
       testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);
     });

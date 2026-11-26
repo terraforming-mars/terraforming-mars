@@ -13,7 +13,7 @@ describe('SeismicPredictions', () => {
 
   beforeEach(() => {
     card = new SeismicPredictions();
-    [game, player] = testGame(1, {turmoilExtension: true, underworldExpansion: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true, underworld: true}});
     turmoil = Turmoil.getTurmoil(game);
   });
 

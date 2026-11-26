@@ -19,7 +19,7 @@ describe('LobbyHalls', () => {
 
   beforeEach(() => {
     card = new LobbyHalls();
-    [game, player] = testGame(1, {turmoilExtension: true, pathfindersExpansion: true, venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true, pathfinders: true, venus: true}});
     turmoil = game.turmoil!;
   });
 

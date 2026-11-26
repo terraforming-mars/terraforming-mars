@@ -239,7 +239,7 @@ describe('EcologicalSurvey', () => {
   }
 
   it('Works with Greens policy', () => {
-    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true, turmoil: true}});
     game.board = EmptyBoard.newInstance();
     player.playedCards.push(card);
     const [space1, space2] = game.board.getAvailableSpacesOnLand(player);

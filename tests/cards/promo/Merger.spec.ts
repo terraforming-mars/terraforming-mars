@@ -52,7 +52,7 @@ describe('Merger', () => {
 
   beforeEach(() => {
     merger = new Merger();
-    [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {prelude: true, turmoil: true}});
 
     // Preset corporation deck for testing
     game.corporationDeck.drawPile = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];
@@ -309,7 +309,7 @@ describe('Merger', () => {
       const corpNames = corporations.map(toName).join(', ');
 
       it(`(${corpNames}, ${candidate.name}, ${megacredits})`, () => {
-        [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+        [game, player, player2] = testGame(2, {expansions: {prelude: true, turmoil: true}});
         player.playCorporationCard(corporations[0]);
         if (corporations.length > 1) {
           player.playCorporationCard(corporations[1]);

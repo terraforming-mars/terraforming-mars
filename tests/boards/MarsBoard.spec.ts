@@ -249,7 +249,7 @@ describe('MarsBoard', () => {
     });
 
     it('Reds tax adds to OCEAN cost', () => {
-      [game, player] = testGame(1, {turmoilExtension: true});
+      [game, player] = testGame(1, {expansions: {turmoil: true}});
       setRulingParty(game, PartyName.REDS);
       space = game.board.getSpaceOrThrow('15');
       space.bonus = [SpaceBonus.OCEAN];
@@ -262,7 +262,7 @@ describe('MarsBoard', () => {
     });
 
     it('Reds tax not applied when global parameter is maxed', () => {
-      [game, player] = testGame(1, {turmoilExtension: true});
+      [game, player] = testGame(1, {expansions: {turmoil: true}});
       setRulingParty(game, PartyName.REDS);
       space = game.board.getSpaceOrThrow('15');
       space.bonus = [SpaceBonus.TEMPERATURE_4MC];

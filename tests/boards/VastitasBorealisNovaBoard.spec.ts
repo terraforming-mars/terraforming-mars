@@ -94,7 +94,7 @@ describe('VastitasBorealisNovaBoard', () => {
   });
 
   it('Delegate bonuses work with Turmoil', () => {
-    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true});
+    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVA, expansions: {turmoil: true}});
     const board = cast(game.board, VastitasBorealisNovaBoard);
     const delegateSpace = board.spaces.filter((space) => space.bonus.includes(SpaceBonus.DELEGATE))[0];
     expect(board.getAvailableSpacesOnLand(player, {cost: 0})).includes(delegateSpace);

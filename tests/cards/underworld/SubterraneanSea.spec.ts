@@ -77,7 +77,7 @@ describe('SubterraneanSea', () => {
 
   it('canPlay when Reds are in power', () => {
     const card = new SubterraneanSea();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true, turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true, turmoil: true}});
 
     // Card requirements
     const spaces = game.board.getAvailableSpacesOnLand(player);

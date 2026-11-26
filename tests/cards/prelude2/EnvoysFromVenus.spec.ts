@@ -14,7 +14,7 @@ describe('EnvoysFromVenus', () => {
 
   beforeEach(() => {
     card = new EnvoysFromVenus();
-    [/* game */, player] = testGame(1, {turmoilExtension: true});
+    [/* game */, player] = testGame(1, {expansions: {turmoil: true}});
     turmoil = player.game.turmoil!;
   });
 

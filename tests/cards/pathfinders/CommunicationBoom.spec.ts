@@ -10,7 +10,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('CommunicationBoom', () => {
   it('resolve play', () => {
     const card = new CommunicationBoom();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     const a = fakeCard({name: 'A' as CardName, resourceType: CardResource.MICROBE});

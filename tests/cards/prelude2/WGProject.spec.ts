@@ -25,7 +25,7 @@ describe('WGProject', () => {
 
   beforeEach(() => {
     card = new WGProject();
-    [game, player] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {prelude: true, turmoil: true}});
     smeltingPlant = new SmeltingPlant();
     donation = new Donation();
     hugeAsteroid = new HugeAsteroid();

@@ -18,7 +18,7 @@ describe('TerraformingDeal', () => {
 
   beforeEach(() => {
     card = new TerraformingDeal();
-    [game, player, player2] = testGame(3, {turmoilExtension: true});
+    [game, player, player2] = testGame(3, {expansions: {turmoil: true}});
   });
 
   it('Gains 2 MC whenever player raises TR during action phase', () => {

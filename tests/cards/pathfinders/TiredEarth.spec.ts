@@ -5,7 +5,7 @@ import {testGame} from '../../TestingUtils';
 describe('TiredEarth', () => {
   it('resolve play', () => {
     const card = new TiredEarth();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     turmoil.initGlobalEvent(game);

@@ -6,7 +6,7 @@ import {testGame} from '../TestingUtils';
 describe('VenusInfrastructure', () => {
   it('resolve play', () => {
     const card = new VenusInfrastructure();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.tagsForTest = {venus: 1};
     player2.tagsForTest = {venus: 3};

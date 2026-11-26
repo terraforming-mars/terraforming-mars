@@ -26,7 +26,7 @@ describe('MarsBotTurmoilHelper', () => {
 
   beforeEach(() => {
     // Setup also puts a NEUTRAL delegate in Mars First, which is dominant, and in Scientists.
-    [game, human] = testGame(1, {automa: true, turmoilExtension: true});
+    [game, human] = testGame(1, {automa: true, expansions: {turmoil: true}});
     botPlayer = game.marsBotPlayer!;
     turmoil = Turmoil.getTurmoil(game);
     helper = new MarsBotTurmoilHelper(game);

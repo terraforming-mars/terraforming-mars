@@ -25,7 +25,7 @@ describe('RedCity', () => {
 
   beforeEach(() => {
     card = new RedCity();
-    [game, player, player2] = testGame(2, {pathfindersExpansion: true, turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {pathfinders: true, turmoil: true}});
     turmoil = game.turmoil!;
     board = game.board;
   });

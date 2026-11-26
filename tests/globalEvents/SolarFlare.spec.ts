@@ -6,7 +6,7 @@ import {testGame} from '../TestingUtils';
 describe('SolarFlare', () => {
   it('resolve play', () => {
     const card = new SolarFlare();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.tagsForTest = {space: 1};
     player2.tagsForTest = {space: 3};

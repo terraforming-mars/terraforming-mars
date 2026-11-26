@@ -26,7 +26,7 @@ describe('PublicSponsoredGrant', () => {
 
   beforeEach(() => {
     card = new PublicSponsoredGrant();
-    [game, player, player2, player3] = testGame(3, {turmoilExtension: true});
+    [game, player, player2, player3] = testGame(3, {expansions: {turmoil: true}});
   });
 
   it('canPlay', () => {

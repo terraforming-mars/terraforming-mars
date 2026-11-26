@@ -44,7 +44,7 @@ describe('AquiferPumping', () => {
   });
 
   it('Cannot act if cannot afford reds tax', () => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -65,7 +65,7 @@ describe('AquiferPumping', () => {
   });
 
   it('Steel does not satisfy the reds tax', () => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 

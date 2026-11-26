@@ -14,7 +14,7 @@ describe('PartyPolitics', () => {
     {reserve: 0, megacredits: 5, revealedCost: 6, expected: {placed: 0, calls: []}},
   ] as const) {
     it('places a delegate, and spends 5 M€ on a second when the revealed cost divides by 3: ' + JSON.stringify(run), () => {
-      const [game, human] = testGame(1, {automa: true, turmoilExtension: true});
+      const [game, human] = testGame(1, {automa: true, expansions: {turmoil: true}});
       const botPlayer = game.marsBotPlayer!;
       const {marsBot, calls} = recordingMarsBot({game, player: botPlayer, humanPlayer: human, megacredits: run.megacredits});
       const turmoil = Turmoil.getTurmoil(game);

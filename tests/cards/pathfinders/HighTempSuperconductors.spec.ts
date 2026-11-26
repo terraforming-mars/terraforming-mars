@@ -21,7 +21,7 @@ describe('HighTempSuperconductors', () => {
 
   beforeEach(() => {
     card = new HighTempSuperconductors();
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     turmoil = Turmoil.getTurmoil(game);
   });
 

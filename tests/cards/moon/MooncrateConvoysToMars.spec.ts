@@ -19,7 +19,7 @@ describe('MooncrateConvoysToMars', () => {
   let card: MooncrateConvoysToMars;
 
   beforeEach(() => {
-    [game, player1, player2, player3] = testGame(3, {moonExpansion: true, turmoilExtension: true});
+    [game, player1, player2, player3] = testGame(3, {expansions: {moon: true, turmoil: true}});
     moonData = MoonExpansion.moonData(game);
     card = new MooncrateConvoysToMars();
   });

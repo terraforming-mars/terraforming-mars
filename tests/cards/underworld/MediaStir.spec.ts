@@ -13,7 +13,7 @@ describe('MediaStir', () => {
 
   beforeEach(() => {
     card = new MediaStir();
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
     turmoil = Turmoil.getTurmoil(game);
   });
 

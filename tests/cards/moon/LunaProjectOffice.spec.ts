@@ -64,7 +64,7 @@ describe('LunaProjectOffice', () => {
   it('play - 2 player - draft', () => {
     const [game, player, player2] = testGame(2, {
       draftVariant: true,
-      turmoilExtension: false,
+      expansions: {turmoil: false},
     });
 
     game.generation = 10;

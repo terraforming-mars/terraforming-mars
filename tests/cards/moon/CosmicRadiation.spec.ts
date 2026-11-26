@@ -56,7 +56,7 @@ describe('CosmicRadiation', () => {
   });
 
   it('Compatible with underworld', () => {
-    const [game, player1, player2] = testGame(2, {moonExpansion: true, underworldExpansion: true});
+    const [game, player1, player2] = testGame(2, {expansions: {moon: true, underworld: true}});
     const card = new CosmicRadiation();
     const moonData = MoonExpansion.moonData(game);
 

@@ -35,7 +35,7 @@ describe('BufferGasStandardProject', () => {
   });
 
   it('Test reds', () => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     testRedsCosts(() => card.canAct(player), player, card.cost, 3);
   });
 });

@@ -23,7 +23,7 @@ describe('SpecializedSettlement', () => {
 
   beforeEach(() => {
     card = new SpecializedSettlement();
-    [game, player] = testGame(1, {aresExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(1, {expansions: {ares: true, pathfinders: true}});
     game.board = EmptyBoard.newInstance();
   });
 

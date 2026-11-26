@@ -15,7 +15,7 @@ describe('AerialLenses', () => {
 
   beforeEach(() => {
     card = new AerialLenses();
-    [game, player, player2] = testGame(2, {turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
   });
 
   it('Can play', () => {

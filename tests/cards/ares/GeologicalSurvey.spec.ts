@@ -135,7 +135,7 @@ describe('GeologicalSurvey', () => {
   });
 
   it('Works with Mars First policy', () => {
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
 
     player.playedCards.push(card);
     game.phase = Phase.ACTION; // Policies are only active in the ACTION phase
@@ -243,7 +243,7 @@ describe('GeologicalSurvey', () => {
   }
 
   it('Works with Kelvinists policy', () => {
-    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true, turmoil: true}});
     game.board = EmptyBoard.newInstance();
     player.playedCards.push(card);
     const [space1, space2] = game.board.getAvailableSpacesOnLand(player);

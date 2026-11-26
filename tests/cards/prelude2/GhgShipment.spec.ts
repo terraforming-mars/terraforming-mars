@@ -10,7 +10,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('GhgShipment', () => {
   it('canPlay', () => {
     const card = new GhgShipment();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
 
     expect(card.canPlay(player)).is.false;
 
@@ -21,7 +21,7 @@ describe('GhgShipment', () => {
 
   it('play', () => {
     const card = new GhgShipment();
-    const [/* game */, player] = testGame(1, {turmoilExtension: true});
+    const [/* game */, player] = testGame(1, {expansions: {turmoil: true}});
 
     const jovianLanterns = new JovianLanterns();
     const searchForLife = new SearchForLife();

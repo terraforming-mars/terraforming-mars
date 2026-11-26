@@ -39,6 +39,7 @@ export class RedCity extends Card implements IProjectCard {
           'Place the special tile on Mars ADJACENT TO NO GREENERY. ' +
           'NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space (or hazard) next to this tile.',
         victoryPoints: questionmark(),
+        helpText: 'PolderTech can override Red City\'s greenery-placement restrictions',
       },
     });
   }

@@ -13,7 +13,8 @@ import {Size} from '../../../common/cards/render/Size';
 import {Tag} from '../../../common/cards/Tag';
 import {Phase} from '../../../common/Phase';
 
-// TODO(kberg): PolderTech is not yet compatible with Ares or Red City.
+// TODO(kberg): PolderTech is not yet compatible with Ares. Placing the ocean can add erosions,
+// leaving no valid greenery space.
 export class PolderTechDutch extends CorporationCard implements ICorporationCard {
   constructor() {
     super({
@@ -31,6 +32,7 @@ export class PolderTechDutch extends CorporationCard implements ICorporationCard
           b.effect('When you place an ocean tile, gain 1 energy.', (eb) => eb.oceans(1, {size: Size.SMALL}).startEffect.energy(1)).br;
           b.effect('When you place a greenery, gain 1 plant.', (eb) => eb.greenery({size: Size.SMALL}).startEffect.plants(1)).br;
         }),
+        helpText: 'PolderTech overrides Red City\'s greenery-placement restrictions',
       },
     });
   }
@@ -39,7 +41,8 @@ export class PolderTechDutch extends CorporationCard implements ICorporationCard
     const board = player.game.board;
 
     // Find valid ocean space. They have to be next to a place to put the greenery.
-    // Greenery spaces can be any space because this corp ignores greenery placement restrictions.
+    // Greenery spaces can be any space because this corp ignores greenery placement restrictions,
+    // including Red City's.
     const oceanSpaces = board.getAvailableSpacesForOcean(player);
     const greenerySpaces = board.getAvailableSpacesOnLand(player);
     const oceanSpacesNextToGreenerySpaces = oceanSpaces.filter((space) => {

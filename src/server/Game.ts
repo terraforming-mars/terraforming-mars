@@ -1497,7 +1497,7 @@ export class Game implements IGame, Logger {
     case SpaceBonus.SCIENCE:
       this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
       break;
-    case SpaceBonus.TEMPERATURE_4MC:
+    case SpaceBonus.TEMPERATURE:
       if (this.getTemperature() < this.max.temperature) {
         this.defer(new SelectPaymentDeferred(
           player,

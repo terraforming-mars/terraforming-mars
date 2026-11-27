@@ -216,15 +216,15 @@ describe('MarsBoard', () => {
       expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
     });
 
-    it('TEMPERATURE_4MC bonus is free when temperature is maxed out', () => {
-      space.bonus = [SpaceBonus.TEMPERATURE_4MC];
+    it('TEMPERATURE bonus is free when temperature is maxed out', () => {
+      space.bonus = [SpaceBonus.TEMPERATURE];
       setTemperature(game, constants.MAX_TEMPERATURE);
       player.megaCredits = 0;
       expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
     });
 
-    it('TEMPERATURE_4MC bonus requires Vastitas Borealis Nova temperature cost', () => {
-      space.bonus = [SpaceBonus.TEMPERATURE_4MC];
+    it('TEMPERATURE bonus requires Vastitas Borealis Nova temperature cost', () => {
+      space.bonus = [SpaceBonus.TEMPERATURE];
       player.megaCredits = constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST - 1;
       expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
       player.megaCredits = constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST;
@@ -240,7 +240,7 @@ describe('MarsBoard', () => {
     });
 
     it('Sums multiple unaffordable bonuses', () => {
-      space.bonus = [SpaceBonus.OCEAN, SpaceBonus.TEMPERATURE_4MC];
+      space.bonus = [SpaceBonus.OCEAN, SpaceBonus.TEMPERATURE];
       // Each bonus is checked independently, so M€ shortage on either fails.
       player.megaCredits = constants.HELLAS_BONUS_OCEAN_COST - 1;
       expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
@@ -265,7 +265,7 @@ describe('MarsBoard', () => {
       [game, player] = testGame(1, {expansions: {turmoil: true}});
       setRulingParty(game, PartyName.REDS);
       space = game.board.getSpaceOrThrow('15');
-      space.bonus = [SpaceBonus.TEMPERATURE_4MC];
+      space.bonus = [SpaceBonus.TEMPERATURE];
       setTemperature(game, constants.MAX_TEMPERATURE);
 
       player.megaCredits = 0;

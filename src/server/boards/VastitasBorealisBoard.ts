@@ -17,7 +17,7 @@ export class VastitasBorealisBoard extends MarsBoard {
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const HEAT = SpaceBonus.HEAT;
     const TITANIUM = SpaceBonus.TITANIUM;
-    const TEMPERATURE = SpaceBonus.TEMPERATURE_4MC;
+    const TEMPERATURE = SpaceBonus.TEMPERATURE;
 
     // y=0
     builder.row((r) => r.land(STEEL, STEEL).land(PLANT).land().land().volcanic(TITANIUM, TITANIUM));

@@ -14,7 +14,7 @@ import {CardName} from '../../src/common/cards/CardName';
 function newGameConfigForTest(): NewGameConfig {
   return {
     players: [{
-      name: 'Robot',
+      name: 'a',
       color: 'blue',
       beginner: false,
       handicap: 0,
@@ -111,7 +111,7 @@ describe('ApiCreateGame', () => {
     expect(model.id.startsWith('g')).is.true;
     const game = await scaffolding.ctx.gameLoader.getGame(model.id);
     expect(game).is.not.undefined;
-    expect(game!.players[0].name).eq('Robot');
+    expect(game!.players[0].name).eq('a');
   });
 
   it('red rover solo game', async () => {
@@ -134,14 +134,20 @@ describe('ApiCreateGame', () => {
     await Promise.all(([emit, post]));
   }
 
-  const twoPlayers = [{name: 'a', color: 'red'}, {name: 'b', color: 'blue'}];
+  // A complete create-game request for a two-player game.
+  const twoPlayerConfig: NewGameConfig = {
+    ...newGameConfigForTest(),
+    players: [
+      {name: 'a', color: 'blue', beginner: false, handicap: 0, first: true},
+      {name: 'b', color: 'red', beginner: false, handicap: 0, first: false},
+    ],
+  };
 
   it('rejects a custom corporation list smaller than players × starting corporations', async () => {
     await postConfig({
-      players: twoPlayers,
+      ...twoPlayerConfig,
       startingCorporations: 2,
       customCorporationsList: [CardName.CREDICOR, CardName.ECOLINE, CardName.HELION],
-      customPreludes: [],
     });
     expect(res.statusCode).eq(statusCode.badRequest);
     expect(res.content).contains('at least 4 corporations');
@@ -149,19 +155,17 @@ describe('ApiCreateGame', () => {
 
   it('accepts a custom corporation list of exactly players × starting corporations', async () => {
     await postConfig({
-      players: twoPlayers,
+      ...twoPlayerConfig,
       startingCorporations: 2,
       customCorporationsList: [CardName.CREDICOR, CardName.ECOLINE, CardName.HELION, CardName.INVENTRIX],
-      customPreludes: [],
     });
-    expect(res.statusCode).not.eq(statusCode.badRequest);
+    expect(res.statusCode).eq(statusCode.ok);
   });
 
   it('rejects a custom prelude list smaller than players × starting preludes', async () => {
     await postConfig({
-      players: twoPlayers,
+      ...twoPlayerConfig,
       startingPreludes: 4,
-      customCorporationsList: [],
       customPreludes: [CardName.ALLIED_BANK, CardName.AQUIFER_TURBINES, CardName.BIOFUELS, CardName.BIOLAB, CardName.BIOSPHERE_SUPPORT, CardName.BUSINESS_EMPIRE, CardName.DOME_FARMING],
     });
     expect(res.statusCode).eq(statusCode.badRequest);
@@ -170,10 +174,8 @@ describe('ApiCreateGame', () => {
 
   it('rejects a custom CEO list smaller than players × CEOs dealt', async () => {
     await postConfig({
-      players: twoPlayers,
+      ...twoPlayerConfig,
       startingCeos: 1,
-      customCorporationsList: [],
-      customPreludes: [],
       customCeos: [CardName.FLOYD, CardName.HAL9000, CardName.KAREN, CardName.GORDON, CardName.ULRICH],
     });
     expect(res.statusCode).eq(statusCode.badRequest);
@@ -185,14 +187,8 @@ describe('ApiCreateGame', () => {
     awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Celebrity'],
   };
 
-  // One-player games ignore milestones and awards.
-  function twoPlayerConfig() {
-    const config = newGameConfigForTest();
-    return {...config, players: [config.players[0], {...config.players[0], name: 'Robot 2', color: 'red', first: false}]};
-  }
-
   it('uses custom milestones and awards', async () => {
-    await postConfig({...twoPlayerConfig(), randomMA: RandomMAOptionType.MANUAL, customMA});
+    await postConfig({...twoPlayerConfig, randomMA: RandomMAOptionType.MANUAL, customMA});
     expect(res.statusCode).eq(statusCode.ok);
     const model = JSON.parse(res.content) as SimpleGameModel;
     const game = await scaffolding.ctx.gameLoader.getGame(model.id);
@@ -201,16 +197,15 @@ describe('ApiCreateGame', () => {
   });
 
   it('rejects custom milestones and awards of the wrong size', async () => {
-    await postConfig({...twoPlayerConfig(), randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}});
+    await postConfig({...twoPlayerConfig, randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}});
     expect(res.statusCode).eq(statusCode.internalServerError);
     expect(res.content).contains('You must have between 3 and 8 custom awards');
   });
 
   it('rejects custom milestones and awards from missing expansions', async () => {
-    const config = twoPlayerConfig();
     await postConfig({
-      ...config,
-      expansions: {...config.expansions, turmoil: false},
+      ...twoPlayerConfig,
+      expansions: {...twoPlayerConfig.expansions, turmoil: false},
       randomMA: RandomMAOptionType.MANUAL,
       customMA: {...customMA, awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Politician']},
     });

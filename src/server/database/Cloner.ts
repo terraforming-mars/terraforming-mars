@@ -14,7 +14,7 @@ export class Cloner {
     newGameId: GameId,
     newSpectatorId: SpectatorId,
     players: Array<IPlayer>,
-    firstPlayerIndex: number,
+    firstPlayerId: PlayerId,
     serialized: SerializedGame): IGame {
     const serializedGameId: GameId = serialized.id;
     const serializedPlayerIds: Array<PlayerId> = serialized.players.map(toID);
@@ -41,7 +41,7 @@ export class Cloner {
     for (let idx = 0; idx < players.length; idx++) {
       this.updatePlayer(players[idx], serialized.players[idx]);
     }
-    serialized.first = serialized.players[firstPlayerIndex].id;
+    serialized.first = firstPlayerId;
     serialized.clonedGamedId = '#' + serializedGameId;
     serialized.createdTimeMs = new Date().getTime();
     const game = Game.deserialize(serialized);

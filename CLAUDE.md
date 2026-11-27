@@ -129,4 +129,5 @@ Custom i18n via `src/client/directives/i18n.ts` with `v-i18n` directive. Transla
 
 @STYLE.md
 
-Adhere to it as best as you can, calling out outliers.
+When you write or edit code, follow STYLE.md with every edit.
+If you can't meet the style guide, explain briefly.

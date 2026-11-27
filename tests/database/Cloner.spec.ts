@@ -11,7 +11,7 @@ describe('Cloner', () => {
   it('solo game preserved', () => {
     const player = new Player('old-player1', 'yellow', true, 9, 'p-old-player1-id');
     const game = Game.newInstance(
-      'g-old-game-id', [player], player, 'spectatorid', {
+      'g-old-game-id', [player], player.id, 'spectatorid', {
         expansions: {...DEFAULT_EXPANSIONS, turmoil: true},
       }, new SeededRandom(-5179823149812374));
 
@@ -77,7 +77,7 @@ describe('Cloner', () => {
   it('automa game keeps MarsBot\'s delegates', () => {
     const player = new Player('old-player1', 'yellow', false, 0, 'p-old-player1-id');
     const game = Game.newInstance(
-      'g-old-game-id', [player], player, 'spectatorid', {
+      'g-old-game-id', [player], player.id, 'spectatorid', {
         automa: true,
         expansions: {...DEFAULT_EXPANSIONS, turmoil: true},
       });

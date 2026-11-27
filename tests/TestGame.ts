@@ -62,7 +62,7 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
     if (customOptions?.skipInitialShuffling) {
       Deck.shuffle = () => {};
     }
-    const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], `spectator-id${idSuffix}`, copy);
+    const game = Game.newInstance(`game-id${idSuffix}`, players, players[0].id, `spectator-id${idSuffix}`, copy);
     if (customOptions?.skipInitialCardSelection !== false) {
       for (const player of players) {
         /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */

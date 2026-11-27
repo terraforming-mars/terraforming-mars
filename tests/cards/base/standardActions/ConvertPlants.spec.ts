@@ -17,7 +17,7 @@ describe('ConvertPlants', () => {
     card = new ConvertPlants();
     player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    Game.newInstance('gameid', [player, player2], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, turmoil: true}});
+    Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, turmoil: true}});
   });
 
   it('Can not act without plants', () => {

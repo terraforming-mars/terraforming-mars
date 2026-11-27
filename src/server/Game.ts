@@ -206,7 +206,7 @@ export class Game implements IGame, Logger {
     name: string,
     players: Array<IPlayer>,
     marsBotPlayer: IPlayer | undefined,
-    first: IPlayer,
+    first: PlayerId,
     activePlayer: PlayerId,
     spectatorId: SpectatorId,
     gameOptions: GameOptions,
@@ -222,8 +222,8 @@ export class Game implements IGame, Logger {
     this.gameOptions = {...gameOptions};
     this.players = players;
     const playerIds = players.map(toID);
-    if (playerIds.includes(first.id) === false) {
-      throw new Error('Cannot find first player ' + first.id + ' in [' + playerIds + ']');
+    if (playerIds.includes(first) === false) {
+      throw new Error('Cannot find first player ' + first + ' in [' + playerIds + ']');
     }
     if (playerIds.includes(activePlayer) === false) {
       throw new Error('Cannot find active player ' + activePlayer + ' in [' + playerIds + ']');
@@ -237,8 +237,8 @@ export class Game implements IGame, Logger {
     }
 
     this.activePlayer = this.getPlayerById(activePlayer);
-    this.first = first; // To satisfy the constructor.
-    this.setFirstPlayer(first);
+    this.first = this.getPlayerById(first);
+    this.setFirstPlayer(this.first);
     this.spectatorId = spectatorId;
     this.rng = rng;
     this.projectDeck = projectDeck;
@@ -275,7 +275,7 @@ export class Game implements IGame, Logger {
 
   public static newInstance(id: GameId,
     players: Array<IPlayer>,
-    firstPlayer: IPlayer,
+    firstPlayer: PlayerId,
     spectatorId: SpectatorId,
     partialOptions: Partial<GameOptions> = {},
     rng: GameRandom = new SeededRandom(0)): Game {
@@ -306,7 +306,7 @@ export class Game implements IGame, Logger {
     const ceoDeck = new CeoDeck(gameCards.getCeoCards(), [], rng);
     ceoDeck.shuffle();
 
-    const activePlayer = firstPlayer.id;
+    const activePlayer = firstPlayer;
 
     const tags = new Set<Tag>();
     for (const deck of [projectDeck, corporationDeck, preludeDeck, ceoDeck]) {
@@ -1726,11 +1726,6 @@ export class Game implements IGame, Logger {
     const players = d.players.map((element) => Player.deserialize(element));
     // MarsBot isn't serialized with the players, so it is recreated from the game id.
     const marsBotPlayer = gameOptions.automa ? AutomaGameSetup.createMarsBotPlayer(d.id) : undefined;
-    const first = players.find((player) => player.id === d.first);
-    if (first === undefined) {
-      throw new Error(`Player ${d.first} not found when rebuilding First Player`);
-    }
-
     const board = GameSetup.deserializeBoard(marsBotPlayer === undefined ? players : [...players, marsBotPlayer], gameOptions, d);
 
     let rng: GameRandom;
@@ -1749,7 +1744,7 @@ export class Game implements IGame, Logger {
 
     const ceoDeck = CeoDeck.deserialize(d.ceoDeck, rng);
 
-    const game = new Game(d.id, d.name, players, marsBotPlayer, first, d.activePlayer, d.spectatorId, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
+    const game = new Game(d.id, d.name, players, marsBotPlayer, d.first, d.activePlayer, d.spectatorId, gameOptions, rng, board, projectDeck, corporationDeck, preludeDeck, ceoDeck, d.tags);
     game.resettable = true;
     game.spectatorId = d.spectatorId;
     game.createdTime = new Date(d.createdTimeMs);

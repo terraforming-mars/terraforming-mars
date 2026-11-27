@@ -49,7 +49,7 @@ describe('GameLoader', () => {
     setTestDatabase(database);
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    game = Game.newInstance('gameid', [player, player2], player, 'spectatorid');
+    game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid');
     instance.resetForTesting();
   });
   afterEach(() => {
@@ -158,7 +158,7 @@ describe('GameLoader', () => {
     const numberOfGames = 10;
     for (let i = 0; i < numberOfGames; i++) {
       const player = new Player('name', 'blue', false, 0, 'p-' + i as PlayerId);
-      Game.newInstance('game-' + i as GameId, [player], player, 'spectatorid');
+      Game.newInstance('game-' + i as GameId, [player], player.id, 'spectatorid');
     }
     database.getGameSleep = 500;
     instance.resetForTesting();
@@ -268,7 +268,7 @@ describe('GameLoader', () => {
   // Idle eviction only targets solo games; the shared `gameid` is multiplayer.
   function addSoloGame(id: GameId): void {
     const soloPlayer = new Player('solo', 'blue', false, 0, ('p-' + id) as PlayerId);
-    Game.newInstance(id, [soloPlayer], soloPlayer, ('s' + id) as SpectatorId);
+    Game.newInstance(id, [soloPlayer], soloPlayer.id, ('s' + id) as SpectatorId);
   }
 
   it('evicts a solo game idle past the threshold', async () => {

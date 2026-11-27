@@ -112,7 +112,7 @@ describe('ApiGameLogs', () => {
       const players = [yellowPlayer, orangePlayer, bluePlayer];
       const playerUnderTest = players[entry.idx];
 
-      const game = Game.newInstance('game-id', players, yellowPlayer, 'spectatorid');
+      const game = Game.newInstance('game-id', players, yellowPlayer.id, 'spectatorid');
       await scaffolding.ctx.gameLoader.add(game);
 
       // Remove logs to-date to simplify the test

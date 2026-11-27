@@ -165,6 +165,7 @@ async function createGame(config: NewGameConfig): Promise<IGame> {
   const gameId = safeCast(generateRandomId('g'), isGameId);
   const spectatorId = safeCast(generateRandomId('s'), isSpectatorId);
   const players = toPlayers(config);
+  // TODO(kberg): Switch to player id.
   const firstPlayerIdx = Math.max(0, config.players.findIndex((p) => p.first));
   const boardName = config.boards[Math.floor(Math.random() * config.boards.length)];
   const gameOptions = toGameOptions(config, boardName);
@@ -173,7 +174,7 @@ async function createGame(config: NewGameConfig): Promise<IGame> {
     const serialized = await Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
     return Cloner.clone(gameId, spectatorId, players, firstPlayerIdx, serialized);
   } else {
-    return Game.newInstance(gameId, players, players[firstPlayerIdx], spectatorId, gameOptions, StrongRandom.newInstance());
+    return Game.newInstance(gameId, players, players[firstPlayerIdx].id, spectatorId, gameOptions, StrongRandom.newInstance());
   }
 }
 export class ApiCreateGame extends Handler {

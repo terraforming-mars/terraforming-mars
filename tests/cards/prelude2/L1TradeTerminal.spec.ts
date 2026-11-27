@@ -124,4 +124,17 @@ describe('L1TradeTerminal', () => {
     expect(tardigrades.resourceCount).eq(1);
     expect(vermin.resourceCount).eq(1);
   });
+
+  it('does not automatically add resources for ancient shipyards', () => {
+    const cards = cardsFromJSON([CardName.AERIAL_MAPPERS, CardName.TARDIGRADES, CardName.ANCIENT_SHIPYARDS]);
+    const [aerialMappers, tardigrades, ancientShipyards] = cards;
+    player.playedCards.push(...cards);
+    cards.forEach((card) => card.resourceCount = 1);
+
+    const selectCard = cast(card.play(player), SelectCard);
+    expect(selectCard.cards.map(toName)).deep.eq(cards.map(toName));
+    expect(aerialMappers.resourceCount).eq(1);
+    expect(tardigrades.resourceCount).eq(1);
+    expect(ancientShipyards.resourceCount).eq(1);
+  });
 });

@@ -41,6 +41,16 @@ export class L1TradeTerminal extends Card {
     }
   }
 
+  /* Returns true when adding a resource to `card` could cost its owner VP. */
+  private losesVPFromResources(card: ICard): boolean {
+    // Vermin's VP is 'special', so it can't be detected from its VP declaration.
+    if (card.name === CardName.VERMIN) {
+      return true;
+    }
+    const vp = card.victoryPoints;
+    return typeof vp === 'object' && vp.resourcesHere !== undefined && (vp.each ?? 0) < 0;
+  }
+
   private getEligibleCards(player: IPlayer) {
     return player.getCardsWithResources().concat(
       player.getSelfReplicatingRobotsTargetCards().filter((card) => card.resourceCount > 0)
@@ -57,10 +67,8 @@ export class L1TradeTerminal extends Card {
 
   public override bespokePlay(player: IPlayer): PlayerInput | undefined {
     const cards = this.getEligibleCards(player);
-    // TODO(kberg): Make compatible with https://github.com/terraforming-mars/terraforming-mars/pull/7539#discussion_r2219661618
-    const noCardsWithNegativeVP = !(cards.some((card) => card.name === CardName.ANCIENT_SHIPYARDS || card.name === CardName.VERMIN));
 
-    if (cards.length <= 3 && noCardsWithNegativeVP) {
+    if (cards.length <= 3 && !cards.some(this.losesVPFromResources)) {
       this.addResources(player, cards);
       return undefined;
     }

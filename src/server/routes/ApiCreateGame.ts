@@ -171,8 +171,7 @@ async function createGame(config: NewGameConfig): Promise<IGame> {
 
   if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
     const serialized = await Database.getInstance().getGameVersion(gameOptions.clonedGamedId, 0);
-    // TODO(kberg): Provide a new spectator id
-    return Cloner.clone(gameId, players, firstPlayerIdx, serialized);
+    return Cloner.clone(gameId, spectatorId, players, firstPlayerIdx, serialized);
   } else {
     return Game.newInstance(gameId, players, players[firstPlayerIdx], spectatorId, gameOptions, StrongRandom.newInstance());
   }

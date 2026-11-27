@@ -167,7 +167,7 @@ describe('MarsBotBoard', () => {
       {track: 4, position: 2, expected: 'floater'},
       {track: 4, position: 4, expected: 'floater2'},
     ]) {
-      it(`gains floaters on the cloud spaces of the Event and Energy tracks, track ${run.track} space ${run.position}`, () => {
+      it('gains floaters on the cloud spaces of the Event and Energy tracks: ' + JSON.stringify(run), () => {
         expect(THARSIS_MARSBOT_BOARD[run.track].layout[run.position]).to.eq(run.expected);
       });
     }

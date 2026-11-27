@@ -16,9 +16,10 @@ describe('Cloner', () => {
       }, new SeededRandom(-5179823149812374));
 
     const newPlayer = new Player('new-player1', 'red', false, 3, 'p-new-player1-id');
-    const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());
+    const newGame = Cloner.clone('g-new-id', 's-new-id', [newPlayer], 0, game.serialize());
 
     expect(newGame.id).eq('g-new-id');
+    expect(newGame.spectatorId).eq('s-new-id');
     expect(game.getPlayerById('p-old-player1-id')).is.not.undefined;
     expect(() => game.getPlayerById('p-new-player1-id')).to.throw();
     expect(() => newGame.getPlayerById('p-old-player1-id')).to.throw();
@@ -82,7 +83,7 @@ describe('Cloner', () => {
       });
 
     const newPlayer = new Player('new-player1', 'red', false, 0, 'p-new-player1-id');
-    const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());
+    const newGame = Cloner.clone('g-new-id', 's-new-id', [newPlayer], 0, game.serialize());
 
     const botPlayer = newGame.marsBotPlayer!;
     expect(botPlayer.id).eq('p-g-new-id-marsbot');

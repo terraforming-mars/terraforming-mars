@@ -40,7 +40,7 @@ describe('ApiPlayer', () => {
   it('pulls player', async () => {
     const player = TestPlayer.BLACK.newPlayer();
     scaffolding.url = '/api/player?id=' + player.id;
-    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-id', [player], player.id, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     await scaffolding.get(ApiPlayer.INSTANCE, res);
     const response: PlayerViewModel = JSON.parse(res.content);

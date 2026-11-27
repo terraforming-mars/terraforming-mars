@@ -46,7 +46,7 @@ describe('Game', () => {
   it('should initialize with right defaults', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid');
     expect(game.gameOptions.expansions.corpera).is.true;
     expect(game.getGeneration()).to.eq(1);
   });
@@ -58,16 +58,16 @@ describe('Game', () => {
       milestones: ['Terraformer', 'Gardener', 'Builder', 'Mayor', 'Planner'],
       awards: ['Banker', 'Scientist', 'Thermalist', 'Miner', 'Politician'],
     } as const;
-    expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}))
+    expect(() => Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA: {...customMA, awards: ['Banker']}}))
       .to.throw('You must have between 3 and 8 custom awards');
-    expect(() => Game.newInstance('gameid', [player, player2], player, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA}))
+    expect(() => Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', {randomMA: RandomMAOptionType.MANUAL, customMA}))
       .to.throw('Politician needs the Turmoil expansion');
   });
 
   it('sets starting production if corporate era not selected', () => {
     const player = TestPlayer.BLUE.newPlayer();
 
-    Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, corpera: false}});
+    Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, corpera: false}});
     expect(player.production.megacredits).to.eq(1);
     expect(player.production.steel).to.eq(1);
     expect(player.production.titanium).to.eq(1);
@@ -80,7 +80,7 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const player3 = TestPlayer.YELLOW.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2, player3], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player, player2, player3], player.id, 'spectatorid');
 
     addCity(player, '29');
     addGreenery(player, '21');
@@ -141,7 +141,7 @@ describe('Game', () => {
   it('Disallows to set temperature more than allowed maximum', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-id', [player, player2], player, 'spectatorid');
+    const game = Game.newInstance('game-id', [player, player2], player.id, 'spectatorid');
 
     setTemperature(game, 6);
     let initialTR = player.terraformRating;
@@ -162,7 +162,7 @@ describe('Game', () => {
   it('Disallows to set oxygenLevel more than allowed maximum', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-id', [player, player2], player, 'spectatorid');
+    const game = Game.newInstance('game-id', [player, player2], player.id, 'spectatorid');
 
     setOxygenLevel(game, 13);
     const initialTR = player.terraformRating;
@@ -200,7 +200,7 @@ describe('Game', () => {
   it('Draft round for 2 players', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-draft', [player, player2], player, 'spectatorid');
+    const game = Game.newInstance('game-draft', [player, player2], player.id, 'spectatorid');
     game.generation = 4;
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
@@ -212,7 +212,7 @@ describe('Game', () => {
   it('No draft round for 2 players', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-classic', [player, player2], player, 'spectatorid');
+    const game = Game.newInstance('game-classic', [player, player2], player.id, 'spectatorid');
     game.generation = 2;
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
@@ -223,7 +223,7 @@ describe('Game', () => {
 
   it('Solo play next generation', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-solo', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-solo', [player], player.id, 'spectatorid');
     game.playerHasPassed(player);
     game.playerIsFinishedTakingActions();
     expect(game.getGeneration()).to.eq(2);
@@ -232,7 +232,7 @@ describe('Game', () => {
   it('Should not finish game before Venus is terraformed, if chosen', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-venusterraform', [player, player2], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}, requiresVenusTrackCompletion: true});
+    const game = Game.newInstance('game-venusterraform', [player, player2], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}, requiresVenusTrackCompletion: true});
     setTemperature(game, constants.MAX_TEMPERATURE);
     setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
     // setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
@@ -252,7 +252,7 @@ describe('Game', () => {
   it('Should finish game if Mars and Venus is terraformed, if chosen', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-venusterraform', [player, player2], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}, requiresVenusTrackCompletion: true});
+    const game = Game.newInstance('game-venusterraform', [player, player2], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}, requiresVenusTrackCompletion: true});
     setTemperature(game, constants.MAX_TEMPERATURE);
     setOxygenLevel(game, constants.MAX_OXYGEN_LEVEL);
     setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
@@ -277,7 +277,7 @@ describe('Game', () => {
   it('Should not finish game if Mars is not terraformed but Venus is terraformed, if chosen', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-venusterraform', [player, player2], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}, requiresVenusTrackCompletion: true});
+    const game = Game.newInstance('game-venusterraform', [player, player2], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}, requiresVenusTrackCompletion: true});
     setTemperature(game, 2);
     setOxygenLevel(game, 2);
     setVenusScaleLevel(game, constants.MAX_VENUS_SCALE);
@@ -295,7 +295,7 @@ describe('Game', () => {
 
   it('Should finish solo game in the end of last generation', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-solo1', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-solo1', [player], player.id, 'spectatorid');
     game.playerIsDoneWithGame(player);
 
     // Now game should be in finished state
@@ -322,7 +322,7 @@ describe('Game', () => {
   it('Should not finish solo game before last generation if Mars is already terraformed', () => {
     const player = TestPlayer.BLUE.newPlayer();
 
-    const game = Game.newInstance('game-solo2', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-solo2', [player], player.id, 'spectatorid');
     game.generation = 10;
 
     // Terraform
@@ -341,7 +341,7 @@ describe('Game', () => {
 
   it('Solo player should place final greeneries if victory condition met', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-solo2', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-solo2', [player], player.id, 'spectatorid');
     /* Removes SelectInitialCards. The cast verifies that it's popping the right thing. */
     cast(player.popWaitingFor(), SelectInitialCards);
 
@@ -364,7 +364,7 @@ describe('Game', () => {
 
   it('Solo player should not place final greeneries if victory condition not met', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-solo2', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-solo2', [player], player.id, 'spectatorid');
 
     // Set up near end-game conditions
     game.generation = 14;
@@ -382,7 +382,7 @@ describe('Game', () => {
 
   it('Solo player should place final greeneries in TR 63 mode if victory condition is met', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-solo2', [player], player, 'spectatorid', {soloTR: true});
+    const game = Game.newInstance('game-solo2', [player], player.id, 'spectatorid', {soloTR: true});
     /* Removes SelectInitialCards. The cast verifies that it's popping the right thing. */
     cast(player.popWaitingFor(), SelectInitialCards);
 
@@ -403,7 +403,7 @@ describe('Game', () => {
 
   it('Solo player should not place final greeneries in TR63 mode if victory condition not met', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-solo2', [player], player, 'spectatorid', {soloTR: true});
+    const game = Game.newInstance('game-solo2', [player], player.id, 'spectatorid', {soloTR: true});
 
     // Set up near end-game conditions
     game.generation = 14;
@@ -421,7 +421,7 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const otherPlayer = TestPlayer.RED.newPlayer();
 
-    const game = Game.newInstance('gameid', [player, otherPlayer], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player, otherPlayer], player.id, 'spectatorid');
     game.generation = 14;
 
     // Terraform
@@ -467,7 +467,7 @@ describe('Game', () => {
     const player2 = new TestPlayer('green');
     const player3 = new TestPlayer('yellow');
     const player4 = new TestPlayer('red');
-    const game = Game.newInstance('gto', [player1, player2, player3, player4], player3, 'spectatorid');
+    const game = Game.newInstance('gto', [player1, player2, player3, player4], player3.id, 'spectatorid');
 
     [player1, player2, player3, player4].forEach((p) => {
       p.popWaitingFor();
@@ -519,7 +519,7 @@ describe('Game', () => {
     const player2 = new TestPlayer('green');
     const player3 = new TestPlayer('yellow');
     const player4 = new TestPlayer('red');
-    const game = Game.newInstance('gto', [player1, player2, player3, player4], player2, 'spectatorid');
+    const game = Game.newInstance('gto', [player1, player2, player3, player4], player2.id, 'spectatorid');
     game.incrementFirstPlayer();
 
     [player1, player2, player3, player4].forEach((p) => {
@@ -561,7 +561,7 @@ describe('Game', () => {
 
       const player1 = new TestPlayer('blue');
       const player2 = new TestPlayer('green');
-      let game = Game.newInstance('gto', [player1, player2], player1, 'spectatorid');
+      let game = Game.newInstance('gto', [player1, player2], player1.id, 'spectatorid');
 
       game.players.forEach((p) => {
         (p as TestPlayer).popWaitingFor();
@@ -607,7 +607,7 @@ describe('Game', () => {
     const player2 = new Player('p2', 'green', false, 0, 'p2-id');
     const player3 = new Player('p3', 'yellow', false, 0, 'p3-id');
     const player4 = new Player('p4', 'red', false, 0, 'p4-id');
-    const game = Game.newInstance('gto', [player1, player2, player3, player4], player3, 'spectatorid');
+    const game = Game.newInstance('gto', [player1, player2, player3, player4], player3.id, 'spectatorid');
 
     expect(game.playersInGenerationOrder.map(toName)).deep.eq(['p3', 'p4', 'p1', 'p2']);
 
@@ -626,7 +626,7 @@ describe('Game', () => {
 
   it('Gets card player for corporation card', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gto', [player], player, 'spectatorid');
+    const game = Game.newInstance('gto', [player], player.id, 'spectatorid');
     const card = new SaturnSystems();
     player.playedCards.push(card);
     expect(game.getCardPlayerOrThrow(card.name)).to.eq(player);
@@ -634,7 +634,7 @@ describe('Game', () => {
 
   it('Does not assign player to ocean after placement', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-oceanz', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-oceanz', [player], player.id, 'spectatorid');
     const spaceId: SpaceId = game.board.getAvailableSpacesForOcean(player)[0].id;
     addOcean(player, spaceId);
 
@@ -657,12 +657,12 @@ describe('Game', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
     const gameOptions = {boardName: BoardName.HELLAS, randomMA: RandomMAOptionType.UNLIMITED};
-    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', gameOptions);
+    const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', gameOptions);
 
     const prevMilestones = game.milestones.map(toName).sort();
     const prevAwards = game.awards.map(toName).sort();
 
-    const game2 = Game.newInstance('game-foobar2', [player, player2], player, 'spectatorid', gameOptions);
+    const game2 = Game.newInstance('game-foobar2', [player, player2], player.id, 'spectatorid', gameOptions);
 
     const milestones = game2.milestones.map(toName).sort();
     const awards = game2.awards.map(toName).sort();
@@ -675,7 +675,7 @@ describe('Game', () => {
   it('Milestones can be claimed', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', {});
+    const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', {});
     player.popWaitingFor();
 
     player.setTerraformRating(35); // Can claim Terraformer milestone
@@ -698,7 +698,7 @@ describe('Game', () => {
   it('Milestones cannot be claimed twice', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', {});
+    const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', {});
     player.popWaitingFor();
 
     player.setTerraformRating(35); // Can claim Terraformer milestone
@@ -724,7 +724,7 @@ describe('Game', () => {
       CardName.UTOPIA_INVEST,
     ];
     const gameOptions = {customCorporationsList: corpsFromTurmoil, expansions: {...DEFAULT_EXPANSIONS, turmoil: false}};
-    Game.newInstance('gameid', [player, player2], player, 'spectatorid', gameOptions);
+    Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', gameOptions);
 
     const corpsAssignedToPlayers =
             [...player.dealtCorporationCards, ...player2.dealtCorporationCards].map(toName);
@@ -746,7 +746,7 @@ describe('Game', () => {
       CardName.EXPERIENCED_MARTIANS,
     ];
     const gameOptions = {expansions: {...DEFAULT_EXPANSIONS, prelude: true, pathfinders: false, promo: false}, customPreludes};
-    Game.newInstance('gameid', [player, player2], player, 'spectatorid', gameOptions);
+    Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', gameOptions);
 
     const assignedPreludes =
             [...player.dealtPreludeCards, ...player2.dealtPreludeCards].map(toName);
@@ -756,7 +756,7 @@ describe('Game', () => {
 
   it('throws if Delta Project is in customPreludes', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    expect(() => Game.newInstance('gameid', [player], player, 'spectatorid', {
+    expect(() => Game.newInstance('gameid', [player], player.id, 'spectatorid', {
       expansions: {...DEFAULT_EXPANSIONS, deltaProject: true, prelude: true},
       customPreludes: [CardName.DELTA_PROJECT, CardName.ALLIED_BANK],
     })).to.throw();
@@ -764,7 +764,7 @@ describe('Game', () => {
 
   it('throws if Delta Project is banned', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    expect(() => Game.newInstance('gameid', [player], player, 'spectatorid', {
+    expect(() => Game.newInstance('gameid', [player], player.id, 'spectatorid', {
       expansions: {...DEFAULT_EXPANSIONS, deltaProject: true},
       bannedCards: [CardName.DELTA_PROJECT],
     })).to.throw();
@@ -774,13 +774,13 @@ describe('Game', () => {
     const player1 = new Player('name', 'blue', false, 0, 'p-id3');
     const player2 = new Player('name', 'red', false, 0, 'p-id3');
     expect(
-      () => Game.newInstance('gameid', [player1, player2], player1, 'spectatorid'))
+      () => Game.newInstance('gameid', [player1, player2], player1.id, 'spectatorid'))
       .to.throw(Error, /Duplicate player found: \[p-id3,p-id3\]/);
   });
 
   it('fails when first player is absent from the list of players.', () => {
     expect(
-      () => Game.newInstance('gameid', [TestPlayer.RED.newPlayer(), TestPlayer.BLUE.newPlayer()], TestPlayer.YELLOW.newPlayer(), 'spectatorid'))
+      () => Game.newInstance('gameid', [TestPlayer.RED.newPlayer(), TestPlayer.BLUE.newPlayer()], TestPlayer.YELLOW.newPlayer().id, 'spectatorid'))
       .to.throw(Error, /Cannot find first player/);
   });
 
@@ -788,13 +788,13 @@ describe('Game', () => {
     const player1 = new Player('name', 'red', false, 0, 'p-id1');
     const player2 = new Player('name', 'red', false, 0, 'p-id2');
     expect(
-      () => Game.newInstance('gameid', [player1, player2], player1, 'spectatorid'))
+      () => Game.newInstance('gameid', [player1, player2], player1.id, 'spectatorid'))
       .to.throw(Error, /Duplicate color found/);
   });
 
   it('grant space bonus sanity test', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
     const space = game.board.getAvailableSpacesOnLand(player)[0];
 
     space.bonus = [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.PLANT, SpaceBonus.TITANIUM];
@@ -811,7 +811,7 @@ describe('Game', () => {
 
   it('grants the standard resource space bonus', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
     const space = game.board.getAvailableSpacesOnLand(player)[0];
     space.bonus = [SpaceBonus.STANDARD_RESOURCE];
 
@@ -826,7 +826,7 @@ describe('Game', () => {
 
   it('Ocean upgrade tiles can be placed on ocean spaces without Ares or Pathfinders', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('game-ocean-upgrade', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-ocean-upgrade', [player], player.id, 'spectatorid');
     const oceanSpace = addOcean(player);
 
     // Placing an ocean city tile on top of an existing ocean should not throw,
@@ -839,7 +839,7 @@ describe('Game', () => {
 
   it('round-trips a strong random generator and continues the same sequence', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gnew', [player], player, 'snew', {}, StrongRandom.newInstance([1, 2, 3, 4]));
+    const game = Game.newInstance('gnew', [player], player.id, 'snew', {}, StrongRandom.newInstance([1, 2, 3, 4]));
     range(7).forEach(() => game.rng.next());
     const d = game.serialize();
     expect(d.rng?.kind).to.eq('sfc32');
@@ -878,7 +878,7 @@ describe('Game', () => {
    */
   it('serializes properties', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
     game.monsInsuranceOwner = undefined;
     game.syndicatePirateRaider = undefined;
     game.moonData = undefined;
@@ -924,7 +924,7 @@ describe('Game', () => {
 
   it('deserializing a game without moon data still loads', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, moon: false}});
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, moon: false}});
     const serialized = game.serialize();
     delete serialized['moonData'];
     const deserialized = Game.deserialize(serialized);
@@ -933,7 +933,7 @@ describe('Game', () => {
 
   it('deserializing a game without pathfinders still loads', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
     const serialized = game.serialize();
     Reflect.set(serialized.gameOptions, 'pathfindersData', undefined);
     const deserialized = Game.deserialize(serialized);
@@ -942,7 +942,7 @@ describe('Game', () => {
 
   it('deserializing a game replaces invalid escape velocity options with defaults', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {
       escapeVelocity: {
         thresholdMinutes: 35,
         bonusSectionsPerAction: 2,
@@ -968,7 +968,7 @@ describe('Game', () => {
   for (const {showOtherPlayersVP, expected} of legacyShowVPCases) {
     it(`deserializing a game converts legacy showOtherPlayersVP ${showOtherPlayersVP} to showVP ${expected}`, () => {
       const player = TestPlayer.BLUE.newPlayer();
-      const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+      const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
       const serialized = game.serialize();
       Reflect.deleteProperty(serialized.gameOptions, 'showVP');
       Reflect.set(serialized.gameOptions, 'showOtherPlayersVP', showOtherPlayersVP);
@@ -980,7 +980,7 @@ describe('Game', () => {
 
   it('deserializing a game with legacy colony space ids', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: true}});
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: true}});
     const serialized = game.serialize();
 
     const legacy = (id: SpaceId) => id.startsWith('c') ? id.substring(1) as SpaceId : id;
@@ -997,7 +997,7 @@ describe('Game', () => {
 
   it('deserializing a game with St. Joseph cathedrals on legacy colony space ids', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: true}});
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: true}});
     const serialized = game.serialize();
     serialized.stJosephCathedrals = ['75', '31'];
 
@@ -1008,7 +1008,7 @@ describe('Game', () => {
 
   it('deserializing a game with awards', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
     const scientist = game.awards.find((award) => award.name === 'Scientist')!;
     game.fundedAwards.push({
       award: scientist,
@@ -1029,7 +1029,7 @@ describe('Game', () => {
   // it('deserializing a game with renamed awards', () => {
   //   const player = TestPlayer.BLUE.newPlayer();
   //   const player2 = TestPlayer.RED.newPlayer();
-  //   const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid');
+  //   const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid');
   //   const engineer = new AmazonisEngineer();
 
   //   game.awards.unshift(engineer);
@@ -1054,7 +1054,7 @@ describe('Game', () => {
   it('dealing with awards accidentally funded twice', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
+    const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
     const scientist = game.awards.find((award) => award.name === 'Scientist')!;
 
     game.fundedAwards.push({
@@ -1089,7 +1089,7 @@ describe('Game', () => {
   it('deserializing a game with milestones', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
+    const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
     const terraformier = game.milestones.find((milestone) => milestone.name === 'Terraformer')!;
 
     game.claimedMilestones.push({
@@ -1106,7 +1106,7 @@ describe('Game', () => {
   it('deserializing a game with renamed milestones', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid');
     const spacefarer = new Spacefarer();
 
     game.milestones.unshift(spacefarer);
@@ -1133,7 +1133,7 @@ describe('Game', () => {
   // it('deserializing a game with renamed awards', () => {
   //   const player = TestPlayer.BLUE.newPlayer();
   //   const player2 = TestPlayer.RED.newPlayer();
-  //   const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid');
+  //   const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid');
   //   const suburbian = new Suburbian();
 
   //   game.awards.unshift(suburbian);
@@ -1161,7 +1161,7 @@ describe('Game', () => {
   it('dealing with milestones accidentally claimed twice', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
+    const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: false}});
     const terraformier = game.milestones.find((milestone) => milestone.name === 'Terraformer')!;
 
     game.claimedMilestones.push({
@@ -1195,7 +1195,7 @@ describe('Game', () => {
   it('deserializing a colonies game includes discarded colonies #4522', () => {
     const player = TestPlayer.BLUE.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('gameid', [player, player2], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, colonies: false}});
+    const game = Game.newInstance('gameid', [player, player2], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, colonies: false}});
 
     const colonyNames = game.colonies.map(toName);
     const discardedColonyNames = game.discardedColonies.map(toName);
@@ -1208,7 +1208,7 @@ describe('Game', () => {
 
   it('wgt includes all parameters at the game start', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: false}});
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: false}});
     game.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
@@ -1219,7 +1219,7 @@ describe('Game', () => {
 
   it('wgt includes all parameters at the game start, with Venus', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}});
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}});
     game.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
@@ -1231,7 +1231,7 @@ describe('Game', () => {
 
   it('wgt includes all parameters at the game start, with The Moon', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: false, moon: true}});
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: false, moon: true}});
     game.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
     expect(parameters).to.have.members([
@@ -1245,37 +1245,37 @@ describe('Game', () => {
 
   it('Deal preludes when starting preludes is undefined', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, startingPreludes: undefined});
+    Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, startingPreludes: undefined});
     expect(player.dealtPreludeCards).has.lengthOf(4);
   });
 
   it('Deal preludes when starting preludes is defined, 3', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, startingPreludes: 3});
+    Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, startingPreludes: 3});
     expect(player.dealtPreludeCards).has.lengthOf(4);
   });
 
   it('Deal preludes when starting preludes is defined, 6', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, startingPreludes: 6});
+    Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, startingPreludes: 6});
     expect(player.dealtPreludeCards).has.lengthOf(6);
   });
 
   it('Deal preludes when starting preludes is defined, 1; expect 4 preludes in hand', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, startingPreludes: 1});
+    Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, prelude: true}, startingPreludes: 1});
     expect(player.dealtPreludeCards).has.lengthOf(4);
   });
 
   it('Deal CEOs when starting CEOs is undefined', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, ceo: true}, startingCeos: undefined});
+    Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, ceo: true}, startingCeos: undefined});
     expect(player.dealtCeoCards).has.lengthOf(3);
   });
 
   it('Deal CEOs when starting CEOs is defined, 4', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, ceo: true}, startingCeos: 4});
+    Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, ceo: true}, startingCeos: 4});
     expect(player.dealtCeoCards).has.lengthOf(4);
   });
 
@@ -1284,7 +1284,7 @@ describe('Game', () => {
     const player2 = TestPlayer.RED.newPlayer();
     player.playedCards.push(new ArcticAlgae());
     // player2 is first player, and will resolve WGT.
-    const game = Game.newInstance('gameid', [player, player2], player2, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}});
+    const game = Game.newInstance('gameid', [player, player2], player2.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true}});
     game.worldGovernmentTerraforming();
     const orOptions = cast(player2.popWaitingFor(), OrOptions);
     const oceanAction = cast(orOptions.options.filter((o) => o.title.toString() === 'Add an ocean')[0], SelectSpace);
@@ -1299,7 +1299,7 @@ describe('Game', () => {
     const player2 = TestPlayer.RED.newPlayer();
     player.playedCards.push(new ArcticAlgae());
     // player2 is first player, and will resolve WGT.
-    const game = Game.newInstance('gameid', [player, player2], player2, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true, turmoil: true}});
+    const game = Game.newInstance('gameid', [player, player2], player2.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, venus: true, turmoil: true}});
 
   game.turmoil!.currentGlobalEvent = new TiredEarth(); // Lose one plant for each earth tag you have.
   player.tagsForTest = {earth: 1};
@@ -1316,11 +1316,11 @@ describe('Game', () => {
 
   it('game.tags excludes values accordingly', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    let game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: true}});
+    let game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: true}});
     expect(game.tags).does.not.include(Tag.VENUS);
 
     // Dyson Screens has a Venus tag.
-    game = Game.newInstance('gameid', [player], player, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: true}, includedCards: [
+    game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, pathfinders: true}, includedCards: [
       CardName.DYSON_SCREENS,
     ]});
     expect(game.tags).to.include(Tag.VENUS);

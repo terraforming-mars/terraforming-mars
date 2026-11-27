@@ -21,7 +21,8 @@
 
 ## Collections
 - Describe array types as `Array<T>`, not `T[]`.
-- Prefer readonly container types — `ReadonlyArray<T>`, `ReadonlySet<T>`, `ReadonlyMap<K, V>`, etc.
+- Prefer readonly container types — `ReadonlyArray<T>`, `ReadonlySet<T>`, `ReadonlyMap<K, V>`, etc.,
+  as part of APIs and public methods that escape the file.
 - Avoid unnecessary spread operators. Be certain any defensive copy of `[...x]` is necessary.
 
 ## Imports

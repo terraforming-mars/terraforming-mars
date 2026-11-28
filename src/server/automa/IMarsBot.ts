@@ -138,6 +138,20 @@ export interface IMarsBot {
    * Failed Action, when the bot cannot fund one.
    */
   maybeFundAward(): boolean;
+  /** Tells the bot's corp that the bot resolved `tag`, on a project card or as one of the corp's starting tags. */
+  notifyTagResolved(tag: Tag): void;
+  /** Tells the bot's corp that the bot resolved `card`. */
+  notifyProjectCardResolved(card: IProjectCard): void;
+  /**
+   * Resolves the cube on space `position` of the track `trackIndex`, which the bot's track just reached.
+   *
+   * True when a corp cube replaced the icon printed on that space, which then stays unresolved.
+   */
+  triggerTrackCube(trackIndex: number, position: number): boolean;
+  /** Tells the bot's corp that space `position` of the track `trackIndex` finished resolving, its icon included. */
+  notifyTrackSpaceResolved(trackIndex: number, position: number): void;
+  /** Tells the bot's corp that the bot took a Failed Action, after it gained its M€ for it. */
+  notifyFailedAction(): void;
 
   /**
    * Raises the temperature for a corp effect. The steps it actually moves count toward

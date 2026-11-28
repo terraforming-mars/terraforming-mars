@@ -5,9 +5,9 @@ import {fakeMarsBot, setTrack} from '../automa/FakeMarsBot';
 
 describe('Miner', () => {
   it('MarsBot scores its Space track plus 5', () => {
-    const bot = fakeMarsBot();
-    setTrack(bot, Tag.SPACE, 3);
+    const marsBot = fakeMarsBot();
+    setTrack(marsBot, Tag.SPACE, 3);
 
-    expect(new Miner().marsBotScore(bot)).eq(8);
+    expect(new Miner().marsBotScore(marsBot)).eq(8);
   });
 });

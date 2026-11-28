@@ -14,15 +14,15 @@ describe('Visionary', () => {
     it('MarsBot scores its least advanced track doubled, the second least with Venus: ' + JSON.stringify(run), () => {
       const tracks = run.venus ? [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK] : THARSIS_MARSBOT_BOARD;
       const [game] = testGame(1, {expansions: {venus: run.venus}});
-      const bot = fakeMarsBot({tracks, game});
-      setAllTracks(bot, 6);
-      setTrack(bot, Tag.BUILDING, 1);
-      setTrack(bot, Tag.SPACE, 4);
+      const marsBot = fakeMarsBot({tracks, game});
+      setAllTracks(marsBot, 6);
+      setTrack(marsBot, Tag.BUILDING, 1);
+      setTrack(marsBot, Tag.SPACE, 4);
       if (run.venus) {
-        setTrack(bot, Tag.VENUS, 2);
+        setTrack(marsBot, Tag.VENUS, 2);
       }
 
-      expect(new Visionary().marsBotScore(bot)).eq(run.expected);
+      expect(new Visionary().marsBotScore(marsBot)).eq(run.expected);
     });
   }
 });

@@ -11,7 +11,7 @@ export class Banker implements IAward {
     return player.production.megacredits;
   }
 
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.marsBotBoard.trackPosition(Tag.BUILDING) + bot.marsBotBoard.trackPosition(Tag.EVENT);
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.marsBotBoard.trackPosition(Tag.BUILDING) + marsBot.marsBotBoard.trackPosition(Tag.EVENT);
   }
 }

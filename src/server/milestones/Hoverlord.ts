@@ -20,7 +20,7 @@ export class Hoverlord extends BaseMilestone {
   }
 
   /** MarsBot stores its floaters on its Venus board. */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.floaters >= 7;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.floaters >= 7;
   }
 }

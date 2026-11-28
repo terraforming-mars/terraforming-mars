@@ -53,12 +53,12 @@ describe('Diversifier', () => {
     {plant: 3, expected: true},
   ] as const) {
     it('MarsBot needs space 3 on 7 tracks, so Venus can stand in for one other track: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
-      setAllTracks(bot, 3);
-      setTrack(bot, Tag.VENUS, 2);
-      setTrack(bot, Tag.PLANT, run.plant);
+      const marsBot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
+      setAllTracks(marsBot, 3);
+      setTrack(marsBot, Tag.VENUS, 2);
+      setTrack(marsBot, Tag.PLANT, run.plant);
 
-      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

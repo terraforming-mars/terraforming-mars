@@ -15,7 +15,7 @@ export class Thermalist implements IAward {
     }
   }
 
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.marsBotBoard.trackPosition(Tag.POWER) + 5;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.marsBotBoard.trackPosition(Tag.POWER) + 5;
   }
 }

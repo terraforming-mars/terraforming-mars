@@ -17,7 +17,7 @@ export interface IMilestone {
    *
    * Only for milestones where the automa rules differ from `canClaim` for MarsBot's player.
    */
-  marsBotCanClaim?(bot: IMarsBot): boolean;
+  marsBotCanClaim?(marsBot: IMarsBot): boolean;
 }
 
 export abstract class BaseMilestone implements IMilestone {

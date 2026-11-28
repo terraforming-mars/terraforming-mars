@@ -26,9 +26,9 @@ describe('MediaArchives', () => {
   it('counts MarsBot\'s event track', () => {
     const card = new MediaArchives();
     const [game, player] = testGame(1, {automa: true});
-    const bot = fakeMarsBot();
-    game.marsBotPlayer!.tags = new MarsBotTags(game.marsBotPlayer!, bot.marsBotBoard);
-    setTrack(bot, Tag.EVENT, 4);
+    const marsBot = fakeMarsBot();
+    game.marsBotPlayer!.tags = new MarsBotTags(game.marsBotPlayer!, marsBot.marsBotBoard);
+    setTrack(marsBot, Tag.EVENT, 4);
     player.playedCards.push(card, new Virus());
 
     cast(card.play(player), undefined);

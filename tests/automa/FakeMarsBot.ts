@@ -17,17 +17,17 @@ export function fakeMarsBot(options: FakeMarsBotOptions = {}): IMarsBot {
 }
 
 /** Moves the marker of the track that carries `tag` to space `position`. */
-export function setTrack(bot: IMarsBot, tag: Tag, position: number): void {
-  const index = bot.marsBotBoard.tagToTrack[tag];
+export function setTrack(marsBot: IMarsBot, tag: Tag, position: number): void {
+  const index = marsBot.marsBotBoard.tagToTrack[tag];
   if (index === undefined) {
     throw new Error(`No track carries ${tag}`);
   }
-  bot.marsBotBoard.tracks[index].position = position;
+  marsBot.marsBotBoard.tracks[index].position = position;
 }
 
 /** Moves the marker of every track, Venus included, to space `position`. */
-export function setAllTracks(bot: IMarsBot, position: number): void {
-  for (const track of bot.marsBotBoard.tracks) {
+export function setAllTracks(marsBot: IMarsBot, position: number): void {
+  for (const track of marsBot.marsBotBoard.tracks) {
     track.position = position;
   }
 }

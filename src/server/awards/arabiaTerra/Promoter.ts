@@ -13,7 +13,7 @@ export class Promoter implements IAward {
   }
 
   /** Rulebook C p.10 and p.15. */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.marsBotBoard.trackPosition(Tag.EVENT);
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.marsBotBoard.trackPosition(Tag.EVENT);
   }
 }

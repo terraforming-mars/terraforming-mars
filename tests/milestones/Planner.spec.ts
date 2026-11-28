@@ -11,12 +11,12 @@ describe('Planner', () => {
     {tag: Tag.PLANT, position: 4, expected: true},
   ] as const) {
     it('MarsBot needs space 4 on every track except Venus: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
-      setAllTracks(bot, 4);
-      setTrack(bot, Tag.VENUS, 0);
+      const marsBot = fakeMarsBot({tracks: [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK]});
+      setAllTracks(marsBot, 4);
+      setTrack(marsBot, Tag.VENUS, 0);
 
-      setTrack(bot, run.tag, run.position);
-      expect(new Planner().marsBotCanClaim(bot)).eq(run.expected);
+      setTrack(marsBot, run.tag, run.position);
+      expect(new Planner().marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

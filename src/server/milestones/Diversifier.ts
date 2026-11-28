@@ -20,7 +20,7 @@ export class Diversifier extends BaseMilestone {
    * That is every track without Venus, as Hellas asks (rulebook C p.9), and 7 of 8 with it
    * (rulebook C p.2), which is also the Milestones & Awards expansion's rule (rulebook C p.13).
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.tracks.filter((track) => track.position >= 3).length >= 7;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.tracks.filter((track) => track.position >= 3).length >= 7;
   }
 }

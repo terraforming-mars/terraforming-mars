@@ -28,10 +28,10 @@ export class Farmer extends BaseMilestone {
    * Microbe) or of its bio track (rulebook C p.10). The Milestones & Awards expansion asks for
    * space 7 of the bio track (rulebook C p.13).
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    if (marsBotUsesBoardGoals(bot, BoardName.VASTITAS_BOREALIS_NOVA)) {
-      return bot.marsBotBoard.trackPosition(Tag.SCIENCE) >= 6 || bot.marsBotBoard.trackPosition(Tag.PLANT) >= 6;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    if (marsBotUsesBoardGoals(marsBot, BoardName.VASTITAS_BOREALIS_NOVA)) {
+      return marsBot.marsBotBoard.trackPosition(Tag.SCIENCE) >= 6 || marsBot.marsBotBoard.trackPosition(Tag.PLANT) >= 6;
     }
-    return bot.marsBotBoard.trackPosition(Tag.PLANT) >= 7;
+    return marsBot.marsBotBoard.trackPosition(Tag.PLANT) >= 7;
   }
 }

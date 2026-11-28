@@ -36,11 +36,11 @@ describe('RimSettler', () => {
     it('MarsBot reads its Jovian track on Hellas and its Energy track elsewhere: ' + JSON.stringify(run), () => {
       const [game] = testGame(1, {boardName: run.boardName, modularMA: run.modularMA});
       // The Milestones & Awards expansion plays MarsBot's Tharsis board on any map.
-      const bot = fakeMarsBot({tracks: run.modularMA ? THARSIS_MARSBOT_BOARD : scienceJovianTracks, game});
-      setTrack(bot, Tag.SCIENCE, run.science);
-      setTrack(bot, Tag.POWER, run.power);
+      const marsBot = fakeMarsBot({tracks: run.modularMA ? THARSIS_MARSBOT_BOARD : scienceJovianTracks, game});
+      setTrack(marsBot, Tag.SCIENCE, run.science);
+      setTrack(marsBot, Tag.POWER, run.power);
 
-      expect(new RimSettler().marsBotCanClaim(bot)).eq(run.expected);
+      expect(new RimSettler().marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

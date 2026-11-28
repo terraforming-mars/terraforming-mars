@@ -16,5 +16,5 @@ export interface IAward {
      *
      * Only for awards where the automa rules differ from `getScore` for MarsBot's player.
      */
-    marsBotScore?(bot: IMarsBot): number;
+    marsBotScore?(marsBot: IMarsBot): number;
 }

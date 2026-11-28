@@ -21,7 +21,7 @@ export class Engineer extends BaseMilestone {
   }
 
   /** Rulebook C p.10 and p.13. */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.trackPosition(Tag.POWER) + bot.marsBotBoard.trackPosition(Tag.EARTH) >= 10;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.trackPosition(Tag.POWER) + marsBot.marsBotBoard.trackPosition(Tag.EARTH) >= 10;
   }
 }

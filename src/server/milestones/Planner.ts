@@ -16,8 +16,8 @@ export class Planner extends BaseMilestone {
   }
 
   /** Requires space 4 on every track except Venus (rulebook A, p.8; rulebook C, p.2). */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.tracks
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.tracks
       .filter((track) => !track.definition.tags.includes(Tag.VENUS))
       .every((track) => track.position >= 4);
   }

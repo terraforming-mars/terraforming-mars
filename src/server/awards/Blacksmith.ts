@@ -13,7 +13,7 @@ export class Blacksmith implements IAward {
   }
 
   /** Rulebook C p.10. */
-  public marsBotScore(bot: IMarsBot): number {
-    return Math.max(bot.marsBotBoard.trackPosition(Tag.BUILDING), bot.marsBotBoard.trackPosition(Tag.SPACE));
+  public marsBotScore(marsBot: IMarsBot): number {
+    return Math.max(marsBot.marsBotBoard.trackPosition(Tag.BUILDING), marsBot.marsBotBoard.trackPosition(Tag.SPACE));
   }
 }

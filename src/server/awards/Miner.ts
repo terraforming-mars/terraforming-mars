@@ -15,7 +15,7 @@ export class Miner implements IAward {
     }
   }
 
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.marsBotBoard.trackPosition(Tag.SPACE) + 5;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.marsBotBoard.trackPosition(Tag.SPACE) + 5;
   }
 }

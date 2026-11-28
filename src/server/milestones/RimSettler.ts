@@ -26,10 +26,10 @@ export class RimSettler extends BaseMilestone {
    *
    * The Milestones & Awards expansion asks for space 5 of the Energy track (rulebook C p.14).
    */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    if (marsBotUsesBoardGoals(bot, BoardName.HELLAS)) {
-      return bot.marsBotBoard.trackPosition(Tag.JOVIAN) >= 6;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    if (marsBotUsesBoardGoals(marsBot, BoardName.HELLAS)) {
+      return marsBot.marsBotBoard.trackPosition(Tag.JOVIAN) >= 6;
     }
-    return bot.marsBotBoard.trackPosition(Tag.POWER) >= 5;
+    return marsBot.marsBotBoard.trackPosition(Tag.POWER) >= 5;
   }
 }

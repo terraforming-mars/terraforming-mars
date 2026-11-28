@@ -19,7 +19,7 @@ export class Magnate implements IAward {
    * The expansion list's "blue and green" (rulebook C p.15) is a typo, per the designer in BGG
    * thread 3534424.
    */
-  public marsBotScore(bot: IMarsBot): number {
-    return bot.playedProjectCards.filter((card) => card.type === CardType.AUTOMATED).length;
+  public marsBotScore(marsBot: IMarsBot): number {
+    return marsBot.playedProjectCards.filter((card) => card.type === CardType.AUTOMATED).length;
   }
 }

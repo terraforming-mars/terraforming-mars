@@ -9,11 +9,11 @@ describe('Blacksmith', () => {
     {building: 6, space: 2, expected: 6},
   ] as const) {
     it('MarsBot scores the higher of its Building and Space tracks: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot();
-      setTrack(bot, Tag.BUILDING, run.building);
-      setTrack(bot, Tag.SPACE, run.space);
+      const marsBot = fakeMarsBot();
+      setTrack(marsBot, Tag.BUILDING, run.building);
+      setTrack(marsBot, Tag.SPACE, run.space);
 
-      expect(new Blacksmith().marsBotScore(bot)).eq(run.expected);
+      expect(new Blacksmith().marsBotScore(marsBot)).eq(run.expected);
     });
   }
 });

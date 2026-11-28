@@ -9,10 +9,10 @@ describe('VSpacefarer', () => {
     {position: 5, expected: true},
   ] as const) {
     it('MarsBot needs space 5 of its Space track: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot();
-      setTrack(bot, Tag.SPACE, run.position);
+      const marsBot = fakeMarsBot();
+      setTrack(marsBot, Tag.SPACE, run.position);
 
-      expect(new VSpacefarer().marsBotCanClaim(bot)).eq(run.expected);
+      expect(new VSpacefarer().marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

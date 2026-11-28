@@ -51,11 +51,11 @@ describe('Engineer', () => {
     {power: 4, earth: 6, expected: true},
   ] as const) {
     it('MarsBot needs its Power and Earth tracks to add up to 10: ' + JSON.stringify(run), () => {
-      const bot = fakeMarsBot();
-      setTrack(bot, Tag.POWER, run.power);
-      setTrack(bot, Tag.EARTH, run.earth);
+      const marsBot = fakeMarsBot();
+      setTrack(marsBot, Tag.POWER, run.power);
+      setTrack(marsBot, Tag.EARTH, run.earth);
 
-      expect(milestone.marsBotCanClaim(bot)).eq(run.expected);
+      expect(milestone.marsBotCanClaim(marsBot)).eq(run.expected);
     });
   }
 });

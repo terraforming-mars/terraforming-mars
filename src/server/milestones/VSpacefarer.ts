@@ -17,7 +17,7 @@ export class VSpacefarer extends BaseMilestone {
   }
 
   /** Rulebook C p.10. */
-  public marsBotCanClaim(bot: IMarsBot): boolean {
-    return bot.marsBotBoard.trackPosition(Tag.SPACE) >= 5;
+  public marsBotCanClaim(marsBot: IMarsBot): boolean {
+    return marsBot.marsBotBoard.trackPosition(Tag.SPACE) >= 5;
   }
 }

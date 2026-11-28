@@ -385,12 +385,10 @@ export class PostgreSQL implements IDatabase {
     const gameCompressed = this.compressOnWrite ? compressToBrotli(gameJSON) : null;
 
     this.statistics.saveCount++;
-    // Taken with the snapshot above, so the row's save id matches the one inside it, and a save that
-    // starts before this one finishes gets the next id.
-    const thisSaveId = game.lastSaveId;
-    game.lastSaveId = thisSaveId + 1;
     try {
       await tx(this.pool, async (client) => {
+        // Holding onto a value avoids certain race conditions where saveGame is called twice in a row.
+        const thisSaveId = game.lastSaveId;
         // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x
         //
         // When compressOnWrite is true, the game state is written to game_compressed; when it's
@@ -400,7 +398,7 @@ export class PostgreSQL implements IDatabase {
           VALUES ($1, $2, $3, $4, $5)
           ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3, game_compressed = $4
           RETURNING (xmax = 0) AS inserted`,
-          [game.id, thisSaveId, this.compressOnWrite ? null : gameJSON, this.compressOnWrite ? gameCompressed : null, game.players.length]);
+          [game.id, game.lastSaveId, this.compressOnWrite ? null : gameJSON, this.compressOnWrite ? gameCompressed : null, game.players.length]);
 
         await client.query(
           `INSERT INTO game (game_id, log, options)
@@ -408,6 +406,8 @@ export class PostgreSQL implements IDatabase {
           ON CONFLICT (game_id)
           DO UPDATE SET log = $2`,
           [game.id, log, options]);
+
+        game.lastSaveId = thisSaveId + 1;
 
         let inserted = true;
         try {
@@ -435,10 +435,6 @@ export class PostgreSQL implements IDatabase {
         }
       });
     } catch (err) {
-      // Hand the id back unless a later save already took the next one.
-      if (game.lastSaveId === thisSaveId + 1) {
-        game.lastSaveId = thisSaveId;
-      }
       this.statistics.saveErrorCount++;
       // saveGame deliberately never rejects (see below), so MetricsDelegate's generic wrapper never
       // sees this error. It's the only way this operation's error count gets recorded.

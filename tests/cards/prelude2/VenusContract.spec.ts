@@ -13,7 +13,7 @@ describe('VenusContract', () => {
 
   beforeEach(() => {
     card = new VenusContract();
-    [game, player, player2] = testGame(2, {venusNextExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {venus: true}});
     player.playedCards.push(card);
   });
 

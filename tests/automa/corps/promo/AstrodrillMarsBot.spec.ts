@@ -6,8 +6,8 @@ import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('AstrodrillMarsBot', () => {
   for (const run of [
-    {cube: 'white', calls: [`advanceTrack(${TRACK.plant})`]},
-    {cube: 'black', calls: [`advanceTrack(${TRACK.space})`]},
+    {cube: 'white', expected: [`advanceTrack(${TRACK.plant})`]},
+    {cube: 'black', expected: [`advanceTrack(${TRACK.space})`]},
   ] as const) {
     it(`advances its least advanced track for a white cube and the space track for a black one, ${run.cube} cube`, () => {
       const {marsBot, calls} = recordingMarsBot();
@@ -16,7 +16,7 @@ describe('AstrodrillMarsBot', () => {
 
       new AstrodrillMarsBot().onTrackCubeTrigger(marsBot, TRACK.space, 2, run.cube);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
     });
   }
 

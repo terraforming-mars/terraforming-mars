@@ -1,15 +1,6 @@
-import {COLONIES_CARD_MANIFEST} from './cards/colonies/ColoniesCardManifest';
 import {PRELUDE_CARD_MANIFEST} from './cards/prelude/PreludeCardManifest';
-import {PROMO_CARD_MANIFEST} from './cards/promo/PromoCardManifest';
-import {BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST} from './cards/StandardCardManifests';
-import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
-import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
-import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
-import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
-import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
-import {PATHFINDERS_CARD_MANIFEST} from './cards/pathfinders/PathfindersCardManifest';
-import {CEO_CARD_MANIFEST} from './cards/ceos/CeoCardManifest';
 import {CardManifest, ModuleManifest} from './cards/ModuleManifest';
+import {ALL_MODULE_MANIFESTS} from '@/server/cards/AllManifests';
 import {CardName} from '../common/cards/CardName';
 import {ICard} from './cards/ICard';
 import {isCompatibleWith} from './cards/CardFactorySpec';
@@ -21,9 +12,32 @@ import {newCard} from './createCard';
 import {resolveCardName} from '../common/cards/CardRenames';
 import {IPreludeCard} from './cards/prelude/IPreludeCard';
 import {ICeoCard} from './cards/ceos/ICeoCard';
-import {PRELUDE2_CARD_MANIFEST} from './cards/prelude2/Prelude2CardManifest';
-import {STAR_WARS_CARD_MANIFEST} from './cards/starwars/StarwarsCardManifest';
-import {UNDERWORLD_CARD_MANIFEST} from './cards/underworld/UnderworldCardManifest';
+import {GameModule} from '@/common/cards/GameModule';
+import {comparing} from '@/common/utils/Ordering';
+
+/**
+ * Module order for building decks.
+ *
+ * Changing it changes the decks a given seed produces.
+ */
+const DECK_MODULE_ORDER: ReadonlyArray<GameModule> = [
+  'base',
+  'corpera',
+  'prelude',
+  'prelude2',
+  'venus',
+  'colonies',
+  'turmoil',
+  'ares',
+  'promo',
+  'community',
+  'moon',
+  'pathfinders',
+  'ceo',
+  'starwars',
+  'underworld',
+  'deltaProject',
+];
 
 /**
  * Returns the cards available to a game based on its `GameOptions`.
@@ -44,27 +58,9 @@ export class GameCards {
   public constructor(gameOptions: GameOptions) {
     this.gameOptions = gameOptions;
 
-    const manifests: Array<[boolean, ModuleManifest]> = [
-      [true, BASE_CARD_MANIFEST],
-      [gameOptions.corporateEra, CORP_ERA_CARD_MANIFEST],
-      [gameOptions.preludeExtension, PRELUDE_CARD_MANIFEST],
-      [gameOptions.prelude2Expansion, PRELUDE2_CARD_MANIFEST],
-      [gameOptions.venusNextExtension, VENUS_CARD_MANIFEST],
-      [gameOptions.coloniesExtension, COLONIES_CARD_MANIFEST],
-      [gameOptions.turmoilExtension, TURMOIL_CARD_MANIFEST],
-      [gameOptions.aresExtension, ARES_CARD_MANIFEST],
-      [gameOptions.promoCardsOption, PROMO_CARD_MANIFEST],
-      [gameOptions.communityCardsOption, COMMUNITY_CARD_MANIFEST],
-      [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
-      [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
-      [gameOptions.ceoExtension, CEO_CARD_MANIFEST],
-      [gameOptions.starWarsExpansion, STAR_WARS_CARD_MANIFEST],
-      [gameOptions.underworldExpansion, UNDERWORLD_CARD_MANIFEST],
-    ];
-
-    this.moduleManifests = manifests
-      .filter(([option, _manifest]) => option === true)
-      .map(([_option, manifest]) => manifest);
+    this.moduleManifests = ALL_MODULE_MANIFESTS
+      .filter((manifest) => manifest.module === 'base' || gameOptions.expansions[manifest.module])
+      .toSorted(comparing((manifest) => DECK_MODULE_ORDER.indexOf(manifest.module)));
   }
 
   private instantiate<T extends ICard>(manifest: CardManifest<T>): Array<T> {
@@ -104,7 +100,8 @@ export class GameCards {
       // remove it from the deck to avoid possible conflicts (e.g. Valley Trust / New Partner)
       preludes = preludes.filter((c) => c.name !== CardName.MERGER);
     }
-    return preludes;
+    // Every player is dealt Delta Project during game setup, so it never belongs in the deck.
+    return preludes.filter((c) => c.name !== CardName.DELTA_PROJECT);
   }
 
   public getCeoCards() {

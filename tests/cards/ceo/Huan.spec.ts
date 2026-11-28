@@ -14,7 +14,7 @@ describe('Huan', () => {
   beforeEach(() => {
     card = new Huan();
 
-    [game, player, player2] = testGame(2, {coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true}});
     player.playedCards.push(card);
   });
 

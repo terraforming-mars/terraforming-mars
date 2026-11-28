@@ -6,7 +6,7 @@ import {testGame} from '../../TestingUtils';
 describe('LeadershipSummit', () => {
   it('resolve play', () => {
     const card = new LeadershipSummit();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     turmoil.dominantParty = turmoil.getPartyByName(PartyName.REDS);
@@ -22,7 +22,7 @@ describe('LeadershipSummit', () => {
 
   it('party leaders are capped at 5, then influence is added', () => {
     const card = new LeadershipSummit();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     // There are 6 parties, so leading all of them exceeds the cap.

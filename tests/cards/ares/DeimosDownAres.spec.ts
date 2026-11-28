@@ -21,7 +21,7 @@ describe('DeimosDownAres', () => {
 
   beforeEach(() => {
     card = new DeimosDownAres();
-    [game, player, player2] = testGame(2, {aresExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ares: true}});
     player.megaCredits = 0;
     player2.megaCredits = 0;
     player.steel = 0;

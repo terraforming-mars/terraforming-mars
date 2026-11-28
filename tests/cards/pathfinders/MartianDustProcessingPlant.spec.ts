@@ -13,7 +13,7 @@ describe('MartianDustProcessingPlant', () => {
 
   beforeEach(() => {
     card = new MartianDustProcessingPlant();
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [game, player] = testGame(1, {expansions: {pathfinders: true}});
   });
 
   it('canPlay', () => {

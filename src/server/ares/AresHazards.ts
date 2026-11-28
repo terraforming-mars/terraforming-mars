@@ -62,6 +62,15 @@ export class AresHazards {
     });
   }
 
+  /** Returns true when placing one more ocean will place erosion tiles. */
+  public static nextOceanPlacesErosionTiles(game: IGame): boolean {
+    if (game.aresData === undefined || game.gameOptions.aresHazards === false) {
+      return false;
+    }
+    const constraint = game.aresData.hazardData.erosionOceanCount;
+    return constraint.available && game.board.getOceanSpaces().length + 1 >= constraint.threshold;
+  }
+
   private static testToPlaceErosionTiles(aresData: AresData, player: IPlayer) {
     if (player.game.gameOptions.aresHazards === false) {
       return;

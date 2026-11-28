@@ -41,7 +41,7 @@ const MAP_TIEBREAKERS: Partial<Record<BoardName, ReadonlyArray<TiebreakerName>>>
  */
 const SPECIAL_HEX_COSTS: ReadonlyMap<SpaceBonus, number> = new Map([
   [SpaceBonus.OCEAN, HELLAS_BONUS_OCEAN_COST],
-  [SpaceBonus.TEMPERATURE_4MC, VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST],
+  [SpaceBonus.TEMPERATURE, VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST],
   [SpaceBonus.COLONY, TERRA_CIMMERIA_COLONY_COST],
 ]);
 
@@ -49,7 +49,7 @@ const SPECIAL_HEX_COSTS: ReadonlyMap<SpaceBonus, number> = new Map([
 const SPECIAL_HEX_ICONS = 2.5;
 
 /**
- * Handles MarsBot tile placement with automa-specific rules and tiebreakers.
+ * Picks the space for each MarsBot tile by the automa rules and tiebreakers.
  *
  * Greenery: Adjacent to as many MarsBot cities as possible, less the human's adjacent cities.
  * City: Adjacent to as much existing greenery as possible. Standard city rules.
@@ -96,10 +96,14 @@ export class MarsBotTilePlacer {
     return names;
   }
 
-  /** Find the best space for MarsBot to place a greenery. Returns undefined if none available. */
-  public findGreenerySpace(): Space | undefined {
+  /**
+   * Finds the best space for MarsBot to place a greenery, or undefined if none is available.
+   *
+   * @param filter limits the choice to the legal greenery spaces it accepts.
+   */
+  public findGreenerySpace(filter: (space: Space) => boolean = () => true): Space | undefined {
     const board = this.marsBot.game.board;
-    const spaces = board.getAvailableSpacesForGreenery(this.marsBot.player);
+    const spaces = board.getAvailableSpacesForGreenery(this.marsBot.player).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -117,7 +121,7 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * Find the best space for MarsBot to place a city. Returns undefined if none available.
+   * Finds the best space for MarsBot to place a city, or undefined if none is available.
    *
    * @param filter limits the choice to the legal city spaces it accepts.
    */
@@ -135,11 +139,11 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * Find the best space for MarsBot to place a city next to at least two greenery or ocean tiles.
-   * This is what the Expedited Construction bonus card (B05) asks for.
+   * Finds the best space for MarsBot to place a city next to at least two greenery or ocean tiles.
    *
-   * Among those spaces the usual city rule picks, so 2 greeneries beat 3 oceans. The card's
-   * wording wins over the rulebook's "most tiles of these types". The card's author (TDaver):
+   * This is what the Expedited Construction bonus card (B05) asks for. Among those spaces the usual
+   * city rule picks, so 2 greeneries beat 3 oceans. The card's wording wins over the rulebook's
+   * "most tiles of these types". The card's author (TDaver):
    * https://boardgamegeek.com/thread/3350125/article/44720677#44720677
    */
   public findExpeditedConstructionCitySpace(): Space | undefined {
@@ -149,9 +153,13 @@ export class MarsBotTilePlacer {
     return this.findCitySpace((space) => adjacentGreeneryOrOcean(space) >= 2);
   }
 
-  /** Find the best space for MarsBot to place an ocean. Returns undefined if none available. */
-  public findOceanSpace(): Space | undefined {
-    const spaces = this.marsBot.game.board.getAvailableSpacesForOcean(this.marsBot.player);
+  /**
+   * Finds the best space for MarsBot to place an ocean, or undefined if none is available.
+   *
+   * @param filter limits the choice to the ocean spaces it accepts.
+   */
+  public findOceanSpace(filter: (space: Space) => boolean = () => true): Space | undefined {
+    const spaces = this.marsBot.game.board.getAvailableSpacesForOcean(this.marsBot.player).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -159,12 +167,11 @@ export class MarsBotTilePlacer {
     return this.selectBestSpace(spaces, () => 0);
   }
 
-  /** Find a space for the Neural Instance tile: not adjacent to any tiles, not on edge, not on/adjacent to reserved spaces. */
+  /** Finds a space for the Neural Instance tile: not adjacent to any tiles, not on the edge, not on or next to reserved spaces. */
   public findNeuralInstanceSpace(): Space | undefined {
     const board = this.marsBot.game.board;
     const spaces = board.getAvailableSpacesOnLand(this.marsBot.player).filter((space) => {
       const adj = board.getAdjacentSpaces(space);
-      // Adjacent to no tiles
       if (adj.some((s) => s.tile !== undefined)) {
         return false;
       }
@@ -183,14 +190,53 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * Select the best space from candidates using:
+   * Finds the space for one of MarsBot's player markers (Settlers): a land space that is not
+   * reserved and has neither a tile nor a marker.
+   *
+   * After the usual tiebreakers and before the random one, it prefers the space next to the most
+   * ocean-reserved spaces.
+   */
+  public findMarkerSpace(): Space | undefined {
+    const board = this.marsBot.game.board;
+    const spaces = board.getAvailableSpacesOnLand(this.marsBot.player).filter((space) => space.player === undefined);
+    return this.selectBestSpace(spaces, () => 0,
+      (space) => board.getAdjacentSpaces(space).filter((s) => s.spaceType === SpaceType.OCEAN).length);
+  }
+
+  /**
+   * Finds the best space for a MarsBot city next to at least one of the human's greeneries.
+   *
+   * This is what the Build, Build, Build bonus card asks for first.
+   */
+  public findCitySpaceNextToHumanGreenery(): Space | undefined {
+    const board = this.marsBot.game.board;
+    return this.findCitySpace((space) =>
+      board.getAdjacentSpaces(space).some((s) => Board.isGreenerySpace(s) && Board.spaceOwnedBy(s, this.marsBot.humanPlayer)));
+  }
+
+  /**
+   * Finds the best land space for a MarsBot special tile next to at least one of the human's cities.
+   *
+   * This is what the Build, Build, Build bonus card asks for second.
+   */
+  public findSpecialTileSpaceNextToHumanCity(): Space | undefined {
+    const board = this.marsBot.game.board;
+    const eligible = board.getAvailableSpacesOnLand(this.marsBot.player).filter((space) =>
+      board.getAdjacentSpaces(space).some((s) => Board.isCitySpace(s) && Board.spaceOwnedBy(s, this.marsBot.humanPlayer)));
+    return this.selectBestSpace(eligible, () => 0);
+  }
+
+  /**
+   * Selects the best space from the candidates, ranking them by:
    * 1. primaryScorer (type-specific)
    * 2. The map's tiebreakers, in order (see `MAP_TIEBREAKERS`)
-   * 3. Random (using project deck card cost)
+   * 3. beforeRandomScorer, when a card adds its own tiebreaker ahead of the random one
+   * 4. Random (using project deck card cost)
    */
   private selectBestSpace(
     spaces: ReadonlyArray<Space>,
     primaryScorer: Scorer,
+    beforeRandomScorer: Scorer = () => 0,
   ): Space | undefined {
     if (spaces.length === 0) {
       return undefined;
@@ -202,6 +248,7 @@ export class MarsBotTilePlacer {
     const scorers: ReadonlyArray<Scorer> = [
       primaryScorer,
       ...this.tiebreakerNames().map((name) => this.tiebreaker(name)),
+      beforeRandomScorer,
     ];
 
     // Highest first, each scorer breaking the ties of the ones before it
@@ -316,7 +363,7 @@ export class MarsBotTilePlacer {
     switch (bonus) {
     case SpaceBonus.OCEAN:
       return game.canAddOcean() && game.board.getAvailableSpacesForOcean(marsBot.player).length > 0;
-    case SpaceBonus.TEMPERATURE_4MC:
+    case SpaceBonus.TEMPERATURE:
       return game.getTemperature() < game.max.temperature;
     case SpaceBonus.COLONY:
       return marsBot.canPlaceColony();
@@ -326,9 +373,10 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * Called once MarsBot has placed a tile on `space`. On the hexes that cost M€, MarsBot pays for
-   * the bonus and gets it when it can. Otherwise it neither pays nor gets anything, which includes
-   * a bonus its corporation swallows or one that finds no colony to build.
+   * Resolves the bonus of a hex that costs M€, once MarsBot has placed a tile on `space`.
+   *
+   * MarsBot pays for the bonus and gets it when it can. Otherwise it neither pays nor gets anything,
+   * which includes a bonus its corporation swallows or one that finds no colony to build.
    */
   public resolveSpecialHex(space: Space): void {
     const bonus = this.specialBonus(space);
@@ -345,7 +393,7 @@ export class MarsBotTilePlacer {
       resolved = game.board.getOceanSpaces().length > oceans;
       break;
     }
-    case SpaceBonus.TEMPERATURE_4MC: {
+    case SpaceBonus.TEMPERATURE: {
       const temperature = game.getTemperature();
       marsBot.raiseTemperature(1);
       resolved = game.getTemperature() > temperature;
@@ -361,30 +409,32 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * Break a tie by flipping a project card and counting its cost through the tied spaces. Counting
-   * starts at 1 on the first space and goes back to the first after passing the last. A cost of 0
-   * picks the last space.
+   * Breaks a tie by flipping a project card and counting its cost through the tied spaces.
+   *
+   * Counting starts at 1 on the first space and goes back to the first after passing the last. A cost
+   * of 0 picks the last space.
    */
   private randomTiebreak(spaces: ReadonlyArray<Space>): Space {
     const game = this.marsBot.game;
     const card = game.projectDeck.drawOrThrow(game);
     game.projectDeck.discard(card);
+    game.log('MarsBot reveals ${0} to break a tie', (b) => b.card(card, {cost: true}));
     const index = card.cost === 0 ? spaces.length - 1 : (card.cost - 1) % spaces.length;
     return spaces[index];
   }
 
-  /** Calculate MC MarsBot gains from placement bonuses (1 MC per icon covered). */
+  /** Calculates the M€ MarsBot gains from placement bonuses, 1 M€ per icon covered. */
   public getPlacementBonusMC(space: Space): number {
     return this.paidIconCount(space);
   }
 
-  /** Calculate MC MarsBot gains from ocean adjacency: its player's `oceanBonus` per adjacent ocean. */
+  /** Calculates the M€ MarsBot gains from ocean adjacency: its player's `oceanBonus` per adjacent ocean. */
   public getOceanAdjacencyMC(space: Space): number {
     const oceans = this.marsBot.game.board.getAdjacentSpaces(space).filter(Board.isOceanSpace).length;
     return oceans * this.marsBot.player.oceanBonus;
   }
 
-  /** Total placement MC for MarsBot: 1 MC per bonus icon + M€ per adjacent ocean. */
+  /** Calculates the placement M€ MarsBot gains: 1 M€ per bonus icon plus `oceanBonus` per adjacent ocean. */
   public getTotalPlacementMC(space: Space): number {
     return this.getPlacementBonusMC(space) + this.getOceanAdjacencyMC(space);
   }

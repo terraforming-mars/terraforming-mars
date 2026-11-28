@@ -14,7 +14,7 @@ describe('SmallDutyRovers', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     card = new SmallDutyRovers();
     moonData = MoonExpansion.moonData(game);
     // remove space bonuses to keep this simple.

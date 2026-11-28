@@ -14,7 +14,7 @@ describe('TradeAdvance', () => {
   beforeEach(() => {
     card = new TradeAdvance();
     [game, player] = testGame(2, {
-      coloniesExtension: true,
+      expansions: {colonies: true},
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
     });
   });
@@ -40,7 +40,7 @@ describe('TradeAdvance', () => {
 
   it('Should play, solo', () => {
     const [/* game */, player] = testGame(1, {
-      coloniesExtension: true,
+      expansions: {colonies: true},
       customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
     });
 

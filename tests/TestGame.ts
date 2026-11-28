@@ -4,8 +4,11 @@ import {GameOptions} from '../src/server/game/GameOptions';
 import {TestPlayer} from './TestPlayer';
 import {SelectInitialCards} from '../src/server/inputs/SelectInitialCards';
 import {Deck} from '../src/server/cards/Deck';
+import {DEFAULT_EXPANSIONS, Expansions} from '@/common/cards/GameModule';
 
-export type TestGameOptions = GameOptions & {
+export type TestGameOptions = Omit<GameOptions, 'expansions'> & {
+  /** Expansions to override. The rest come from the legacy flags, or their defaults. */
+  expansions: Partial<Expansions>;
   /* skip initial card selection */
   skipInitialCardSelection: boolean;
   /* skip shuffling when creating the game */
@@ -40,8 +43,17 @@ function createPlayers(count: number, idSuffix: string): Array<TestPlayer> {
 export function testGame(count: number, customOptions?: Partial<TestGameOptions>, idSuffix = ''): [IGame, ...Array<TestPlayer>] {
   const players = createPlayers(count, idSuffix);
 
-  const copy = {...customOptions};
-  if (copy.aresExtension === true && copy.aresHazards === undefined) {
+  const {expansions, ...rest} = customOptions ?? {};
+
+  const copy: Partial<GameOptions> = {
+    ...rest,
+    expansions: {
+      ...DEFAULT_EXPANSIONS,
+      ...expansions,
+    },
+  };
+
+  if (expansions?.ares === true && copy.aresHazards === undefined) {
     copy.aresHazards = false;
   }
 
@@ -50,10 +62,10 @@ export function testGame(count: number, customOptions?: Partial<TestGameOptions>
     if (customOptions?.skipInitialShuffling) {
       Deck.shuffle = () => {};
     }
-    const game = Game.newInstance(`game-id${idSuffix}`, players, players[0], `spectator-id${idSuffix}`, customOptions);
+    const game = Game.newInstance(`game-id${idSuffix}`, players, players[0].id, `spectator-id${idSuffix}`, copy);
     if (customOptions?.skipInitialCardSelection !== false) {
       for (const player of players) {
-      /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
+        /* Removes waitingFor if it is SelectInitialCards. Used when wanting it cleared out for further testing. */
         if (player.getWaitingFor() instanceof SelectInitialCards) {
           player.popWaitingFor();
         }

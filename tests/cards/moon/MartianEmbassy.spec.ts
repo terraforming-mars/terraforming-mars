@@ -10,7 +10,7 @@ describe('MartianEmbassy', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [game, player] = testGame(1, {expansions: {pathfinders: true}});
     card = new MartianEmbassy();
   });
 

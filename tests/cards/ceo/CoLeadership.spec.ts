@@ -10,7 +10,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('Co Leadership', () => {
   it('Should play', () => {
     const card = new CoLeadership();
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     expect(player.ceoCardsInHand).is.empty;
     expect(game.ceoDeck.discardPile).is.empty;
 
@@ -26,7 +26,7 @@ describe('Co Leadership', () => {
 
   it('Playable during the action phase', () => {
     const card = new CoLeadership();
-    const [game, player] = testGame(1, {ceoExtension: true, preludeExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true, prelude: true}});
 
     expect(game.ceoDeck.discardPile).is.empty;
 

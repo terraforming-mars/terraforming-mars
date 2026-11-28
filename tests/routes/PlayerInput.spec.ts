@@ -36,10 +36,10 @@ describe('PlayerInput', () => {
   it('performs undo action', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;
-    const game = Game.newInstance('gameid-foo', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid-foo', [player], player.id, 'spectatorid');
 
     const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer({beginner: true});
-    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer, 'spectatorid');
+    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer.id, 'spectatorid');
 
     await scaffolding.ctx.gameLoader.add(game);
 
@@ -64,10 +64,10 @@ describe('PlayerInput', () => {
   it('reverts to current game instance if undo fails', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;
-    const game = Game.newInstance('gameid-foo', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid-foo', [player], player.id, 'spectatorid');
 
     const undoVersionOfPlayer = TestPlayer.BLUE.newPlayer({beginner: true});
-    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer, 'spectatorid');
+    const undo = Game.newInstance('gameid-old', [undoVersionOfPlayer], undoVersionOfPlayer.id, 'spectatorid');
 
     await scaffolding.ctx.gameLoader.add(game);
 
@@ -92,7 +92,7 @@ describe('PlayerInput', () => {
   it('sends 400 when input processing throws a plain Error', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = '/player/input?id=' + player.id;
-    const game = Game.newInstance('gameid-foo', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid-foo', [player], player.id, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
 
     const options = cast(player.getWaitingFor(), OrOptions);
@@ -115,7 +115,7 @@ describe('PlayerInput', () => {
   it('sends 400 on server error', async () => {
     const player = TestPlayer.BLUE.newPlayer();
     scaffolding.url = `/player/input?id=${player.id}`;
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
 
     const post = scaffolding.post(PlayerInput.INSTANCE, res);
@@ -132,7 +132,7 @@ describe('PlayerInput', () => {
   it('rejects a response to an earlier input', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = `/player/input?id=${player.id}`;
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     const waitingFor = player.getWaitingFor();
     const powerPlant: OrOptionsResponse = {type: 'or', index: 1, response: {type: 'projectCard', card: CardName.POWER_PLANT_STANDARD_PROJECT, payment: Payment.of({megacredits: 11})}};
@@ -152,7 +152,7 @@ describe('PlayerInput', () => {
   it('rejects a response without a request id', async () => {
     const player = TestPlayer.BLUE.newPlayer({beginner: true});
     scaffolding.url = `/player/input?id=${player.id}`;
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     const waitingFor = player.getWaitingFor();
     const powerPlant: OrOptionsResponse = {type: 'or', index: 1, response: {type: 'projectCard', card: CardName.POWER_PLANT_STANDARD_PROJECT, payment: Payment.of({megacredits: 11})}};
@@ -177,7 +177,7 @@ describe('PlayerInput', () => {
       clock = scaffolding.ctx.clock as FakeClock;
       player = TestPlayer.BLUE.newPlayer({beginner: true});
       player.clock = clock;
-      const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+      const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
       await scaffolding.ctx.gameLoader.add(game);
       playerInputMetrics.responseInterval.reset();
     });

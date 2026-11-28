@@ -40,7 +40,7 @@ describe('KingdomofTauraro', () => {
 
   it('May place next to own excavation tokens', () => {
     const card = new KingdomofTauraro();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
 
     const board = game.board;

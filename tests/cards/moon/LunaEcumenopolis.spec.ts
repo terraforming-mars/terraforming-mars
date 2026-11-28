@@ -20,7 +20,7 @@ describe('LunaEcumenopolis', () => {
   let card: LunaEcumenopolis;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     moonData = MoonExpansion.moonData(game);
     card = new LunaEcumenopolis();
   });
@@ -145,7 +145,7 @@ describe('LunaEcumenopolis', () => {
 
   // it('canPlay when Reds are in power', () => {
   //   const player = TestPlayer.BLUE.newPlayer();
-  //   const game = testGame(1, {moonExpansion: true});
+  //   const game = testGame(1, {expansions: {moon: true}});
   //   const moonData = MoonExpansion.moonData(game);
 
   //   // Card requirements

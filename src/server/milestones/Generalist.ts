@@ -14,7 +14,7 @@ export class Generalist extends BaseMilestone {
 
   public getScore(player: IPlayer): number {
     let score = 0;
-    const requiredProduction = player.game.gameOptions.corporateEra ? 0 : 1;
+    const requiredProduction = player.game.gameOptions.expansions.corpera ? 0 : 1;
 
     if (player.production.megacredits > requiredProduction) {
       score++;

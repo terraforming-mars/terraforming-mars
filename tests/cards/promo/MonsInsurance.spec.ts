@@ -136,7 +136,7 @@ describe('MonsInsurance - Solo', () => {
   beforeEach(() => {
     card = new MonsInsurance();
 
-    [game, player] = testGame(1, {preludeExtension: true});
+    [game, player] = testGame(1, {expansions: {prelude: true}});
     card.play(player);
     player.playedCards.push(card);
   });

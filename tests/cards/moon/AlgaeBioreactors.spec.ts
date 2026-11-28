@@ -15,7 +15,7 @@ describe('AlgaeBioreactors', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     card = new AlgaeBioreactors();
     moonData = MoonExpansion.moonData(game);
   });
@@ -46,7 +46,7 @@ describe('AlgaeBioreactors', () => {
   });
 
   it('canPlay when Reds are in power', () => {
-    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {moon: true, turmoil: true}});
     const moonData = MoonExpansion.moonData(game);
 
     // Card requirements

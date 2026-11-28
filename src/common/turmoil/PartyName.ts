@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-syntax
 export enum PartyName {
     MARS = 'Mars First',
     SCIENTISTS = 'Scientists',

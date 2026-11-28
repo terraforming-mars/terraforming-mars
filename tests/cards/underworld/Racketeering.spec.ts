@@ -12,7 +12,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('Racketeering', () => {
   it('play', () => {
     const card = new Racketeering();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
 
@@ -21,7 +21,7 @@ describe('Racketeering', () => {
 
   it('several cards', () => {
     const card = new Racketeering();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     // Prelude with crime tag
     player.playedCards.push(new InheritedFortune());
@@ -36,7 +36,7 @@ describe('Racketeering', () => {
 
   it('including events', () => {
     const card = new Racketeering();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     // Underworld Hired Raiders has a crime tag.
     player.playedCards.push(new HiredRaiders());
@@ -47,7 +47,7 @@ describe('Racketeering', () => {
 
   it('including wild tags', () => {
     const card = new Racketeering();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     player.playedCards.push(fakeCard({tags: [Tag.WILD]}));
     cast(card.play(player), undefined);

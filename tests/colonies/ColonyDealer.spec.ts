@@ -4,9 +4,18 @@ import {SeededRandom} from '../../src/common/utils/Random';
 import {DEFAULT_GAME_OPTIONS} from '../../src/server/game/GameOptions';
 import {toName} from '../../src/common/utils/utils';
 import {ColonyName} from '../../src/common/colonies/ColonyName';
+import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 
 describe('ColonyDealer', () => {
-  const options = {...DEFAULT_GAME_OPTIONS, venusNextExtension: false, coloniesExtension: false, turmoilExtension: false, communityCardsOption: false};
+  const options = {
+    ...DEFAULT_GAME_OPTIONS,
+    expansions: {
+      ...DEFAULT_EXPANSIONS,
+      venus: false,
+      colonies: false,
+      turmoil: false,
+      community: false,
+    }};
 
   it('draw', () => {
     const dealer = new ColonyDealer(new SeededRandom(1), options);

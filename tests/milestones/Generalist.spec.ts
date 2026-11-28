@@ -22,14 +22,14 @@ describe('Generalist', () => {
   });
 
   it('Cannot claim with +1 of each production in game without corp era', () => {
-    const [/* game */, player/* , player2 */] = testGame(2, {corporateEra: false});
+    const [/* game */, player/* , player2 */] = testGame(2, {expansions: {corpera: false}});
 
     ALL_RESOURCES.forEach((resource) => expect(player.production[resource]).to.eq(1));
     expect(milestone.canClaim(player)).is.not.true;
   });
 
   it('Can claim with +2 of each production in game without corp era', () => {
-    const [/* game */, player/* , player2 */] = testGame(2, {corporateEra: false});
+    const [/* game */, player/* , player2 */] = testGame(2, {expansions: {corpera: false}});
     ALL_RESOURCES.forEach((resource) => player.production.add(resource, 1));
 
     ALL_RESOURCES.forEach((resource) => expect(player.production[resource]).to.eq(2));

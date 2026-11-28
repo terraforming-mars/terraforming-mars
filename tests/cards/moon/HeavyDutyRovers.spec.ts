@@ -16,7 +16,7 @@ describe('HeavyDutyRovers', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     card = new HeavyDutyRovers();
     moonData = MoonExpansion.moonData(game);
   });
@@ -44,7 +44,7 @@ describe('HeavyDutyRovers', () => {
   });
 
   it('issues/5065', () => {
-    const [game, player, player2, player3] = testGame(3, {moonExpansion: true});
+    const [game, player, player2, player3] = testGame(3, {expansions: {moon: true}});
     moonData = MoonExpansion.moonData(game);
 
     function addTile(spaceId: SpaceId, tileType: TileType, p: IPlayer = player) {

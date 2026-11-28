@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 describe('SupportedResearch', () => {
   it('Should play', () => {
     const card = new SupportedResearch();
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
     expect(card.canPlay(player)).is.not.true;
 
     const scientists = game.turmoil!.getPartyByName(PartyName.SCIENTISTS);

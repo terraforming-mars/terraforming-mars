@@ -9,6 +9,6 @@ describe('EcoLineMarsBot', () => {
 
     new EcoLineMarsBot().beforeActionPhase(marsBot);
 
-    expect(calls).deep.eq(['addBonusCardToActionDeck(B23)']);
+    expect(calls).deep.eq(['addBonusCardToActionDeck(Rapid Sprouting)']);
   });
 });

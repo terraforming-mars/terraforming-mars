@@ -13,7 +13,7 @@ describe('RedTourismWave', () => {
 
   beforeEach(() => {
     card = new RedTourismWave();
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
   });
 
   it('Can play', () => {

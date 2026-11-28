@@ -13,7 +13,7 @@ describe('Titania', () => {
 
   beforeEach(() => {
     titania = new Titania();
-    [game, player, player2] = testGame(2, {coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true}});
     game.colonies.push(titania);
   });
 

@@ -492,9 +492,18 @@ describe('drafting', () => {
       CardName.ARCTIC_ALGAE,
       CardName.ARTIFICIAL_LAKE]);
 
+    expect(player.timer.serialize().enabled).is.false;
+    expect(otherPlayer.timer.serialize().enabled).is.false;
+
     selectCard(player, CardName.ADAPTATION_TECHNOLOGY);
     expectReselect(player);
+    expect(player.timer.serialize().enabled).is.false;
     selectCard(otherPlayer, CardName.ALGAE);
+
+    expect(player.timer.serialize().enabled).is.true;
+    expect(otherPlayer.timer.serialize().enabled).is.true;
+    expect(player.timer.serialize().running).is.true;
+    expect(otherPlayer.timer.serialize().running).is.true;
 
     expect(player.draftedCards.map(toName)).deep.eq([CardName.ADAPTATION_TECHNOLOGY]);
     expect(otherPlayer.draftedCards.map(toName)).deep.eq([CardName.ALGAE]);
@@ -755,7 +764,7 @@ describe('drafting', () => {
       skipInitialShuffling: true,
       draftVariant: true,
       initialDraftVariant: true,
-      preludeExtension: true,
+      expansions: {prelude: true},
       preludeDraftVariant: false,
     });
 
@@ -825,7 +834,7 @@ describe('drafting', () => {
       skipInitialShuffling: true,
       draftVariant: true,
       initialDraftVariant: true,
-      preludeExtension: true,
+      expansions: {prelude: true},
       preludeDraftVariant: true,
     });
 
@@ -980,7 +989,7 @@ describe('drafting', () => {
       skipInitialShuffling: true,
       draftVariant: true,
       initialDraftVariant: true,
-      ceoExtension: true,
+      expansions: {ceo: true},
       ceosDraftVariant: true,
     });
 

@@ -6,7 +6,7 @@ import {testGame} from '../../../TestGame';
 import {TRACK, RecordingMarsBot, recordingMarsBot} from '../RecordingMarsBot';
 
 
-/** A recording bot whose player is MarsBot's player in an automa game. */
+/** Creates a recording bot whose player is MarsBot's player in an automa game. */
 function lakefrontBot(fields: Partial<IMarsBot> = {}): RecordingMarsBot {
   const [game] = testGame(1, {automa: true});
   return recordingMarsBot({game, player: game.marsBotPlayer, megacredits: 0, ...fields});

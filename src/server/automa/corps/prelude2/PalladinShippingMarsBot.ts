@@ -34,7 +34,7 @@ export class PalladinShippingMarsBot extends MarsBotCorp {
   }
 
   public override onTrackCubeTrigger(marsBot: IMarsBot, _trackIndex: number, _position: number, cubeType: CubeType): void {
-    // Collect cube onto card. If 2 colors present, remove pair + temp +1
+    // Cubes collect on the card, and a white and a black cube together are removed for 1 temperature step
     const key = cubeType === 'white' ? 'whiteCubesOnCard' : 'blackCubesOnCard';
     marsBot.setCorpState(key, marsBot.getCorpState(key) + 1);
     const white = marsBot.getCorpState('whiteCubesOnCard');

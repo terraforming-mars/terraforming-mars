@@ -45,7 +45,7 @@ describe('CaretakerContract', () => {
   });
 
   it('Cannot act if cannot afford reds tax', () => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     game.phase = Phase.ACTION;
 
@@ -65,7 +65,7 @@ describe('CaretakerContract', () => {
   });
 
   it('Do not double-account heat with Helion using Reds tax', () => {
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
     const helion = new Helion();
     player.playedCards.push(helion);
     helion.play(player);

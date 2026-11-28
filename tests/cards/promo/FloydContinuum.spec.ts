@@ -12,7 +12,7 @@ describe('FloydContinuum', () => {
 
   beforeEach(() => {
     card = new FloydContinuum();
-    [game, player] = testGame(1, {venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {venus: true}});
     player.playedCards.push(card);
   });
 

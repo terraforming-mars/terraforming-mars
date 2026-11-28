@@ -67,10 +67,10 @@ export class EconomicHelp extends Card implements IProjectCard {
     if (data.mars === lowest) {
       PathfindersExpansion.raiseTrack(Tag.MARS, player, increment);
     }
-    if (data.moon === lowest && player.game.gameOptions.moonExpansion === true) {
+    if (data.moon === lowest && player.game.gameOptions.expansions.moon === true) {
       PathfindersExpansion.raiseTrack(Tag.MOON, player, increment);
     }
-    if (data.venus === lowest && player.game.gameOptions.venusNextExtension === true) {
+    if (data.venus === lowest && player.game.gameOptions.expansions.venus === true) {
       PathfindersExpansion.raiseTrack(Tag.VENUS, player, increment);
     }
     return undefined;

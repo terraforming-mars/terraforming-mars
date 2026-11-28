@@ -19,7 +19,7 @@ describe('Greens', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
   });
 
   it('Ruling bonus 1: Gain 1 M€ for each plant, microbe and animal tag you have', () => {

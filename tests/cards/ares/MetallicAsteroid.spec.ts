@@ -17,7 +17,7 @@ describe('MetallicAsteroid', () => {
 
   beforeEach(() => {
     card = new MetallicAsteroid();
-    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
+    [game, player, otherPlayer] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Play', () => {

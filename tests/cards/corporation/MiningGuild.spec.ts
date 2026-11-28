@@ -23,7 +23,7 @@ describe('MiningGuild', () => {
   beforeEach(() => {
     card = new MiningGuild();
     [game, player, player2] = testGame(2, {
-      aresExtension: true,
+      expansions: {ares: true},
       aresHazards: false,
     });
 

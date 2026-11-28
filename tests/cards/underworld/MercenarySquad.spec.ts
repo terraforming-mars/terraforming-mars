@@ -19,7 +19,7 @@ describe('MercenarySquad', () => {
 
   beforeEach(() => {
     card = new MercenarySquad();
-    [game, player, player2] = testGame(2, {underworldExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {underworld: true}});
   });
 
   const canPlayRuns = [

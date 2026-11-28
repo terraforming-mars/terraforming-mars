@@ -16,7 +16,7 @@ describe('GiantSolarShade', () => {
 
   beforeEach(() => {
     card = new GiantSolarShade();
-    [game, player/* , player2 */] = testGame(2, {venusNextExtension: true, turmoilExtension: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {venus: true, turmoil: true}});
   });
 
   it('Should play', () => {

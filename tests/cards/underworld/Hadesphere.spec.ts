@@ -14,7 +14,7 @@ describe('Hadesphere', () => {
 
   beforeEach(() => {
     card = new Hadesphere();
-    [game, player] = testGame(1, {underworldExpansion: true});
+    [game, player] = testGame(1, {expansions: {underworld: true}});
   });
 
   it('Should play', () => {

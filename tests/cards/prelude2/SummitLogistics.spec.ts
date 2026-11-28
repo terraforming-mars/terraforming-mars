@@ -13,7 +13,7 @@ describe('SummitLogistics', () => {
 
   beforeEach(() => {
     card = new SummitLogistics();
-    [game, player] = testGame(2, {turmoilExtension: true, coloniesExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true, colonies: true}});
   });
 
   it('canPlay', () => {

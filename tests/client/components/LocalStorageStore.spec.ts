@@ -37,24 +37,7 @@ describe('LocalStorageStore', () => {
     expect(safeLocalStorage.getItem('swept:new')).to.not.be.null;
   });
 
-  it('migrates legacy (non-envelope) values forward instead of dropping them', () => {
-    // A pre-envelope value: the bare payload, no {v, e} wrapper.
-    safeLocalStorage.setItem('mig:a', JSON.stringify({legacy: true}));
-    const store = new LocalStorageStore<{legacy: boolean}>({
-      prefix: 'mig:',
-      ttlMs: 1000,
-      migrate: (raw) => JSON.parse(raw),
-    });
-    // Not deleted, and rewritten in envelope form with a fresh expiry.
-    const raw = safeLocalStorage.getItem('mig:a');
-    expect(raw).to.not.be.null;
-    const stored = JSON.parse(raw!);
-    expect(stored.v).to.deep.eq({legacy: true});
-    expect(stored.e).to.be.a('number');
-    expect(store.get('a')).to.deep.eq({legacy: true});
-  });
-
-  it('drops unrecoverable entries when no migrate is supplied', () => {
+  it('drops unrecognized entries when created', () => {
     safeLocalStorage.setItem('drop:a', 'not json at all');
     new LocalStorageStore<number>({prefix: 'drop:', ttlMs: 1000});
     expect(safeLocalStorage.getItem('drop:a')).to.be.null;

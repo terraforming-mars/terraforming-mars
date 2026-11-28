@@ -17,7 +17,7 @@ describe('ThoriumRush', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     card = new ThoriumRush();
     moonData = MoonExpansion.moonData(game);
   });
@@ -48,7 +48,7 @@ describe('ThoriumRush', () => {
   });
 
   it('canPlay when Reds are in power', () => {
-    const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {moon: true, turmoil: true}});
     const turmoil = game.turmoil!;
     const moonData = MoonExpansion.moonData(game);
     game.phase = Phase.ACTION;

@@ -31,7 +31,7 @@ describe('AresHandler', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
+    [game, player, otherPlayer] = testGame(2, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
   });
 
@@ -302,7 +302,7 @@ describe('AresHandler', () => {
   // Issue #7855: covering a hazard with Reds in power requires paying both the hazard
   // cost and the Reds TR cost, but assertCanPay only checks the hazard cost.
   it('cover mild hazard with Reds in power requires enough for hazard and TR cost', () => {
-    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true, turmoil: true}});
     game.board = EmptyBoard.newInstance();
     setRulingParty(game, PartyName.REDS, 'rp01');
 
@@ -316,7 +316,7 @@ describe('AresHandler', () => {
   });
 
   it('hazard space is not available when Reds in power and player cannot afford hazard and TR cost', () => {
-    [game, player] = testGame(2, {aresExtension: true, turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true, turmoil: true}});
     game.board = EmptyBoard.newInstance();
     setRulingParty(game, PartyName.REDS, 'rp01');
 
@@ -417,7 +417,7 @@ describe('Hazard tests', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {ares: true}, aresHazards: true});
   });
 
   it('erosion appears after the third ocean', () => {
@@ -556,7 +556,7 @@ describe('Hazard tests', () => {
   });
 
   it('Placing a hazard tile removes underground components', () => {
-    const [game, player] = testGame(2, {aresExtension: true, underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {ares: true, underworld: true}});
     const [space1, space2] = game.board.getAvailableSpacesOnLand(player);
 
     space1.undergroundResources = 'card1';

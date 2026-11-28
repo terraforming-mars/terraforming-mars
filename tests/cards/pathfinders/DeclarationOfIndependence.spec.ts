@@ -14,7 +14,7 @@ describe('DeclarationOfIndependence', () => {
 
   beforeEach(() => {
     card = new DeclarationOfIndependence();
-    [/* game */, player] = testGame(1, {turmoilExtension: true});
+    [/* game */, player] = testGame(1, {expansions: {turmoil: true}});
     turmoil = player.game.turmoil!;
   });
 

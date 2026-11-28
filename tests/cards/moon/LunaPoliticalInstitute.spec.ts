@@ -17,7 +17,7 @@ describe('LunaPoliticalInstitute', () => {
   let turmoil: Turmoil;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {turmoilExtension: true, moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true, moon: true}});
     card = new LunaPoliticalInstitute();
     turmoil = game.turmoil!;
   });

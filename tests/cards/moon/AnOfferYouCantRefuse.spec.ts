@@ -21,7 +21,7 @@ describe('AnOfferYouCantRefuse', () => {
   let card: AnOfferYouCantRefuse;
 
   beforeEach(() => {
-    [game, player, redPlayer, yellowPlayer] = testGame(3, {moonExpansion: true, turmoilExtension: true});
+    [game, player, redPlayer, yellowPlayer] = testGame(3, {expansions: {moon: true, turmoil: true}});
     turmoil = game.turmoil!;
     parties = new Parties(turmoil);
     clearParties();

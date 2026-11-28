@@ -5,7 +5,7 @@ import {PartyName} from '../../../src/common/turmoil/PartyName';
 
 describe('Politician', () => {
   let award: Politician;
-  const [game, player, player2] = testGame(2, {turmoilExtension: true});
+  const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
 
   it('Influence and party leader check', () => {
     // Have hope I didn't mess anything -_-

@@ -29,7 +29,7 @@ describe('Poseidon', () => {
 
   it('initial action', () => {
     const card = new Poseidon();
-    const [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {colonies: true}});
 
     player.defer(card.initialAction(player));
     runAllActions(game);

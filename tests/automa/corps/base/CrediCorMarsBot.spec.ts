@@ -6,15 +6,15 @@ import {recordingMarsBot} from '../RecordingMarsBot';
 
 describe('CrediCorMarsBot', () => {
   for (const run of [
-    {card: new MagneticFieldGenerators(), cost: 20, calls: ['gainMc(4)']},
-    {card: new ArtificialLake(), cost: 15, calls: []},
+    {card: new MagneticFieldGenerators(), cost: 20, expected: ['gainMc(4)']},
+    {card: new ArtificialLake(), cost: 15, expected: []},
   ]) {
     it(`gains 4 M€ for a card that costs 20 or more, card that costs ${run.cost}`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
       new CrediCorMarsBot().onProjectCardResolved(marsBot, run.card);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
     });
   }
 });

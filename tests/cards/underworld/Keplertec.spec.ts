@@ -35,7 +35,7 @@ describe('Keplertec', () => {
 
   it('action', () => {
     const card = new Keplertec();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const securityFleet = new SecurityFleet();
     player.playedCards.push(card, securityFleet, new Tardigrades());
@@ -55,7 +55,7 @@ describe('Keplertec', () => {
 
   it('effect', () => {
     const card = new Keplertec();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
 
     // Preload with reliable tokens, first one is draw a card.
@@ -90,7 +90,7 @@ describe('Keplertec', () => {
   it('effect triggers onIdentificationByAnyPlayer', () => {
     const card = new Keplertec();
     const insider = new MiningMarketInsider();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card, insider);
 
     player.addResourceTo(card, 1);
@@ -102,7 +102,7 @@ describe('Keplertec', () => {
 
   it('effect, 2 at once', () => {
     const card = new Keplertec();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
 
     // Preload with reliable token.

@@ -10,7 +10,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../../common/cards/render/Size';
 import {all, digit} from '../Options';
 import {message} from '../../logs/MessageBuilder';
-
 export class Sabotage extends Card implements IProjectCard {
   constructor() {
     super({
@@ -37,14 +36,11 @@ export class Sabotage extends Card implements IProjectCard {
   public override bespokePlay(player: IPlayer) {
     const availableActions = new OrOptions();
 
-    if (player.game.isSoloMode() && player.playedCards.has(CardName.MONS_INSURANCE)) {
-      availableActions.options.push(new SelectOption(
-        'Remove resources from the neutral opponent',
-        'Remove plants')
-        .andThen(() => {
-          player.resolveInsuranceInSoloGame();
-          return undefined;
-        }));
+    if (player.game.isSoloMode()) {
+      const option = player.resolveNeutralPlayerAttack('Remove resources from the neutral opponent');
+      if (option !== undefined) {
+        availableActions.options.push(option);
+      }
     } else {
       player.opponents.forEach((target) => {
         if (target.titanium > 0 && !target.alloysAreProtected()) {

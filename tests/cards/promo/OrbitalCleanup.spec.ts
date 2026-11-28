@@ -46,7 +46,7 @@ describe('OrbitalCleanup', () => {
   });
 
   it('Turmoil Science Tag Requirements does not increase Income', () => {
-    const [game, player] = testGame(2, {ceoExtension: true, turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {ceo: true, turmoil: true}});
 
     // Sanity check that Science Ruling Policy is working as intended:
     const bioengineeringEnclosure = new BioengineeringEnclosure(); // Requires 1 science tag

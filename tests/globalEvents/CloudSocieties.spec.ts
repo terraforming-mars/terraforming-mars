@@ -7,7 +7,7 @@ import {testGame} from '../TestingUtils';
 describe('CloudSocieties', () => {
   it('resolve play', () => {
     const card = new CloudSocieties();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     const floatingHabs = new FloatingHabs();
     player.playedCards.push(floatingHabs);

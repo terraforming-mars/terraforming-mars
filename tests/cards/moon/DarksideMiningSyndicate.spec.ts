@@ -14,7 +14,7 @@ describe('DarksideMiningSyndicate', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     card = new DarksideMiningSyndicate();
     moonData = MoonExpansion.moonData(game);
   });
@@ -58,7 +58,7 @@ describe('DarksideMiningSyndicate', () => {
 
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
-      const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true, moonExpansion: true});
+      const [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true, moon: true}});
       game.moonData!.miningRate = run.miningRate;
       testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);
     });

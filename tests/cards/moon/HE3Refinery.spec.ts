@@ -13,7 +13,7 @@ describe('HE3Refinery', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     card = new HE3Refinery();
     moonData = MoonExpansion.moonData(game);
   });

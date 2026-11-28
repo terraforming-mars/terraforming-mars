@@ -4,15 +4,15 @@ import {TRACK, recordingMarsBot, trackCubes} from '../RecordingMarsBot';
 
 describe('HelionMarsBot', () => {
   for (const run of [
-    {track: TRACK.building, cube: 'white', calls: ['maybeDrawAndResolveProjectCard()']},
-    {track: TRACK.earth, cube: 'black', calls: ['raiseTemperature(1)']},
+    {track: TRACK.building, cube: 'white', expected: ['maybeDrawAndResolveProjectCard()']},
+    {track: TRACK.earth, cube: 'black', expected: ['raiseTemperature(1)']},
   ] as const) {
     it(`draws a project card for a white cube and raises the temperature for a black one, ${run.cube} cube`, () => {
       const {marsBot, calls} = recordingMarsBot();
 
       new HelionMarsBot().onTrackCubeTrigger(marsBot, run.track, 1, run.cube);
 
-      expect(calls).deep.eq(run.calls);
+      expect(calls).deep.eq(run.expected);
     });
   }
 
@@ -31,7 +31,8 @@ describe('HelionMarsBot', () => {
 
   // The card replaces the temperature step only
   it('white cube replaces a temperature step, and no other icon', () => {
-    const white = (position: number) => new HelionMarsBot().onTrackCubeTrigger(recordingMarsBot().marsBot, TRACK.building, position, 'white');
+    const white = (position: number) =>
+      new HelionMarsBot().onTrackCubeTrigger(recordingMarsBot().marsBot, TRACK.building, position, 'white');
 
     expect(white(6)).is.true;
     expect(white(7)).is.false;

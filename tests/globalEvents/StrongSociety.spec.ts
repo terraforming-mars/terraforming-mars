@@ -7,7 +7,7 @@ import {SpaceName} from '../../src/common/boards/SpaceName';
 describe('StrongSociety', () => {
   it('resolve play', () => {
     const card = new StrongSociety();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     addCity(player);
     turmoil.chairman = player2;
@@ -23,7 +23,7 @@ describe('StrongSociety', () => {
 
   it('counts cities off Mars, and only your own', () => {
     const card = new StrongSociety();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
 
     addCity(player);
     addCity(player, SpaceName.GANYMEDE_COLONY);

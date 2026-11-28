@@ -10,7 +10,7 @@ describe('GiantSolarCollector', () => {
 
   beforeEach(() => {
     card = new GiantSolarCollector();
-    [/* game */, player] = testGame(1, {venusNextExtension: true});
+    [/* game */, player] = testGame(1, {expansions: {venus: true}});
   });
 
   it('Should play', () => {

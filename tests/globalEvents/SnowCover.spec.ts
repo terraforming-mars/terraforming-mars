@@ -17,7 +17,7 @@ describe('SnowCover', () => {
 
   beforeEach(() => {
     card = new SnowCover();
-    [game, player, player2] = testGame(2, {turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
 
     turmoil = game.turmoil!;
     turmoil.chairman = player2;

@@ -22,7 +22,7 @@ describe('Pallas', () => {
 
   beforeEach(() => {
     pallas = new Pallas();
-    [game, player, player2] = testGame(2, {turmoilExtension: true, coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {turmoil: true, colonies: true}});
     game.colonies.push(pallas);
     turmoil = Turmoil.getTurmoil(game);
     greens = turmoil.getPartyByName(PartyName.GREENS);

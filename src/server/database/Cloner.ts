@@ -1,6 +1,6 @@
 import {Game} from '../Game';
 import {IGame} from '../IGame';
-import {GameId, isPlayerId} from '../../common/Types';
+import {GameId, isPlayerId, SpectatorId} from '../../common/Types';
 import {GameSetup} from '../GameSetup';
 import {IPlayer} from '../IPlayer';
 import {PlayerId} from '../../common/Types';
@@ -12,8 +12,9 @@ import {AutomaGameSetup} from '../automa/AutomaGameSetup';
 export class Cloner {
   public static clone(
     newGameId: GameId,
+    newSpectatorId: SpectatorId,
     players: Array<IPlayer>,
-    firstPlayerIndex: number,
+    firstPlayerId: PlayerId,
     serialized: SerializedGame): IGame {
     const serializedGameId: GameId = serialized.id;
     const serializedPlayerIds: Array<PlayerId> = serialized.players.map(toID);
@@ -35,11 +36,12 @@ export class Cloner {
         [AutomaGameSetup.createMarsBotPlayer(newGameId).id]);
     }
     serialized.id = newGameId;
+    serialized.spectatorId = newSpectatorId;
 
     for (let idx = 0; idx < players.length; idx++) {
       this.updatePlayer(players[idx], serialized.players[idx]);
     }
-    serialized.first = serialized.players[firstPlayerIndex].id;
+    serialized.first = firstPlayerId;
     serialized.clonedGamedId = '#' + serializedGameId;
     serialized.createdTimeMs = new Date().getTime();
     const game = Game.deserialize(serialized);

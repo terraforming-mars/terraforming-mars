@@ -68,7 +68,7 @@ describe('UnexpectedApplication', () => {
   });
 
   it('canAct when reds are in power', () => {
-    [game, player] = testGame(2, {turmoilExtension: true, venusNextExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true, venus: true}});
     setRulingParty(game, PartyName.REDS);
     player.cardsInHand.push(card, tardigrades);
     player.megaCredits = 6;

@@ -33,7 +33,7 @@ describe('PalladinShipping', () => {
   });
 
   it('canAct when reds are in power', () => {
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
     setRulingParty(game, PartyName.REDS);
     player.stock.titanium = 2;
     player.megaCredits = 2;

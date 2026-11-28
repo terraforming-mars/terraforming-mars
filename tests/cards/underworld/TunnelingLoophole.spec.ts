@@ -9,7 +9,7 @@ import {cast} from '@/common/utils/utils';
 describe('TunnelingLoophole', () => {
   it('Should play', () => {
     const card = new TunnelingLoophole();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     player.playedCards.push(card);
 

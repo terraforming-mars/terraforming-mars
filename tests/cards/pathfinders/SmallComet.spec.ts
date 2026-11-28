@@ -64,7 +64,7 @@ describe('SmallComet', () => {
 
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
-      const [game, player, player2] = testGame(2, {turmoilExtension: true});
+      const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
       maxOutOceans(player2, run.oceans);
       setTemperature(game, run.temperature);
       setOxygenLevel(game, run.oxygen);

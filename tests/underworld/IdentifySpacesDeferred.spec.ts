@@ -13,7 +13,7 @@ describe('IdentifySpacesDeferred', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {underworldExpansion: true});
+    [game, player] = testGame(1, {expansions: {underworld: true}});
     game.phase = Phase.ACTION;
   });
 

@@ -44,21 +44,16 @@ export class RemoveAnyPlants extends DeferredAction {
     const removalOptions: Array<SelectOption> = [];
 
     if (game.isSoloMode()) {
-      const option = new SelectOption(
-        'Remove plants from the neutral opponent',
-        'Remove plants')
-        .andThen(() => {
+      const option = player.resolveNeutralPlayerAttack('Remove plants from the neutral opponent', {
+        buttonLabel: 'Remove plants',
+        onAttack: () => {
           game.someoneHasRemovedOtherPlayersPlants = true;
-          player.resolveInsuranceInSoloGame();
-          return undefined;
-        });
-      removalOptions.push(option);
-
-      // Shortcut. Only provide the opportunity if the player is playing Mons Insurance.
-      if (game.monsInsuranceOwner !== player) {
-        option.cb(undefined);
+        },
+      });
+      if (option === undefined) {
         return undefined;
       }
+      removalOptions.push(option);
     }
 
     const candidates = player.opponents.filter((p) => !p.plantsAreProtected() && p.plants > 0);

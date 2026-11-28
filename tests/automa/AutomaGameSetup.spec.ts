@@ -15,11 +15,12 @@ describe('AutomaGameSetup', () => {
     expect(game.playersPlusMarsBot).deep.eq([human, botPlayer]);
     expect(botPlayer.game).eq(game);
     expect(game.isSoloMode()).is.false;
-    expect(game.board.spaces.filter((space) => space.tile !== undefined)).is.empty;
+    const tiledSpaces = game.board.spaces.filter((space) => space.tile !== undefined);
+    expect(tiledSpaces).is.empty;
   });
 
   it('keeps what MarsBot owns when the game is loaded', () => {
-    const [game] = testGame(1, {automa: true, turmoilExtension: true});
+    const [game] = testGame(1, {automa: true, expansions: {turmoil: true}});
     const botPlayer = game.marsBotPlayer!;
     const city = addCity(botPlayer);
     Turmoil.getTurmoil(game).sendDelegateToParty(botPlayer, PartyName.GREENS, game);

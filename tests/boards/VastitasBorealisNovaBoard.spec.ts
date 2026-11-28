@@ -94,7 +94,7 @@ describe('VastitasBorealisNovaBoard', () => {
   });
 
   it('Delegate bonuses work with Turmoil', () => {
-    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVA, turmoilExtension: true});
+    const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVA, expansions: {turmoil: true}});
     const board = cast(game.board, VastitasBorealisNovaBoard);
     const delegateSpace = board.spaces.filter((space) => space.bonus.includes(SpaceBonus.DELEGATE))[0];
     expect(board.getAvailableSpacesOnLand(player, {cost: 0})).includes(delegateSpace);
@@ -107,7 +107,7 @@ describe('VastitasBorealisNovaBoard', () => {
   it('Grants temperature bonus', () => {
     const [game, player] = testGame(2, {boardName: BoardName.VASTITAS_BOREALIS_NOVA});
     const board = cast(game.board, VastitasBorealisNovaBoard);
-    const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.TEMPERATURE_4MC))!;
+    const space = board.spaces.find((space) => space.bonus.includes(SpaceBonus.TEMPERATURE))!;
 
     player.megaCredits = 3;
     expect(board.getAvailableSpacesOnLand(player).map(toID)).does.not.include(space.id);

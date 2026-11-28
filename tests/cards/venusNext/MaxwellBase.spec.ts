@@ -20,7 +20,7 @@ describe('MaxwellBase', () => {
 
   beforeEach(() => {
     card = new MaxwellBase();
-    [game, player] = testGame(2, {venusNextExtension: true});
+    [game, player] = testGame(2, {expansions: {venus: true}});
   });
 
   it('Can not play without energy production', () => {

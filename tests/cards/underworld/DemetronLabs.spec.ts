@@ -9,7 +9,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('DemetronLabs', () => {
   it('play', () => {
     const card = new DemetronLabs();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     card.play(player);
     runAllActions(game);
 
@@ -18,7 +18,7 @@ describe('DemetronLabs', () => {
 
   it('onCardPlayed', () => {
     const card = new DemetronLabs();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
     card.onCardPlayed(player, fakeCard({tags: [Tag.SCIENCE]}));
     expect(card.resourceCount).eq(2);
@@ -26,7 +26,7 @@ describe('DemetronLabs', () => {
 
   it('canAct', () => {
     const card = new DemetronLabs();
-    const [/* game */, player] = testGame(1, {underworldExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {underworld: true}});
 
     card.resourceCount = 2;
     expect(card.canAct(player)).is.false;
@@ -36,7 +36,7 @@ describe('DemetronLabs', () => {
 
   it('action', () => {
     const card = new DemetronLabs();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     card.resourceCount = 3;
 
     expect(player.underworldData.tokens).has.length(0);

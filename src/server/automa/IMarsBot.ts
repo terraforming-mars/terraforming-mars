@@ -1,9 +1,12 @@
-import {BonusCardId} from '../../common/automa/AutomaTypes';
+import {BonusCardName} from '@/common/automa/BonusCardName';
+import {GlobalParameter} from '../../common/GlobalParameter';
 import {Tag} from '../../common/cards/Tag';
 import {IGame} from '../IGame';
 import {IPlayer} from '../IPlayer';
 import {IProjectCard} from '../cards/IProjectCard';
+import {IAward} from '../awards/IAward';
 import {MarsBotBoard} from './MarsBotBoard';
+import {MarsBotBonusDeck} from './MarsBotBonusDeck';
 import {Space} from '../boards/Space';
 
 /** The bot as corp handlers see it, implemented by the bot manager. */
@@ -32,14 +35,14 @@ export interface IMarsBot {
   /**
    * Adds floaters to the bot's floater pool with Venus Next.
    *
-   * With Colonies and without Venus Next they go to its Titan storage area instead (C-14, C-23).
+   * With Colonies and without Venus Next they go to its Titan storage area instead (rulebook C, p.4-5).
    */
   addFloaters(count: number): void;
   /** Removes floaters from where `addFloaters` puts them, stopping at zero. */
   spendFloaters(count: number): void;
 
   gainMc(amount: number): void;
-  /** Positive steps raise the bot's TR, negative steps lower it. */
+  /** Raises the bot's TR by `steps`, or lowers it when `steps` is negative. */
   raiseTR(steps: number): void;
   /** Advances a track and resolves the space it reaches. Does nothing once the game has ended. */
   advanceTrack(trackIndex: number): void;
@@ -52,6 +55,18 @@ export interface IMarsBot {
   maybeAdvanceTrack(trackIndex: number): void;
   /** Takes up to `amount` M€ from the bot, stopping at zero, and returns how much it lost. */
   loseMc(amount: number): number;
+  /**
+   * Advances the track that carries `tag` and tells the player's cards about the tag.
+   *
+   * Returns false when no track carries `tag`.
+   */
+  advanceTrackOfTag(tag: Tag): boolean;
+  /**
+   * Called when a bot track advances for `tag`.
+   *
+   * The player's cards see it as if the bot played a card with that tag.
+   */
+  onTagAdvance(tag: Tag): void;
 
   /**
    * Draws the top project card and resolves it as a bot action. The deck reshuffles its
@@ -59,8 +74,14 @@ export interface IMarsBot {
    * once the game has ended.
    */
   maybeDrawAndResolveProjectCard(): void;
-  /** Same as `maybeDrawAndResolveProjectCard`, but only the card's first tag resolves: the others are ignored. */
+  /** Draws and resolves a project card like `maybeDrawAndResolveProjectCard`, but only the card's first tag resolves. */
   maybeDrawAndResolveProjectCardFirstTagOnly(): void;
+  /** Plays `card` for the bot: it goes to the played pile and its tags advance the bot's tracks. */
+  resolveProjectCard(card: IProjectCard): void;
+  /** Places the bot's Neural Instance tile on `space` and pays the bot its placement M€. */
+  placeNeuralInstance(space: Space): void;
+  /** The bot's score in `award` as it compares itself with the player, its difficulty's handicap and its corp's bonus included. */
+  awardValue(award: IAward): number;
   /**
    * Draws the top bonus card and resolves it. Does nothing when both bonus piles are empty, or
    * once the game has ended.
@@ -82,11 +103,11 @@ export interface IMarsBot {
    *
    * Does nothing when the action deck already holds it.
    */
-  addBonusCardToActionDeck(bonusCardId: BonusCardId): void;
+  addBonusCardToActionDeck(bonusCardName: BonusCardName): void;
   /** Shuffles a bonus card into the bonus deck's draw pile. */
-  addBonusCardToBonusDeck(bonusCardId: BonusCardId): void;
+  addBonusCardToBonusDeck(bonusCardName: BonusCardName): void;
   /** Puts a bonus card at the bottom of the bonus deck's draw pile. */
-  addBonusCardToBottomOfBonusDeck(bonusCardId: BonusCardId): void;
+  addBonusCardToBottomOfBonusDeck(bonusCardName: BonusCardName): void;
   /**
    * Reveals project cards until `count` of them carry `tag`, and shuffles those into the bonus deck.
    *
@@ -97,9 +118,9 @@ export interface IMarsBot {
    * Removes a bonus card from the bonus deck and from the action deck, for a corp's setup. When it
    * was the bonus card dealt at setup, the bonus deck deals a replacement into the action deck.
    */
-  removeBonusCard(bonusCardId: BonusCardId): void;
+  removeBonusCard(bonusCardName: BonusCardName): void;
   /** Resolves a bonus card's effect right away, outside the action deck. The card is not discarded. */
-  resolveBonusCard(bonusCardId: BonusCardId): void;
+  resolveBonusCard(bonusCardName: BonusCardName): void;
   /**
    * Discards the project card with the fewest tags from the bot's action deck, the first one on a tie.
    *
@@ -123,17 +144,55 @@ export interface IMarsBot {
    * `temperatureRaises`. Unlike a track icon, a maxed temperature does nothing, with no Failed Action.
    */
   raiseTemperature(steps: 1 | 2): void;
+  /** Asks the bot's corp whether it cancels this raise of `parameter` (Pristar). True means the parameter stays put. */
+  interceptsParameterRaise(parameter: GlobalParameter): boolean;
+  /** True while Government Intervention raises Venus: the raise's bonuses and the colony it earns pay the bot no M€. */
+  bonusMcBlocked: boolean;
+  /**
+   * Raises the global parameter furthest from completion, for the bonus card `bonusCardName`.
+   *
+   * Distance counts steps remaining (a temperature step is 2 degrees), and a tie goes to oxygen, then
+   * oceans, then temperature. With `allowCorpIntercept` false, no corp may cancel the raise. Returns
+   * false when every parameter is already complete.
+   */
+  advanceFurthestParameter(bonusCardName: BonusCardName, allowCorpIntercept?: boolean): boolean;
+  /**
+   * Places a greenery for the bot on a space that `filter` accepts, raising the oxygen.
+   *
+   * Returns false, with no Failed Action, when no such space is left.
+   */
+  maybePlaceGreenery(filter?: (space: Space) => boolean): boolean;
+  /** Runs `action` and takes back any TR it gave the bot (Government Intervention). */
+  withoutTRGain(action: () => void): void;
+  /**
+   * Runs `action` and takes back any TR or M€ it gave the bot (Government Intervention).
+   *
+   * M€ that Lakefront Resorts' advance brings in stays (rulebook B, p.4).
+   */
+  withoutTRorMcGain(action: () => void): void;
   placeOcean(): void;
   placeCity(): void;
   placeGreenery(): void;
-  /** Places a colony on a randomly selected eligible tile (Colonies rule C-15b). Returns true if placed. */
+  /** Places a colony on a randomly selected eligible tile (rulebook C, p.4). Returns true if placed. */
   maybePlaceRandomColony(): boolean;
   /** True when a colony tile has room for MarsBot. */
   canPlaceColony(): boolean;
   /** Takes the bot's player marker off `space`. True when the space had one. */
   removeMarker(space: Space): boolean;
+  /** The bot's bonus deck. */
+  readonly bonusDeck: MarsBotBonusDeck;
+  /** Puts one of the bot's player markers on `space`, which reserves the space for the bot. */
+  placeMarker(space: Space): void;
+  /** Takes `card` off the bot's played pile. */
+  removePlayedProjectCard(card: IProjectCard): void;
+  /**
+   * Trades with the colony the bot picks, for the bonus card `bonusCardName` (rulebook C, p.5).
+   *
+   * Does nothing, with no Failed Action, when no colony can be traded with or the bot has no M€ to pay.
+   */
+  maybeTrade(bonusCardName: BonusCardName): void;
 
-  /** Corp-specific counters, serialized with the bot. Missing keys read as 0. */
+  /** Reads a corp-specific counter, which is serialized with the bot. A missing key reads as 0. */
   getCorpState(key: string): number;
   setCorpState(key: string, value: number): void;
 }

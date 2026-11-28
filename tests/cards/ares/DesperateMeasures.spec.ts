@@ -16,7 +16,7 @@ describe('DesperateMeasures', () => {
 
   beforeEach(() => {
     card = new DesperateMeasures();
-    [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
+    [game, player] = testGame(2, {expansions: {ares: true}, aresHazards: true});
   });
 
   it('play on top of dust storm', () => {

@@ -16,7 +16,7 @@ describe('Rogers', () => {
 
   beforeEach(() => {
     card = new Rogers();
-    [game, player] = testGame(1, {ceoExtension: true});
+    [game, player] = testGame(1, {expansions: {ceo: true}});
     player.playedCards.push(card);
     player.megaCredits = 30;
   });

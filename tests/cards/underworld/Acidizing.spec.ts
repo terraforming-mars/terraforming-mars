@@ -8,7 +8,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('Acidizing', () => {
   it('Should play', () => {
     const card = new Acidizing();
-    const [game, player] = testGame(2, {underworldExpansion: true, venusNextExtension: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true, venus: true}});
     expect(game.getVenusScaleLevel()).eq(0);
 
     cast(card.play(player), undefined);

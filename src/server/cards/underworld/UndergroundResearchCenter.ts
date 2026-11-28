@@ -9,6 +9,7 @@ import {inplaceRemove} from '../../../common/utils/utils';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Priority} from '../../deferredActions/Priority';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 
 export class UndergroundResearchCenter extends Card implements IProjectCard {
   constructor() {
@@ -26,8 +27,7 @@ export class UndergroundResearchCenter extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'U062',
         renderData: CardRenderer.builder((b) => {
-          // TODO(kberg): can this look like an any tag superscript thing?
-          b.excavate().cards(1).asterix();
+          b.excavate().cards(1, {secondaryTag: AltSecondaryTag.DIVERSE}).asterix();
         }),
 
         description: 'Requires you have 4 underground tokens. ' +

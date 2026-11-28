@@ -13,7 +13,7 @@ describe('MoonStandardProjectVariants2', () => {
     ] as const;
     for (const run of canActRuns) {
       it('can act' + JSON.stringify(run), () => {
-        const [/* game */, player] = testGame(1, {moonExpansion: true, moonStandardProjectVariant: true});
+        const [/* game */, player] = testGame(1, {expansions: {moon: true}, moonStandardProjectVariant: true});
         const card = new MoonHabitatStandardProjectVariant2();
         player.titanium = run.titanium;
         player.megaCredits = run.mc;
@@ -23,7 +23,7 @@ describe('MoonStandardProjectVariants2', () => {
 
     it('can act when Reds are in power', () => {
       const card = new MoonHabitatStandardProjectVariant2();
-      const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true, moonStandardProjectVariant: true});
+      const [game, player] = testGame(1, {expansions: {moon: true, turmoil: true}, moonStandardProjectVariant: true});
       const moonData = MoonExpansion.moonData(game);
 
       testRedsCosts(() => card.canAct(player), player, card.cost, 3);
@@ -40,7 +40,7 @@ describe('MoonStandardProjectVariants2', () => {
     ] as const;
     for (const run of canActRuns) {
       it('can act' + JSON.stringify(run), () => {
-        const [/* game */, player] = testGame(1, {moonExpansion: true, moonStandardProjectVariant: true});
+        const [/* game */, player] = testGame(1, {expansions: {moon: true}, moonStandardProjectVariant: true});
         const card = new MoonMineStandardProjectVariant2();
         player.titanium = run.titanium;
         player.megaCredits = run.mc;
@@ -50,7 +50,7 @@ describe('MoonStandardProjectVariants2', () => {
 
     it('can act when Reds are in power', () => {
       const card = new MoonMineStandardProjectVariant2();
-      const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true, moonStandardProjectVariant: true});
+      const [game, player] = testGame(1, {expansions: {moon: true, turmoil: true}, moonStandardProjectVariant: true});
       const moonData = MoonExpansion.moonData(game);
 
       testRedsCosts(() => card.canAct(player), player, card.cost, 3);
@@ -67,7 +67,7 @@ describe('MoonStandardProjectVariants2', () => {
     ] as const;
     for (const run of canActRuns) {
       it('can act' + JSON.stringify(run), () => {
-        const [/* game */, player] = testGame(1, {moonExpansion: true, moonStandardProjectVariant: true});
+        const [/* game */, player] = testGame(1, {expansions: {moon: true}, moonStandardProjectVariant: true});
         const card = new MoonRoadStandardProjectVariant2();
         player.steel = run.steel;
         player.megaCredits = run.mc;
@@ -77,7 +77,7 @@ describe('MoonStandardProjectVariants2', () => {
 
     it('can act when Reds are in power', () => {
       const card = new MoonRoadStandardProjectVariant2();
-      const [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true, moonStandardProjectVariant: true});
+      const [game, player] = testGame(1, {expansions: {moon: true, turmoil: true}, moonStandardProjectVariant: true});
       const moonData = MoonExpansion.moonData(game);
 
       testRedsCosts(() => card.canAct(player), player, card.cost, 3);

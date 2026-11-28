@@ -25,7 +25,7 @@ export class AresHandler {
   private constructor() {}
 
   public static ifAres(game: IGame, cb: (aresData: AresData) => void) {
-    if (game.gameOptions.aresExtension) {
+    if (game.gameOptions.expansions.ares) {
       if (game.aresData === undefined) {
         throw new Error('Assertion failure: game.aresData is undefined');
       }

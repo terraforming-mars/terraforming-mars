@@ -11,7 +11,7 @@ describe('OtherAresTests', () => {
   let game: IGame;
 
   it('Desert settler counts upgraded oceans', () => {
-    [game, player] = testGame(2, {aresExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true}});
 
     const oceanSpace = game.board.getAvailableSpacesForOcean(player).filter((s) => s.y >= 5)[0];
     game.addOcean(player, oceanSpace);

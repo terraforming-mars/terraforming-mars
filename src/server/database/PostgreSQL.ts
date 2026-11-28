@@ -541,12 +541,12 @@ export class PostgreSQL implements IDatabase {
   }
 
   public async deleteExpiredSessions(): Promise<number> {
-    const res = await this.pool.query('DELETE FROM session WHERE expiration_time <= to_timestamp($1)', [Date.now() / 1000]);
+    const res = await this.pool.query('DELETE FROM session WHERE expiration_time <= $1', [new Date()]);
     return res.rowCount ?? 0;
   }
 
   async getSessions(): Promise<Array<Session>> {
-    const res = await this.pool.query('SELECT session_id, data, expiration_time FROM session WHERE expiration_time > to_timestamp($1)', [Date.now() / 1000]);
+    const res = await this.pool.query('SELECT session_id, data, expiration_time FROM session WHERE expiration_time > $1', [new Date()]);
     return res.rows.map((row) => {
       return {
         id: row.session_id,

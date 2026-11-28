@@ -27,7 +27,7 @@ describe('MediaFrenzy', () => {
 
   it('play', () => {
     const card = new MediaFrenzy();
-    const [game, player, player2, player3, player4] = testGame(4, {underworldExpansion: true});
+    const [game, player, player2, player3, player4] = testGame(4, {expansions: {underworld: true}});
 
     player.underworldData.corruption = 2;
     player2.underworldData.corruption = 2;
@@ -54,7 +54,7 @@ describe('MediaFrenzy', () => {
 
   it('play, player has private military contractors', () => {
     const card = new MediaFrenzy();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
 
     const privateMiltaryContractors = new PrivateMilitaryContractor();
     player2.playedCards.push(privateMiltaryContractors);

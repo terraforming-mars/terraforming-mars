@@ -9,7 +9,7 @@ describe('LunarObservationPost', () => {
   let card: LunarObservationPost;
 
   beforeEach(() => {
-    [/* game */, player] = testGame(2, {moonExpansion: true});
+    [/* game */, player] = testGame(2, {expansions: {moon: true}});
     card = new LunarObservationPost();
   });
 

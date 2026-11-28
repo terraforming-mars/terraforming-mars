@@ -20,7 +20,7 @@ describe('LandSpecialist', () => {
 
   beforeEach(() => {
     milestone = new LandSpecialist();
-    [game, player, player2] = testGame(2, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
+    [game, player, player2] = testGame(2, {boardName: BoardName.ARABIA_TERRA, expansions: {moon: true}});
     board = game.board;
     spaces = board.getAvailableSpacesOnLand(player);
   });

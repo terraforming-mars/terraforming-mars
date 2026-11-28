@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 describe('GMOContract', () => {
   it('Should play', () => {
     const card = new GMOContract();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.REDS);

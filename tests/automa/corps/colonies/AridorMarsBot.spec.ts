@@ -17,19 +17,21 @@ describe('AridorMarsBot', () => {
 
   // Each board has the Jovian and city tags on different rows, named here by their first tag
   for (const run of [
-    {boardName: BoardName.THARSIS, jovianTrack: 'power', cityTrack: 'earth'},
-    {boardName: BoardName.TERRA_CIMMERIA_NOVA, jovianTrack: 'earth', cityTrack: 'science'},
+    {boardName: BoardName.THARSIS, expected: {jovianTrack: 'power', cityTrack: 'earth'}},
+    {boardName: BoardName.TERRA_CIMMERIA_NOVA, expected: {jovianTrack: 'earth', cityTrack: 'science'}},
   ] as const) {
     it('puts a white cube on #6 of the Jovian track and a black one on #6 of the city track: ' + JSON.stringify(run), () => {
-      expect(trackCubes(new AridorMarsBot(), MARSBOT_BOARDS[run.boardName]!)).to.have.members([
-        'building white 3', 'space white 3', 'science white 3', 'power white 3', `${run.jovianTrack} white 6`,
-        'earth black 3', `${run.cityTrack} black 6`, 'plant black 3', 'plant black 6',
-      ]);
+      const expected = [
+        'building white 3', 'space white 3', 'science white 3', 'power white 3', `${run.expected.jovianTrack} white 6`,
+        'earth black 3', `${run.expected.cityTrack} black 6`, 'plant black 3', 'plant black 6',
+      ];
+
+      expect(trackCubes(new AridorMarsBot(), MARSBOT_BOARDS[run.boardName]!)).to.have.members(expected);
     });
   }
 
   it('adds a colony tile to the game at setup, active, and builds no colony', () => {
-    const [game] = testGame(1, {coloniesExtension: true});
+    const [game] = testGame(1, {expansions: {colonies: true}});
     const {marsBot, calls} = recordingMarsBot({game});
     const titan = new Titan();
     game.discardedColonies = [titan];
@@ -43,7 +45,7 @@ describe('AridorMarsBot', () => {
   });
 
   it('adds nothing at setup when every colony tile is already in play', () => {
-    const [game] = testGame(1, {coloniesExtension: true});
+    const [game] = testGame(1, {expansions: {colonies: true}});
     const {marsBot} = recordingMarsBot({game});
     game.discardedColonies = [];
     const inPlay = game.colonies.slice();

@@ -7,7 +7,10 @@ import {MarsBotBoard} from '@/server/automa/MarsBotBoard';
 import {MARSBOT_BOARDS} from '@/server/automa/boards/MarsBotBoards';
 import {VENUS_MARSBOT_TRACK} from '@/server/automa/boards/VenusMarsBot';
 
-const MARS_TAGS = [Tag.BUILDING, Tag.SPACE, Tag.EVENT, Tag.SCIENCE, Tag.POWER, Tag.JOVIAN, Tag.EARTH, Tag.CITY, Tag.PLANT, Tag.ANIMAL, Tag.MICROBE];
+const MARS_TAGS = [
+  Tag.BUILDING, Tag.SPACE, Tag.EVENT, Tag.SCIENCE, Tag.POWER, Tag.JOVIAN, Tag.EARTH, Tag.CITY, Tag.PLANT, Tag.ANIMAL,
+  Tag.MICROBE,
+];
 
 // Track index of each tag on the Tharsis board. Every other map moves a few of them (rulebook C, p.8).
 const THARSIS_TAG_TRACKS: Partial<Record<Tag, number>> = {
@@ -57,9 +60,12 @@ describe('MarsBotBoards', () => {
     it(`puts every Mars tag on one track, in the same track order on every map, ${boardName}`, () => {
       const base = MARSBOT_BOARDS[boardName]!;
       for (const tag of MARS_TAGS) {
-        expect(base.filter((track) => track.tags.includes(tag)), `${boardName} ${tag}`).has.length(1);
+        const tracksWithTag = base.filter((track) => track.tags.includes(tag));
+        expect(tracksWithTag, `${boardName} ${tag}`).has.length(1);
       }
-      expect(base.map((track) => track.tags[0])).deep.eq([Tag.BUILDING, Tag.SPACE, Tag.EVENT, Tag.SCIENCE, Tag.POWER, Tag.EARTH, Tag.PLANT]);
+      const firstTags = base.map((track) => track.tags[0]);
+      const expectedFirstTags = [Tag.BUILDING, Tag.SPACE, Tag.EVENT, Tag.SCIENCE, Tag.POWER, Tag.EARTH, Tag.PLANT];
+      expect(firstTags).deep.eq(expectedFirstTags);
     });
   }
 
@@ -73,10 +79,12 @@ describe('MarsBotBoards', () => {
   for (const boardName of MARSBOT_BOARD_NAMES) {
     it(`advances only tracks that exist, ${boardName}`, () => {
       const board = new MarsBotBoard([...MARSBOT_BOARDS[boardName]!, VENUS_MARSBOT_TRACK]);
+      const tagsWithTrack = Object.keys(board.tagToTrack);
       for (const {layout} of board.definitions) {
         for (const action of layout) {
           if (action?.startsWith('tag_')) {
-            expect(Object.keys(board.tagToTrack), `${boardName} ${action}`).includes(action.slice('tag_'.length));
+            const tag = action.slice('tag_'.length);
+            expect(tagsWithTrack, `${boardName} ${action}`).includes(tag);
           }
         }
       }
@@ -86,7 +94,8 @@ describe('MarsBotBoards', () => {
   for (const boardName of MARSBOT_BOARD_NAMES) {
     it(`places colonies only on the Utopia Planitia board (rulebook C, p.8), ${boardName}`, () => {
       const actions = MARSBOT_BOARDS[boardName]!.flatMap((track) => track.layout);
-      expect(actions.includes('colony')).eq(boardName === BoardName.UTOPIA_PLANITIA);
+      const placesColonies = actions.includes('colony');
+      expect(placesColonies).eq(boardName === BoardName.UTOPIA_PLANITIA);
     });
   }
 });

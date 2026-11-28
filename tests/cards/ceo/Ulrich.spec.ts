@@ -13,7 +13,7 @@ describe('Ulrich', () => {
 
   beforeEach(() => {
     card = new Ulrich();
-    [game, player, player2] = testGame(2, {ceoExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ceo: true}});
   });
 
   it('Can act', () => {

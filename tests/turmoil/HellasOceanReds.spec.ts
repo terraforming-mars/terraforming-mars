@@ -11,7 +11,7 @@ import * as constants from '../../src/common/constants';
 // Regression coverage for https://github.com/terraforming-mars/terraforming-mars/issues/6195
 describe('Hellas ocean bonus tile placement while Reds rule', () => {
   it('collects the Hellas fee before placing the bonus ocean tile', () => {
-    const [game, player] = testGame(2, {boardName: BoardName.HELLAS, turmoilExtension: true});
+    const [game, player] = testGame(2, {boardName: BoardName.HELLAS, expansions: {turmoil: true}});
     setRulingParty(game, PartyName.REDS);
 
     const hellasSpace = game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
@@ -39,7 +39,7 @@ describe('Hellas ocean bonus tile placement while Reds rule', () => {
   });
 
   it('blocks the ocean placement instead of corrupting state when funds run out', () => {
-    const [game, player] = testGame(2, {boardName: BoardName.HELLAS, turmoilExtension: true});
+    const [game, player] = testGame(2, {boardName: BoardName.HELLAS, expansions: {turmoil: true}});
     setRulingParty(game, PartyName.REDS);
 
     const hellasSpace = game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);

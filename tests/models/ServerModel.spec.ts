@@ -141,7 +141,7 @@ describe('ServerModel', () => {
   });
 
   it('reports the sizes of the decks in the game', () => {
-    [game] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+    [game] = testGame(2, {expansions: {prelude: true, turmoil: true}});
     game.preludeDeck.discardPile.push(...game.preludeDeck.drawPile.splice(0, 1));
 
     const model = Server.getGameModel(game).otherDeckSizes;
@@ -149,9 +149,6 @@ describe('ServerModel', () => {
     expect(model.corporations).deep.eq({drawPile: game.corporationDeck.drawPile.length, discardPile: 0});
     expect(model.preludes).deep.eq({drawPile: game.preludeDeck.drawPile.length, discardPile: 1});
     expect(model.ceos).is.undefined;
-    expect(model.globalEvents).deep.eq({
-      drawPile: game.turmoil!.globalEventDealer.deck.length,
-      discardPile: game.turmoil!.globalEventDealer.discards.length,
-    });
+    expect(model.globalEvents).deep.eq({drawPile: 29, discardPile: 0});
   });
 });

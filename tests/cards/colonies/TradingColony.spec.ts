@@ -16,7 +16,7 @@ describe('TradingColony', () => {
 
   beforeEach(() => {
     card = new TradingColony();
-    [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {colonies: true}});
     game.colonies = [new Callisto(), new Ceres(), new Miranda()];
   });
 

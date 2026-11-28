@@ -6,7 +6,7 @@ import {testGame} from '../TestingUtils';
 describe('EcoSabotage', () => {
   it('resolve play', () => {
     const card = new EcoSabotage();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     turmoil.chairman = player2;

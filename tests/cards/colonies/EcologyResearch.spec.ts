@@ -19,7 +19,7 @@ describe('EcologyResearch', () => {
 
   beforeEach(() => {
     card = new EcologyResearch();
-    [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {colonies: true}});
   });
 
   it('Should play without targets', () => {

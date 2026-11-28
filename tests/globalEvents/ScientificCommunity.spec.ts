@@ -8,7 +8,7 @@ import {testGame} from '../TestingUtils';
 describe('ScientificCommunity', () => {
   it('resolve play', () => {
     const card = new ScientificCommunity();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.cardsInHand.push(new Ants());
     player2.cardsInHand.push(new SecurityFleet(), new Ants());

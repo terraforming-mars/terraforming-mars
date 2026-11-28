@@ -21,7 +21,7 @@ describe('Wetlands', () => {
 
   beforeEach(() => {
     card = new Wetlands();
-    [game, player, player2] = testGame( 2, {pathfindersExpansion: true});
+    [game, player, player2] = testGame( 2, {expansions: {pathfinders: true}});
     game.board = EmptyBoard.newInstance();
     game.board.getSpaceOrThrow('15').spaceType = SpaceType.OCEAN;
     game.board.getSpaceOrThrow('16').spaceType = SpaceType.OCEAN;
@@ -184,7 +184,7 @@ describe('Wetlands', () => {
   });
 
   it('canPlay when Reds are in power', () => {
-    const [/* game */, player] = testGame(2, {turmoilExtension: true});
+    const [/* game */, player] = testGame(2, {expansions: {turmoil: true}});
 
     // Card requirements
     player.plants = 4;

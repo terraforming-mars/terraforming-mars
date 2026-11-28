@@ -7,7 +7,7 @@ import {testGame} from '../TestingUtils';
 describe('Sabotage', () => {
   it('resolve play', () => {
     const card = new Sabotage();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.production.add(Resource.ENERGY, 1);
     player2.production.add(Resource.STEEL, 3);

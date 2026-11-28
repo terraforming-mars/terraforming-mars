@@ -176,7 +176,7 @@ describe('SurveyMission', () => {
   });
 
   it('Does not trigger Geological Survey when gaining a standard resource bonus', () => {
-    [game, player] = testGame(1, {aresExtension: true});
+    [game, player] = testGame(1, {expansions: {ares: true}});
     game.board = board;
     player.playedCards.push(new MiningGuild(), new GeologicalSurvey());
     const selectSpace = cast(card.play(player), SelectSpace);

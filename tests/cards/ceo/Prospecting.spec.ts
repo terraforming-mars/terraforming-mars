@@ -16,7 +16,7 @@ describe('Prospecting', () => {
 
   beforeEach(() => {
     card = new Prospecting();
-    [game, player/* , player2 */] = testGame(2, {coloniesExtension: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {colonies: true}});
   });
 
   it('Can play', () => {

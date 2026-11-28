@@ -18,7 +18,7 @@ describe('ExportConvoy', () => {
   for (const run of canPlayRuns) {
     it('canPlay ' + JSON.stringify(run), () => {
       const card = new ExportConvoy();
-      const [/* game */, player] = testGame(1, {underworldExpansion: true});
+      const [/* game */, player] = testGame(1, {expansions: {underworld: true}});
       const tardigrades = new Tardigrades();
       const birds = new Birds();
       player.playedCards.push(tardigrades, birds);
@@ -33,7 +33,7 @@ describe('ExportConvoy', () => {
 
   it('play, plants', () => {
     const card = new ExportConvoy();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
     player.plants = 4;
 
     cast(card.play(player), undefined);
@@ -46,7 +46,7 @@ describe('ExportConvoy', () => {
 
   it('play, microbes', () => {
     const card = new ExportConvoy();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     const tardigrades = new Tardigrades();
     player.playedCards.push(tardigrades);
     tardigrades.resourceCount = 3;
@@ -62,7 +62,7 @@ describe('ExportConvoy', () => {
 
   it('play, animals', () => {
     const card = new ExportConvoy();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     const birds = new Birds();
     player.playedCards.push(birds);
     birds.resourceCount = 2;

@@ -25,7 +25,7 @@ describe('PatentManipulation', () => {
   for (const run of canPlayRuns) {
     it('canPlay ' + JSON.stringify(run), () => {
       const card = new PatentManipulation();
-      const [/* game */, player] = testGame(2, {underworldExpansion: true});
+      const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
       player.underworldData.corruption = run.corruption;
       player.playedCards.push(...cardsFromJSON([...run.playedCards]));
       expect(card.canPlay(player)).eq(run.expected);
@@ -34,7 +34,7 @@ describe('PatentManipulation', () => {
 
   it('play', () => {
     const card = new PatentManipulation();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
     const microMills = new MicroMills();
     const aiCentral = new AICentral();
     const bribedCommittee = new BribedCommittee();
@@ -54,7 +54,7 @@ describe('PatentManipulation', () => {
 
   it('Fixes #6934', () => {
     const card = new PatentManipulation();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
     const tardigrades = newProjectCard(CardName.TARDIGRADES)!;
     player.playedCards.push(tardigrades);
     tardigrades.resourceCount = 5;

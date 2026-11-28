@@ -19,7 +19,7 @@ describe('AdhaiHighOrbitConstructions', () => {
 
   beforeEach(() => {
     card = new AdhaiHighOrbitConstructions();
-    [/* game */, player] = testGame(1, {coloniesExtension: true});
+    [/* game */, player] = testGame(1, {expansions: {colonies: true}});
     player.playedCards.push(card);
   });
 

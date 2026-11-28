@@ -6,12 +6,13 @@ import {TRACK, recordingMarsBot} from '../RecordingMarsBot';
 describe('MiningGuildMarsBot', () => {
   const corp = new MiningGuildMarsBot();
 
-  // The M€ MarsBot earns comes off the card, and MarsBot keeps it
+  // Our reading: the card ticks for every 10 M€ MarsBot gains (njshaw2, BGG 3553988), so what
+  // is left of a gain after the card empties comes off the refilled card. MarsBot keeps the M€ it earns.
   for (const run of [
-    {gain: 5, card: 5, advances: 0},
-    {mcOnCard: 2, gain: 5, card: 7, advances: 1},
-    {mcOnCard: 2, gain: 25, card: 7, advances: 3},
-    {mcOnCard: 2, building: 17, gain: 15, card: 10, advances: 1},
+    {gain: 5, expected: {card: 5, advances: 0}},
+    {mcOnCard: 2, gain: 5, expected: {card: 7, advances: 1}},
+    {mcOnCard: 2, gain: 25, expected: {card: 7, advances: 3}},
+    {mcOnCard: 2, building: 17, gain: 15, expected: {card: 10, advances: 1}},
   ]) {
     it('counts down from 10, and advances the building track each time the card empties: ' + JSON.stringify(run), () => {
       const {marsBot, calls, corpState} = recordingMarsBot();
@@ -23,8 +24,9 @@ describe('MiningGuildMarsBot', () => {
 
       corp.onMcGained(marsBot, run.gain);
 
-      expect(corpState.get('mcOnCard')).eq(run.card);
-      expect(calls).deep.eq(Array(run.advances).fill(`advanceTrack(${TRACK.building})`));
+      const expectedCalls = Array(run.expected.advances).fill(`advanceTrack(${TRACK.building})`);
+      expect(corpState.get('mcOnCard')).eq(run.expected.card);
+      expect(calls).deep.eq(expectedCalls);
     });
   }
 

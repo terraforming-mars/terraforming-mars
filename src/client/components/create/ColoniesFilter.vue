@@ -20,7 +20,7 @@ import ModuleItemFilter from './ModuleItemFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
 import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES, PATHFINDERS_COLONY_NAMES} from '@/common/colonies/AllColonies';
-import {Expansion, GameModule} from '@/common/cards/GameModule';
+import {Expansion, Expansions, GameModule} from '@/common/cards/GameModule';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 
 const OFFICIAL_COLONIES = OFFICIAL_COLONY_NAMES.toSorted();
@@ -44,7 +44,7 @@ export default defineComponent({
   components: {ModuleItemFilter},
   emits: ['colonies-list-changed', 'close'],
   props: {
-    expansions: {type: Object as () => Record<Expansion, boolean>, required: true},
+    expansions: {type: Object as () => Expansions, required: true},
     selected: {type: Array as () => Array<ColonyName>, required: true},
   },
   data() {

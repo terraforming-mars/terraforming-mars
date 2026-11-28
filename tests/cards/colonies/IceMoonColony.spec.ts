@@ -11,7 +11,7 @@ describe('IceMoonColony', () => {
     const card = new IceMoonColony();
     // 2 players to remove an early-game solo action in the deferred actions queue.
     const [game, player] = testGame(2, {
-      coloniesExtension: true,
+      expansions: {colonies: true},
       customColoniesList: [
         // The important thing is that Europa is absent.
         ColonyName.GANYMEDE,
@@ -45,7 +45,7 @@ describe('IceMoonColony', () => {
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
       const card = new IceMoonColony();
-      const [/* game */, player, player2] = testGame(2, {coloniesExtension: true, turmoilExtension: true});
+      const [/* game */, player, player2] = testGame(2, {expansions: {colonies: true, turmoil: true}});
       maxOutOceans(player2, run.oceans);
       testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);
     });

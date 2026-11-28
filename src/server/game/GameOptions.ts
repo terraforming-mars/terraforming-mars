@@ -5,7 +5,7 @@ import {ColonyName} from '../../common/colonies/ColonyName';
 import {GameId} from '../../common/Types';
 import {RandomMAOptionType} from '../../common/ma/RandomMAOptionType';
 import {AgendaStyle} from '../../common/turmoil/Types';
-import {Expansion} from '../../common/cards/GameModule';
+import {DEFAULT_EXPANSIONS, Expansions} from '../../common/cards/GameModule';
 import {EscapeVelocityOptions} from '../../common/game/NewGameConfig';
 import {CustomMA} from '../../common/ma/CustomMA';
 import {ShowVP} from '../../common/game/ShowVP';
@@ -20,29 +20,14 @@ export type GameOptions = {
   fastModeOption: boolean;
   showVP: ShowVP;
 
-  // Extensions -- Deprecated, except when importing JSON
-  corporateEra: boolean;
-  venusNextExtension: boolean;
-  coloniesExtension: boolean;
-  preludeExtension: boolean;
-  prelude2Expansion: boolean;
-  turmoilExtension: boolean;
-  promoCardsOption: boolean;
-  communityCardsOption: boolean;
-  aresExtension: boolean;
+  // Expansion options
   aresHazards: boolean;
   aresExtremeVariant: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
-  moonExpansion: boolean;
-  pathfindersExpansion: boolean;
-  ceoExtension: boolean;
-  starWarsExpansion: boolean;
-  underworldExpansion: boolean;
-  deltaProjectExpansion: boolean;
 
-  expansions: Record<Expansion, boolean>,
+  expansions: Expansions,
 
   // Variants
   draftVariant: boolean;
@@ -84,17 +69,12 @@ export type GameOptions = {
 
 export const DEFAULT_GAME_OPTIONS: GameOptions = {
   altVenusBoard: false,
-  aresExtension: false,
   aresHazards: true,
   aresExtremeVariant: false,
   boardName: BoardName.THARSIS,
   bannedCards: [],
   includedCards: [],
-  ceoExtension: false,
   clonedGamedId: undefined,
-  coloniesExtension: false,
-  communityCardsOption: false,
-  corporateEra: true,
   customCeos: [],
   customColoniesList: [],
   customCorporationsList: [],
@@ -102,37 +82,16 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customPreludes: [],
   draftVariant: false,
   escapeVelocity: undefined,
-  expansions: {
-    corpera: false,
-    promo: false,
-    venus: false,
-    colonies: false,
-    prelude: false,
-    prelude2: false,
-    turmoil: false,
-    community: false,
-    ares: false,
-    moon: false,
-    pathfinders: false,
-    ceo: false,
-    starwars: false,
-    underworld: false,
-    deltaProject: false,
-  },
+  expansions: {...DEFAULT_EXPANSIONS},
   fastModeOption: false,
   includeFanMA: false,
   initialDraftVariant: false,
   modularMA: false,
-  moonExpansion: false,
   moonStandardProjectVariant: false,
   moonStandardProjectVariant1: false,
-  pathfindersExpansion: false,
   politicalAgendasExtension: 'Standard',
   preludeDraftVariant: false,
   ceosDraftVariant: false,
-  preludeExtension: false,
-  prelude2Expansion: false,
-  promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
   requiresMoonTrackCompletion: false,
   removeNegativeGlobalEventsOption: false,
@@ -145,12 +104,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   startingCeos: constants.CEO_CARDS_DEALT_PER_PLAYER,
   startingCorporations: constants.CORPORATION_CARDS_DEALT_PER_PLAYER,
   startingPreludes: constants.PRELUDE_CARDS_DEALT_PER_PLAYER,
-  starWarsExpansion: false,
-  turmoilExtension: false,
-  underworldExpansion: false,
-  deltaProjectExpansion: false,
   automa: false,
   undoOption: false,
-  venusNextExtension: false,
   twoCorpsVariant: false,
 };

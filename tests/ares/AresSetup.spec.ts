@@ -17,7 +17,7 @@ describe('AresSetup', () => {
   }
 
   it('4 player game', () => {
-    const [game] = testGame(4, {aresExtension: true, aresHazards: false});
+    const [game] = testGame(4, {expansions: {ares: true}, aresHazards: false});
     game.board = EmptyBoard.newInstance();
 
     // front-load the deck with cards of predetermined costs.
@@ -33,7 +33,7 @@ describe('AresSetup', () => {
   });
 
   it('5 player game', () => {
-    const [game] = testGame(5, {aresExtension: true});
+    const [game] = testGame(5, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
 
     // front-load the deck with cards of predetermined costs.
@@ -49,7 +49,7 @@ describe('AresSetup', () => {
   });
 
   it('3 player game', () => {
-    const [game] = testGame(3, {aresExtension: true});
+    const [game] = testGame(3, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
 
     // front-load the deck with cards of predetermined costs.
@@ -72,7 +72,7 @@ describe('AresSetup', () => {
   ] as const;
   for (const run of skipNomadRuns) {
     it('Hazards skip Mars Nomads ' + JSON.stringify(run), () => {
-      const [game] = testGame(5, {aresExtension: true});
+      const [game] = testGame(5, {expansions: {ares: true}});
       game.board = EmptyBoard.newInstance();
       game.projectDeck.drawPile.push(new CaretakerContract(), new EnergyTapping());
 

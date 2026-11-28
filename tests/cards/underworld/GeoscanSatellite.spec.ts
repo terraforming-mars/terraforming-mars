@@ -9,7 +9,7 @@ describe('GeoscanSatellite', () => {
   it('play', () => {
     const card = new GeoscanSatellite();
 
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
 

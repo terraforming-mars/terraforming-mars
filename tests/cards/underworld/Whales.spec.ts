@@ -19,7 +19,7 @@ describe('Whales', () => {
 
   beforeEach(() => {
     card = new Whales();
-    [game, player, otherPlayer] = testGame(2, {underworldExpansion: true});
+    [game, player, otherPlayer] = testGame(2, {expansions: {underworld: true}});
   });
 
   it('canPlay', () => {

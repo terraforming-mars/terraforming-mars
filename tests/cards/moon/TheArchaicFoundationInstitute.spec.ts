@@ -20,7 +20,7 @@ describe('TheArchaicFoundationInstitute', () => {
   let card: TheArchaicFoundationInstitute;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true, turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {moon: true, turmoil: true}});
     card = new TheArchaicFoundationInstitute();
     player.playedCards.push(card);
   });

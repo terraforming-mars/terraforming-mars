@@ -13,7 +13,7 @@ describe('MigrationUnderground', () => {
 
   beforeEach(() => {
     card = new MigrationUnderground();
-    [game, player] = testGame(2, {turmoilExtension: true, underworldExpansion: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true, underworld: true}});
     turmoil = Turmoil.getTurmoil(game);
   });
 

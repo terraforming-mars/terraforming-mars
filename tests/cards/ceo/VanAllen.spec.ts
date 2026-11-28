@@ -16,7 +16,7 @@ describe('Van Allen', () => {
 
   beforeEach(() => {
     card = new VanAllen();
-    [game, player, player2] = testGame(2, {ceoExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {ceo: true}});
   });
 
   it('Cannot claim for free if VanAllen is not in play', () => {

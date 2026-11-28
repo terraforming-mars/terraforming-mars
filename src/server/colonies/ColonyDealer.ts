@@ -22,27 +22,27 @@ export class ColonyDealer {
     if (ColonyDealer.includesCommunityColonies(gameOptions)) {
       colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
     }
-    if (gameOptions.pathfindersExpansion || gameOptions.moonExpansion) {
+    if (gameOptions.expansions.pathfinders || gameOptions.expansions.moon) {
       colonyTiles = colonyTiles.concat(PATHFINDERS_COLONIES_TILES);
     }
-    if (gameOptions.moonExpansion && !this.gameOptions.pathfindersExpansion) {
+    if (gameOptions.expansions.moon && !this.gameOptions.expansions.pathfinders) {
       // Leavitt II isn't built yet but this is pre-emptive
       colonyTiles.filter((c) => c.colonyName !== ColonyName.LEAVITT_II);
     }
-    if (!gameOptions.venusNextExtension) {
+    if (!gameOptions.expansions.venus) {
       colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
     }
-    if (!gameOptions.turmoilExtension) {
+    if (!gameOptions.expansions.turmoil) {
       colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
     }
-    if (!gameOptions.aresExtension) {
+    if (!gameOptions.expansions.ares) {
       colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.DEIMOS);
     }
     this.gameColonies = colonyTiles.map((cf) => new cf.Factory());
   }
 
   private static includesCommunityColonies(gameOptions: GameOptions) : boolean {
-    if (gameOptions.communityCardsOption) {
+    if (gameOptions.expansions.community) {
       return true;
     }
     const communityColonyNames = COMMUNITY_COLONIES_TILES.map((cf) => cf.colonyName);

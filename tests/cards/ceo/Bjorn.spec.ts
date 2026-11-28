@@ -17,7 +17,7 @@ describe('Bjorn', () => {
 
   beforeEach(() => {
     card = new Bjorn();
-    [game, player, player2, player3, player4] = testGame(4, {ceoExtension: true});
+    [game, player, player2, player3, player4] = testGame(4, {expansions: {ceo: true}});
     game.generation = 10;
     stealValue = game.generation + 2;
   });
@@ -95,7 +95,7 @@ describe('Bjorn', () => {
   });
 
   it('Solo mode: can act and grants generation+2 M€', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     const card = new Bjorn();
     game.generation = 10;
     player.megaCredits = 0;

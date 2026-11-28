@@ -24,11 +24,7 @@ export type DrawResult =
   | {ok: true, milestones: ReadonlyArray<MilestoneName>, awards: ReadonlyArray<AwardName>}
   | {ok: false, error: string};
 
-/**
- * Game options for a scenario. Sets both the expansions record and the older per-expansion flags,
- * as game creation does: the selector reads the record for compatibility and venusNextExtension
- * for how many to draw.
- */
+/** Game options for a scenario, with its expansions applied over the defaults. */
 export function gameOptionsFor(scenario: MAScenario): GameOptions {
   const {expansions} = scenario;
   return {
@@ -38,13 +34,6 @@ export function gameOptionsFor(scenario: MAScenario): GameOptions {
     modularMA: scenario.modularMA,
     includeFanMA: scenario.includeFanMA,
     expansions: {...DEFAULT_GAME_OPTIONS.expansions, ...expansions},
-    venusNextExtension: expansions.venus,
-    coloniesExtension: expansions.colonies,
-    turmoilExtension: expansions.turmoil,
-    aresExtension: expansions.ares,
-    moonExpansion: expansions.moon,
-    pathfindersExpansion: expansions.pathfinders,
-    underworldExpansion: expansions.underworld,
   };
 }
 

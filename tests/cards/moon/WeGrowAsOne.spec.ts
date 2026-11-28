@@ -13,9 +13,7 @@ describe('WeGrowAsOne', () => {
 
   beforeEach(() => {
     [game, player] = testGame(1, {
-      moonExpansion: true,
-      coloniesExtension: true,
-      turmoilExtension: true,
+      expansions: {moon: true, colonies: true, turmoil: true},
     });
     card = new WeGrowAsOne();
   });

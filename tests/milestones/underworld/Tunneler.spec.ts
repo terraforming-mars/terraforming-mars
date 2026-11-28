@@ -9,7 +9,7 @@ describe('Tunneler', () => {
 
   beforeEach(() => {
     milestone = new Tunneler();
-    [/* game */, player] = testGame(2, {underworldExpansion: true});
+    [/* game */, player] = testGame(2, {expansions: {underworld: true}});
   });
 
   it('Can claim', () => {

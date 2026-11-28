@@ -9,7 +9,7 @@ describe('Excavator', () => {
 
   beforeEach(() => {
     award = new Excavator();
-    [/* game */, player] = testGame(2, {underworldExpansion: true});
+    [/* game */, player] = testGame(2, {expansions: {underworld: true}});
   });
 
   it('getScore', () => {

@@ -13,7 +13,7 @@ describe('IshtarExpedition', () => {
 
   beforeEach(() => {
     card = new IshtarExpedition();
-    [game, player] = testGame(2, {venusNextExtension: true});
+    [game, player] = testGame(2, {expansions: {venus: true}});
   });
 
   it('canPlay', () => {

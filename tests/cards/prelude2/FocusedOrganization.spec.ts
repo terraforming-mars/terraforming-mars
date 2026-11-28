@@ -84,7 +84,7 @@ describe('FocusedOrganization', () => {
   it('Compatible with Sol Bank', () => {
     const card = new FocusedOrganization();
     const solBank = new SolBank();
-    const [game, player] = testGame(1, {pathfindersExpansion: true});
+    const [game, player] = testGame(1, {expansions: {pathfinders: true}});
     player.playedCards.push(solBank);
 
     const firstCard = game.projectDeck.drawOrThrow(game);

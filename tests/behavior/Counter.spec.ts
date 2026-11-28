@@ -31,9 +31,9 @@ describe('Counter', () => {
 
   beforeEach(() => {
     [game, player, player2, player3] = testGame(3, {
-      venusNextExtension: true,
-      aresExtension: true,
-      aresHazards: false});
+      expansions: {venus: true, ares: true},
+      aresHazards: false,
+    });
   });
 
   it('numbers', () => {
@@ -318,7 +318,7 @@ describe('Counter for Moon', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    [game, player] = testGame(3, {moonExpansion: true});
+    [game, player] = testGame(3, {expansions: {moon: true}});
     fake = fakeCard();
   });
 
@@ -432,7 +432,7 @@ describe('Counter for Underworld', () => {
   let fake: IProjectCard;
 
   beforeEach(() => {
-    [game, player, player2] = testGame(3, {underworldExpansion: true});
+    [game, player, player2] = testGame(3, {expansions: {underworld: true}});
     fake = fakeCard();
   });
 
@@ -473,7 +473,7 @@ describe('Counter for Turmoil', () => {
   let turmoil: Turmoil;
 
   beforeEach(() => {
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
     turmoil = Turmoil.getTurmoil(game);
   });
 
@@ -546,7 +546,7 @@ describe('Counter for Turmoil', () => {
   });
 
   it('global events do not count wild tags', () => {
-    const [/* game */, player] = testGame(2, {turmoilExtension: true});
+    const [/* game */, player] = testGame(2, {expansions: {turmoil: true}});
     player.tagsForTest = {earth: 1, wild: 1};
 
     // Wild tags apply when taking an action, but not when a global event resolves.

@@ -22,7 +22,7 @@ describe('CommunicationCenter', () => {
 
   beforeEach(() => {
     card = new CommunicationCenter();
-    [game, player, player2] = testGame(2, {pathfindersExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {pathfinders: true}});
   });
 
   it('canPlay', () => {

@@ -34,7 +34,7 @@ describe('AgricolaInc', () => {
   });
 
   it('Scores endgame VP correctly, with Venus', () => {
-    [/* game */, player] = testGame(2, {venusNextExtension: true});
+    [/* game */, player] = testGame(2, {expansions: {venus: true}});
     card.play(player);
     player.playedCards.push(card);
 

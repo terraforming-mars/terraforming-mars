@@ -17,7 +17,7 @@ describe('AquiferTurbines', () => {
 
   beforeEach(() => {
     card = new AquiferTurbines();
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
   });
 
   it('Can not play', () => {

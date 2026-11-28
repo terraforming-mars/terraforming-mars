@@ -16,7 +16,7 @@ describe('LavaFlowsAres', () => {
 
   beforeEach(() => {
     card = new LavaFlowsAres();
-    [game, player] = testGame(2, {aresExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Should play', () => {

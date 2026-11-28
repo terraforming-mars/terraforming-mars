@@ -15,7 +15,7 @@ describe('SearchForLifeUnderground', () => {
 
   beforeEach(() => {
     card = new SearchforLifeUnderground();
-    [game, player] = testGame(2, {underworldExpansion: true});
+    [game, player] = testGame(2, {expansions: {underworld: true}});
   });
 
   it('Can not act if no MC', () => {

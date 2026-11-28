@@ -24,7 +24,7 @@ describe('MoonExpansion', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player, player2] = testGame(2, {moonExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {moon: true}});
     moonData = MoonExpansion.moonData(game);
   });
 

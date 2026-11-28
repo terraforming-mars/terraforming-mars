@@ -20,7 +20,7 @@ describe('HostileTakeover', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player, opponent] = testGame(2, {moonExpansion: true});
+    [game, player, opponent] = testGame(2, {expansions: {moon: true}});
     card = new HostileTakeover();
     moonData = MoonExpansion.moonData(player.game);
   });

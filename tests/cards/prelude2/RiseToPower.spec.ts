@@ -17,7 +17,7 @@ describe('RiseToPower', () => {
 
   beforeEach(() => {
     card = new RiseToPower();
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     turmoil = game.turmoil!;
   });
 

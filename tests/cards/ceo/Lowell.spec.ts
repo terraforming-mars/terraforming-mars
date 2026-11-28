@@ -17,7 +17,7 @@ describe('Lowell', () => {
 
   beforeEach(() => {
     card = new Lowell();
-    [game, player] = testGame(1, {ceoExtension: true, preludeExtension: true});
+    [game, player] = testGame(1, {expansions: {ceo: true, prelude: true}});
     player.megaCredits = 8;
   });
 

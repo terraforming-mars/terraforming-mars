@@ -11,7 +11,7 @@ describe('LunarEmbassy', () => {
 
   beforeEach(() => {
     card = new LunarEmbassy();
-    [/* game */, player] = testGame(1, {pathfindersExpansion: true});
+    [/* game */, player] = testGame(1, {expansions: {pathfinders: true}});
   });
 
   it('play', () => {

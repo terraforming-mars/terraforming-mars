@@ -14,7 +14,7 @@ describe('CloudCity', () => {
 
   beforeEach(() => {
     card = new CloudCity();
-    [game, player] = testGame(1, {venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {venus: true}});
   });
 
   it('Can play', () => {

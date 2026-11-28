@@ -12,7 +12,7 @@ describe('EconomicHelp', () => {
 
   beforeEach(() => {
     card = new EconomicHelp();
-    [game, player] = testGame(1, {pathfindersExpansion: true, venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {pathfinders: true, venus: true}});
   });
 
   it('Play - one lowest influence tracks', () => {

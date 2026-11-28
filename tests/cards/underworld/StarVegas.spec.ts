@@ -24,7 +24,7 @@ describe('StarVegas', () => {
 
   it('play', () => {
     const card = new StarVegas();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
     addCity(player);
     addCity(player);
     addCity(player2);
@@ -54,7 +54,7 @@ describe('StarVegas', () => {
 
   it('play - available spaces with Venus', () => {
     const card = new StarVegas();
-    const [game, player/* , player2 */] = testGame(2, {venusNextExtension: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {venus: true}});
 
     cast(card.play(player), undefined);
 
@@ -73,7 +73,7 @@ describe('StarVegas', () => {
 
   it('play - available spaces with Pathfinders', () => {
     const card = new StarVegas();
-    const [game, player/* , player2 */] = testGame(2, {pathfindersExpansion: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {pathfinders: true}});
 
     cast(card.play(player), undefined);
 

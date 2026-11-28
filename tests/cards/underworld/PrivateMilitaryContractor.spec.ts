@@ -9,7 +9,7 @@ describe('PrivateMilitaryContractor', () => {
 
   it('canAct', () => {
     const card = new PrivateMilitaryContractor();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     player.titanium = 0;
 
@@ -22,7 +22,7 @@ describe('PrivateMilitaryContractor', () => {
 
   it('action', () => {
     const card = new PrivateMilitaryContractor();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
     player.titanium = 2;
     cast(card.action(player), undefined);
     runAllActions(game);

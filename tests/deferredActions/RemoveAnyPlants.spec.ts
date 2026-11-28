@@ -8,6 +8,7 @@ import {OrOptions} from '../../src/server/inputs/OrOptions';
 import {formatMessage} from '../TestingUtils';
 import {SelectOption} from '../../src/server/inputs/SelectOption';
 import {cast} from '@/common/utils/utils';
+import {MonsInsurance} from '@/server/cards/promo/MonsInsurance';
 
 describe('RemoveAnyPlants', () => {
   let player: TestPlayer;
@@ -65,5 +66,36 @@ describe('RemoveAnyPlants', () => {
     expect(formatMessage(option.title)).eq('Remove 2 plants from red');
     option.cb();
     expect(target.plants).eq(8);
+  });
+
+  it('Works in solo mode', () => {
+    const [game, player] = testGame(1);
+    player.megaCredits = 10;
+
+    cast(new RemoveAnyPlants(player, 4).execute(), undefined);
+
+    expect(player.megaCredits).eq(10);
+    expect(game.someoneHasRemovedOtherPlayersPlants).is.true;
+  });
+
+  it('Works in solo mode, compatible with Mons Insurance', () => {
+    const [game, player] = testGame(1);
+    const monsInsurance = new MonsInsurance();
+    monsInsurance.play(player);
+    player.playedCards.push(monsInsurance);
+    player.megaCredits = 10;
+
+    const orOptions = cast(new RemoveAnyPlants(player, 4).execute(), OrOptions);
+
+    expect(orOptions.options).has.length(2);
+    expect(formatMessage(orOptions.options[1].title)).eq('Skip removing plants');
+
+    orOptions.options[1].cb();
+    expect(player.megaCredits).eq(10);
+    expect(game.someoneHasRemovedOtherPlayersPlants).is.false;
+
+    orOptions.options[0].cb();
+    expect(player.megaCredits).eq(7);
+    expect(game.someoneHasRemovedOtherPlayersPlants).is.true;
   });
 });

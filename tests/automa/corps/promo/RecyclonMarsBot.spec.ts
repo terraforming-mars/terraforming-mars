@@ -10,7 +10,8 @@ describe('RecyclonMarsBot', () => {
 
     new RecyclonMarsBot().onTrackCubeTrigger(marsBot, 0, 3, 'white');
 
-    expect(trackCubes(new RecyclonMarsBot())).deep.eq([3, 6, 9, 12, 15, 18].map((position) => `building white ${position}`));
+    const expectedCubes = [3, 6, 9, 12, 15, 18].map((position) => `building white ${position}`);
+    expect(trackCubes(new RecyclonMarsBot())).deep.eq(expectedCubes);
     expect(calls).deep.eq([`advanceTrack(${marsBot.marsBotBoard.tagToTrack[Tag.PLANT]})`]);
   });
 });

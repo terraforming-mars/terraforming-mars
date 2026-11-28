@@ -16,7 +16,7 @@ describe('UnitedNationsMissionOne', () => {
 
   beforeEach(() => {
     card = new UnitedNationsMissionOne();
-    [game, player, player2] = testGame(3, {turmoilExtension: true});
+    [game, player, player2] = testGame(3, {expansions: {turmoil: true}});
   });
 
   it('Initializes correctly', () => {

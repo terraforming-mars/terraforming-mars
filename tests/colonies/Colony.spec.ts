@@ -91,6 +91,13 @@ describe('Colony', () => {
     expect(player3.production.megacredits).to.eq(2);
   });
 
+  it('Should build without the placement bonus when told to skip it', () => {
+    luna.addColony(player, {skipBonus: true});
+
+    expect(luna.colonies).deep.eq([player.id]);
+    expect(player.production.megacredits).to.eq(0);
+  });
+
   it('Should start with a trackPosition at 1', () => {
     expect(game.colonies).has.length(6);
     game.colonies.forEach((colony) => {

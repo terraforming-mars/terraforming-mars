@@ -18,7 +18,7 @@
 import {defineComponent} from 'vue';
 import ModuleItemFilter from './ModuleItemFilter.vue';
 import {CardName} from '@/common/cards/CardName';
-import {Expansion, GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
+import {Expansions, GameModule, GAME_MODULES, MODULE_NAMES} from '@/common/cards/GameModule';
 import {byModule, byType, getCard, getCards} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
 import {toName} from '@/common/utils/utils';
@@ -47,7 +47,7 @@ export default defineComponent({
   components: {ModuleItemFilter},
   emits: ['prelude-list-changed', 'close'],
   props: {
-    expansions: {type: Object as () => Record<Expansion, boolean>, required: true},
+    expansions: {type: Object as () => Expansions, required: true},
     selected: {type: Array as () => Array<CardName>, required: true},
   },
   data() {

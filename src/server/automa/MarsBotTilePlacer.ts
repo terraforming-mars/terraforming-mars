@@ -41,7 +41,7 @@ const MAP_TIEBREAKERS: Partial<Record<BoardName, ReadonlyArray<TiebreakerName>>>
  */
 const SPECIAL_HEX_COSTS: ReadonlyMap<SpaceBonus, number> = new Map([
   [SpaceBonus.OCEAN, HELLAS_BONUS_OCEAN_COST],
-  [SpaceBonus.TEMPERATURE_4MC, VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST],
+  [SpaceBonus.TEMPERATURE, VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST],
   [SpaceBonus.COLONY, TERRA_CIMMERIA_COLONY_COST],
 ]);
 
@@ -96,10 +96,14 @@ export class MarsBotTilePlacer {
     return names;
   }
 
-  /** Finds the best space for MarsBot to place a greenery, or undefined if none is available. */
-  public findGreenerySpace(): Space | undefined {
+  /**
+   * Finds the best space for MarsBot to place a greenery, or undefined if none is available.
+   *
+   * @param filter limits the choice to the legal greenery spaces it accepts.
+   */
+  public findGreenerySpace(filter: (space: Space) => boolean = () => true): Space | undefined {
     const board = this.marsBot.game.board;
-    const spaces = board.getAvailableSpacesForGreenery(this.marsBot.player);
+    const spaces = board.getAvailableSpacesForGreenery(this.marsBot.player).filter(filter);
     if (spaces.length === 0) {
       return undefined;
     }
@@ -359,7 +363,7 @@ export class MarsBotTilePlacer {
     switch (bonus) {
     case SpaceBonus.OCEAN:
       return game.canAddOcean() && game.board.getAvailableSpacesForOcean(marsBot.player).length > 0;
-    case SpaceBonus.TEMPERATURE_4MC:
+    case SpaceBonus.TEMPERATURE:
       return game.getTemperature() < game.max.temperature;
     case SpaceBonus.COLONY:
       return marsBot.canPlaceColony();
@@ -389,7 +393,7 @@ export class MarsBotTilePlacer {
       resolved = game.board.getOceanSpaces().length > oceans;
       break;
     }
-    case SpaceBonus.TEMPERATURE_4MC: {
+    case SpaceBonus.TEMPERATURE: {
       const temperature = game.getTemperature();
       marsBot.raiseTemperature(1);
       resolved = game.getTemperature() > temperature;

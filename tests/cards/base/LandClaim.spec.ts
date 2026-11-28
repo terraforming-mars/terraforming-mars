@@ -29,7 +29,8 @@ describe('LandClaim', () => {
   });
 
   it('can claim hazard spaces', () => {
-    const [game, player] = testGame(1, {aresExtension: true, pathfindersExpansion: true});
+    // aresHazards is only here because the old test had it.
+    const [game, player] = testGame(1, {expansions: {ares: true, pathfinders: true}, aresHazards: true});
     const hazardSpace = game.board.spaces.filter(AresHandler.hasHazardTile)[0];
     const landClaim = new LandClaim();
     player.playCard(landClaim);

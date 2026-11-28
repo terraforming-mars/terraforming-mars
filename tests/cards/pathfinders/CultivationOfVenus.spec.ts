@@ -24,7 +24,7 @@ describe('CultivationOfVenus', () => {
   });
 
   it('Can act when reds are in power', () => {
-    [game, player] = testGame(1, {turmoilExtension: true, venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true, venus: true}});
     setRulingParty(game, PartyName.REDS);
     player.plants = 3;
     player.megaCredits = 2;

@@ -18,7 +18,7 @@ describe('UndergroundResearchCenter', () => {
   for (const run of canPlayRuns) {
     it('canPlay ' + JSON.stringify(run), () => {
       const card = new UndergroundResearchCenter();
-      const [/* game */, player/* , opponent */] = testGame(2, {underworldExpansion: true});
+      const [/* game */, player/* , opponent */] = testGame(2, {expansions: {underworld: true}});
 
       for (let idx = 0; idx < run.excavationTokens; idx++) {
         player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});
@@ -29,7 +29,7 @@ describe('UndergroundResearchCenter', () => {
 
   it('play', () => {
     const card = new UndergroundResearchCenter();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
     runAllActions(game);

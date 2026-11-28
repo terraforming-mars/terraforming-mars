@@ -20,7 +20,7 @@ describe('AutomaGameSetup', () => {
   });
 
   it('keeps what MarsBot owns when the game is loaded', () => {
-    const [game] = testGame(1, {automa: true, turmoilExtension: true});
+    const [game] = testGame(1, {automa: true, expansions: {turmoil: true}});
     const botPlayer = game.marsBotPlayer!;
     const city = addCity(botPlayer);
     Turmoil.getTurmoil(game).sendDelegateToParty(botPlayer, PartyName.GREENS, game);

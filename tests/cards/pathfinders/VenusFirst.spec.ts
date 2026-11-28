@@ -12,7 +12,7 @@ describe('VenusFirst', () => {
 
   beforeEach(() => {
     card = new VenusFirst();
-    [game, player] = testGame(1, {venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {venus: true}});
   });
 
   it('Should play', () => {

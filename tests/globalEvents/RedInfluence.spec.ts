@@ -6,7 +6,7 @@ import {testGame} from '../TestingUtils';
 describe('RedInfluence', () => {
   it('resolve play', () => {
     const card = new RedInfluence();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     player.setTerraformRating(23);
@@ -29,7 +29,7 @@ describe('RedInfluence', () => {
 
   it('Max 5', () => {
     const card = new RedInfluence();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
 
     player.setTerraformRating(59);
     player.megaCredits = 20;

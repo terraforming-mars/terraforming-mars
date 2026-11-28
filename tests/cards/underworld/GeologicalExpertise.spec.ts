@@ -9,7 +9,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('GeologicalExpertise', () => {
   it('Should play', () => {
     const card = new GeologicalExpertise();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
     runAllActions(game);

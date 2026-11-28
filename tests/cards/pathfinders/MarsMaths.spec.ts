@@ -44,8 +44,7 @@ describe('MarsMaths', () => {
 
   it('play - solo', () => {
     const [game, player] = testGame(1, {
-      pathfindersExpansion: true,
-      turmoilExtension: false,
+      expansions: {pathfinders: true, turmoil: false},
     });
     player.playedCards.push(card);
     game.generation = 10;
@@ -59,9 +58,8 @@ describe('MarsMaths', () => {
 
   it('play - 2 player - draft', () => {
     const [game, player, player2] = testGame(2, {
-      pathfindersExpansion: true,
+      expansions: {pathfinders: true, turmoil: false},
       draftVariant: true,
-      turmoilExtension: false,
     });
     player.playedCards.push(card);
     game.generation = 10;
@@ -94,9 +92,8 @@ describe('MarsMaths', () => {
 
   it('play - 2 player - no draft', () => {
     const [game, player, player2] = testGame(2, {
-      pathfindersExpansion: true,
+      expansions: {pathfinders: true, turmoil: false},
       draftVariant: false,
-      turmoilExtension: false,
     });
     player.playedCards.push(card);
     game.generation = 10;

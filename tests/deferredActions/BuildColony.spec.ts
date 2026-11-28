@@ -14,7 +14,7 @@ describe('BuildColony', () => {
 
   beforeEach(() => {
     [/* unused */, player, player2, player3] = testGame(3, {
-      coloniesExtension: true,
+      expansions: {colonies: true},
       customColoniesList: [
         // The important thing is that Europa is absent.
         ColonyName.GANYMEDE,

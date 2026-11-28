@@ -12,7 +12,7 @@ describe('HydrogenBombardment', () => {
 
   beforeEach(() => {
     card = new HydrogenBombardment();
-    [game, player] = testGame(1, {venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {venus: true}});
   });
 
   it('Should play', () => {

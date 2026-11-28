@@ -21,7 +21,7 @@ describe('RecklessDetonation', () => {
 
   it('Should play', () => {
     const card = new RecklessDetonation();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
     player2.titanium = 3;
     player2.steel = 4;
 

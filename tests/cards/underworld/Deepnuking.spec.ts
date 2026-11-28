@@ -16,7 +16,7 @@ describe('Deepnuking', () => {
   let card: Deepnuking;
 
   beforeEach(() => {
-    [game, player, player2] = testGame(2, {underworldExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {underworld: true}});
     card = new Deepnuking();
   });
 

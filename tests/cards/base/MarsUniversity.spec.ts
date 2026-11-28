@@ -122,7 +122,7 @@ describe('MarsUniversity', () => {
 
   // https://github.com/terraforming-mars/terraforming-mars/issues/5488
   it('Colony placement comes before Mars U', () => {
-    [game, player] = testGame(2, {coloniesExtension: true});
+    [game, player] = testGame(2, {expansions: {colonies: true}});
     game.colonies = [new Callisto(), new Ceres(), new Miranda()];
     player.cardsInHand = [new EarthOffice()];
     player.playedCards.push(card);

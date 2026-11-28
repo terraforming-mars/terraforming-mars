@@ -13,7 +13,7 @@ describe('ColonialRepresentation', () => {
   let game: IGame;
   beforeEach(() => {
     card = new ColonialRepresentation();
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
   });
 
   it('Influence check', () => {

@@ -16,7 +16,7 @@ describe('NaturalPreserveAres', () => {
 
   beforeEach(() => {
     card = new NaturalPreserveAres();
-    [game, player] = testGame(2, {aresExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Should play', () => {

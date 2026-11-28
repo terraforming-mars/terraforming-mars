@@ -10,7 +10,7 @@ describe('LunaArchives', () => {
   let card: LunaArchives;
 
   beforeEach(() => {
-    [/* game */, player] = testGame(1, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {expansions: {moon: true}});
     card = new LunaArchives();
     player.playedCards.push(card);
   });

@@ -25,7 +25,7 @@ describe('CollegiumCopernicus', () => {
 
   beforeEach(() => {
     card = new CollegiumCopernicus();
-    [game, player] = testGame(2, {coloniesExtension: true, pathfindersExpansion: true});
+    [game, player] = testGame(2, {expansions: {colonies: true, pathfinders: true}});
     // Looks as though when Enceladus is first, the test fails. So removing flakiness by defining colonies.
     game.colonies = [
       new Europa(),

@@ -1,22 +1,25 @@
 import {expect} from 'chai';
 import {Cloner} from '../../src/server/database/Cloner';
 import {Game} from '../../src/server/Game';
+import {SeededRandom} from '../../src/common/utils/Random';
 import {Player} from '../../src/server/Player';
 import {Turmoil} from '../../src/server/turmoil/Turmoil';
 import {DELEGATES_PER_PLAYER} from '../../src/common/constants';
+import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 
 describe('Cloner', () => {
   it('solo game preserved', () => {
     const player = new Player('old-player1', 'yellow', true, 9, 'p-old-player1-id');
     const game = Game.newInstance(
-      'g-old-game-id', [player], player, 'spectatorid', {
-        turmoilExtension: true,
-      }, -5179823149812374);
+      'g-old-game-id', [player], player.id, 'spectatorid', {
+        expansions: {...DEFAULT_EXPANSIONS, turmoil: true},
+      }, new SeededRandom(-5179823149812374));
 
     const newPlayer = new Player('new-player1', 'red', false, 3, 'p-new-player1-id');
-    const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());
+    const newGame = Cloner.clone('g-new-id', 's-new-id', [newPlayer], newPlayer.id, game.serialize());
 
     expect(newGame.id).eq('g-new-id');
+    expect(newGame.spectatorId).eq('s-new-id');
     expect(game.getPlayerById('p-old-player1-id')).is.not.undefined;
     expect(() => game.getPlayerById('p-new-player1-id')).to.throw();
     expect(() => newGame.getPlayerById('p-old-player1-id')).to.throw();
@@ -40,7 +43,7 @@ describe('Cloner', () => {
     expect(player.playedCards, 'playedCards').deep.eq(newPlayerZero.playedCards);
     expect(player.draftedCards, 'draftedCards').deep.eq(newPlayerZero.draftedCards);
 
-    expect(game.rng.seed).eq(newGame.rng.seed);
+    expect(game.rng.serialize()).to.deep.eq(newGame.rng.serialize());
     expect(game.gameAge).eq(newGame.gameAge);
     expect(game.undoCount).eq(newGame.undoCount);
     expect(game.projectDeck.discardPile, 'discardPile').to.deep.eq(newGame.projectDeck.discardPile);
@@ -74,13 +77,13 @@ describe('Cloner', () => {
   it('automa game keeps MarsBot\'s delegates', () => {
     const player = new Player('old-player1', 'yellow', false, 0, 'p-old-player1-id');
     const game = Game.newInstance(
-      'g-old-game-id', [player], player, 'spectatorid', {
+      'g-old-game-id', [player], player.id, 'spectatorid', {
         automa: true,
-        turmoilExtension: true,
+        expansions: {...DEFAULT_EXPANSIONS, turmoil: true},
       });
 
     const newPlayer = new Player('new-player1', 'red', false, 0, 'p-new-player1-id');
-    const newGame = Cloner.clone('g-new-id', [newPlayer], 0, game.serialize());
+    const newGame = Cloner.clone('g-new-id', 's-new-id', [newPlayer], newPlayer.id, game.serialize());
 
     const botPlayer = newGame.marsBotPlayer!;
     expect(botPlayer.id).eq('p-g-new-id-marsbot');

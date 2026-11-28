@@ -16,7 +16,7 @@ describe('Athena', () => {
 
   beforeEach(() => {
     card = new Athena();
-    [game, player/* , player2 */] = testGame(2, {aresExtension: true, aresHazards: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {ares: true}, aresHazards: true});
     card.play(player);
     player.playedCards.push(card);
   });
@@ -48,7 +48,7 @@ describe('Athena', () => {
 
   it('Neutral cube does not block hazard placement', () => {
     // A game without starting hazards, so the board around space 15 is predictably empty.
-    [game, player] = testGame(2, {aresExtension: true, aresHazards: false});
+    [game, player] = testGame(2, {expansions: {ares: true}, aresHazards: false});
     card.play(player);
     player.playedCards.push(card);
 

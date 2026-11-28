@@ -9,7 +9,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('NuclearZoneAres', () => {
   it('Should play', () => {
     const card = new NuclearZoneAres();
-    const [game, player] = testGame(2, {aresExtension: true});
+    const [game, player] = testGame(2, {expansions: {ares: true}});
     card.play(player);
     runAllActions(game);
     const action = cast(player.popWaitingFor(), SelectSpace);

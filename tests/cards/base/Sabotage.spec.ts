@@ -36,7 +36,9 @@ describe('Sabotage', () => {
   it('Solo, player has Mons Insurance', () => {
     const card = new Sabotage();
     const [/* game */, player] = testGame(1);
-    player.playedCards.push(new MonsInsurance());
+    const monsInsurance = new MonsInsurance();
+    monsInsurance.play(player);
+    player.playedCards.push(monsInsurance);
     player.megaCredits = 10;
     const orOptions = cast(card.play(player), OrOptions);
 

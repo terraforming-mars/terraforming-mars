@@ -10,7 +10,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('UndergroundSettlement', () => {
   it('play', () => {
     const card = new UndergroundSettlement();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const selectSpace = cast(churn(card.play(player), player), SelectSpace);
     const space = selectSpace.spaces[0];
@@ -37,7 +37,7 @@ describe('UndergroundSettlement', () => {
   // #7073
   it('excavation rules about adjacency should not apply.', () => {
     const card = new UndergroundSettlement();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     const firstSpace = player.game.board.getAvailableSpacesForCity(player)[0];
     addCity(player, firstSpace.id);

@@ -20,7 +20,7 @@ describe('ValleyTrust', () => {
 
   beforeEach(() => {
     card = new ValleyTrust();
-    [game, player] = testGame(1, {preludeExtension: true});
+    [game, player] = testGame(1, {expansions: {prelude: true}});
   });
 
   it('Does not get card discount for other tags', () => {
@@ -51,7 +51,7 @@ describe('ValleyTrust', () => {
   });
 
   it('Card works even without prelude expansion enabled', () => {
-    [/* game */, player] = testGame(1, {preludeExtension: false});
+    [/* game */, player] = testGame(1, {expansions: {prelude: false}});
     const selectCard = cast(card.initialAction(player), SelectCard<IPreludeCard>);
 
     expect(selectCard.cards).has.length(3);

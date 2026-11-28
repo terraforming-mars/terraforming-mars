@@ -17,7 +17,7 @@ describe('Networker', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player, player2, player3] = testGame(3, {aresExtension: true, aresHazards: false});
+    [game, player, player2, player3] = testGame(3, {expansions: {ares: true}, aresHazards: false});
     game.board = EmptyBoard.newInstance();
     networker = new Networker();
   });

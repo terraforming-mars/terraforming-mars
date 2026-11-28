@@ -18,7 +18,7 @@ describe('Incite', () => {
   beforeEach(() => {
     card = new Incite();
 
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
 
     card.play(player);
     player.playedCards.push(card);

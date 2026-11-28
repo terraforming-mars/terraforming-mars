@@ -21,7 +21,7 @@ describe('CorporateTheft', () => {
   for (const run of canPlayRuns) {
     it('can play ' + JSON.stringify(run), () => {
       const card = new CorporateTheft();
-      const [/* game */, player, _opponent] = testGame(2, {underworldExpansion: true});
+      const [/* game */, player, _opponent] = testGame(2, {expansions: {underworld: true}});
 
       player.underworldData.corruption = run.corruption;
 
@@ -31,7 +31,7 @@ describe('CorporateTheft', () => {
 
   it('action - steal standard resource', () => {
     const card = new CorporateTheft();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
     player.megaCredits = 5;
     player2.steel = 3;
@@ -50,7 +50,7 @@ describe('CorporateTheft', () => {
 
   it('action - steal corruption', () => {
     const card = new CorporateTheft();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
     player.megaCredits = 5;
     player2.underworldData.corruption = 2;
@@ -75,7 +75,7 @@ describe('CorporateTheft', () => {
 
   it('solo', () => {
     const card = new CorporateTheft();
-    const [/* game */, player] = testGame(1, {underworldExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {underworld: true}});
 
     player.underworldData.corruption = 2;
     expect(card.canAct(player)).is.false;
@@ -88,7 +88,7 @@ describe('CorporateTheft', () => {
   for (const run of canActRuns) {
     it('canAct ' + JSON.stringify(run), () => {
       const card = new CorporateTheft();
-      const [/* game */, player, _opponent] = testGame(2, {underworldExpansion: true});
+      const [/* game */, player, _opponent] = testGame(2, {expansions: {underworld: true}});
 
       player.megaCredits = run.mc;
 

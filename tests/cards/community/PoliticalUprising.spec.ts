@@ -18,7 +18,7 @@ describe('PoliticalUprising', () => {
 
   beforeEach(() => {
     card = new PoliticalUprising();
-    [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+    [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true}});
   });
 
   it('Should play', () => {

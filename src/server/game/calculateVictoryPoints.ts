@@ -79,7 +79,7 @@ export function calculateVictoryPoints(player: IPlayer) {
   DeltaProjectExpansion.calculateVictoryPoints(player, builder);
 
   // Underworld Score Bribing
-  if (player.game.gameOptions.underworldExpansion === true) {
+  if (player.game.gameOptions.expansions.underworld === true) {
     const bribe = Math.min(Math.abs(negativeVP), player.underworldData.corruption);
     builder.setVictoryPoints('victoryPoints', bribe, 'Underworld Corruption Bribe');
   }

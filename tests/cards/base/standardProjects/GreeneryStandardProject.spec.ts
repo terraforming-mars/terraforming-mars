@@ -52,7 +52,7 @@ describe('GreeneryStandardProject', () => {
   });
 
   it('Can not act with reds', () => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
 
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

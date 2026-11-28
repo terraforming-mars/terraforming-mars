@@ -13,7 +13,7 @@ describe('ExcavateSpacesDeferred', () => {
   let game: IGame;
 
   beforeEach(() => {
-    [game, player] = testGame(2, {underworldExpansion: true});
+    [game, player] = testGame(2, {expansions: {underworld: true}});
     game.phase = Phase.ACTION;
   });
 

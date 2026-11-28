@@ -39,7 +39,7 @@ describe('RemoveResourcesFromCard', () => {
   });
 
   it('cannot block mandatory self-removals', () => {
-    const [/* game */, player] = testGame(3, {underworldExpansion: true});
+    const [/* game */, player] = testGame(3, {expansions: {underworld: true}});
     const atmoCollectors = new AtmoCollectors();
     player.playedCards.push(atmoCollectors);
     player.underworldData.corruption = 1;
@@ -64,7 +64,7 @@ describe('RemoveResourcesFromCard', () => {
   });
 
   it('unblockable removal from opponent cannot be blocked', () => {
-    const [game, player, opponent] = testGame(3, {underworldExpansion: true});
+    const [game, player, opponent] = testGame(3, {expansions: {underworld: true}});
     const atmoCollectors = new AtmoCollectors();
     opponent.playedCards.push(atmoCollectors);
     opponent.underworldData.corruption = 1;
@@ -79,7 +79,7 @@ describe('RemoveResourcesFromCard', () => {
   });
 
   it('blockable removal from opponent can be blocked', () => {
-    const [game, player, opponent] = testGame(3, {underworldExpansion: true});
+    const [game, player, opponent] = testGame(3, {expansions: {underworld: true}});
     const atmoCollectors = new AtmoCollectors();
     opponent.playedCards.push(atmoCollectors);
     opponent.underworldData.corruption = 1;
@@ -97,7 +97,7 @@ describe('RemoveResourcesFromCard', () => {
     expect(opponent.underworldData.corruption).eq(0);
   });
   it('blockable removal logs when not blocked', () => {
-    const [game, player, opponent] = testGame(3, {underworldExpansion: true});
+    const [game, player, opponent] = testGame(3, {expansions: {underworld: true}});
     const atmoCollectors = new AtmoCollectors();
     opponent.playedCards.push(atmoCollectors);
     opponent.underworldData.corruption = 1;

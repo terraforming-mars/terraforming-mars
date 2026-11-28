@@ -13,7 +13,7 @@ describe('MartianRepository', () => {
 
   beforeEach(() => {
     card = new MartianRepository();
-    [game, player] = testGame(1, {pathfindersExpansion: true});
+    [game, player] = testGame(1, {expansions: {pathfinders: true}});
   });
 
   it('can play', () => {

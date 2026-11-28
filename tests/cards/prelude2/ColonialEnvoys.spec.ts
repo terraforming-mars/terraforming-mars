@@ -20,7 +20,7 @@ describe('ColonialEnvoys', () => {
 
   beforeEach(() => {
     card = new ColonialEnvoys();
-    [game, player] = testGame(2, {turmoilExtension: true, coloniesExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true, colonies: true}});
     turmoil = player.game.turmoil!;
     luna = new Luna();
     ganymede = new Ganymede();

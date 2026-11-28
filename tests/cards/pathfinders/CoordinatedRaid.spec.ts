@@ -46,7 +46,7 @@ describe('CoordinatedRaid', () => {
   beforeEach(() => {
     card = new CoordinatedRaid();
     [game, player, player2] = testGame(2, {
-      coloniesExtension: true,
+      expansions: {colonies: true},
       customColoniesList: [
         ColonyName.PLUTO,
         ColonyName.TRITON,

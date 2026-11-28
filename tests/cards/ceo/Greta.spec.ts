@@ -18,7 +18,7 @@ describe('Greta', () => {
 
 
   it('Does not 4 M€ per TR raise action before OPG action is used', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     player.playedCards.push(card);
 
     runAllActions(game);
@@ -29,7 +29,7 @@ describe('Greta', () => {
   });
 
   it('Gains 4 M€ per TR raise action when OPG action is used', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     player.playedCards.push(card);
 
 
@@ -59,7 +59,7 @@ describe('Greta', () => {
   });
 
   it('Raising multiple global parameters in one action only rewards once', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     player.playedCards.push(card);
 
     runAllActions(game);
@@ -81,7 +81,7 @@ describe('Greta', () => {
   });
 
   it('Does not gain MC after 10 increases', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     player.playedCards.push(card);
 
 
@@ -118,7 +118,7 @@ describe('Greta', () => {
 
 
   it('Can only act once per game, no income when not active', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     player.playedCards.push(card);
 
     card.action();
@@ -131,7 +131,7 @@ describe('Greta', () => {
   });
 
   it('Does not gain 4MC from TR bonus when the winning Chairman', () => {
-    const [game, player, player2] = testGame(2, {ceoExtension: true, turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {ceo: true, turmoil: true}});
     const turmoil = game.turmoil!;
     turmoil.parties.forEach((p) => p.delegates.clear());
     player.playedCards.push(card);
@@ -152,7 +152,7 @@ describe('Greta', () => {
   });
 
   it('Survives serialization', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     player.playedCards.push(card);
     runAllActions(game);
 

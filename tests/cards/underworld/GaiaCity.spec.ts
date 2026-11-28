@@ -20,7 +20,7 @@ describe('GaiaCity', () => {
   for (const run of canPlayRuns) {
     it('canPlay ' + JSON.stringify(run), () => {
       const card = new GaiaCity();
-      const [/* game */, player/* , player2 */] = testGame(2, {underworldExpansion: true});
+      const [/* game */, player/* , player2 */] = testGame(2, {expansions: {underworld: true}});
       player.production.override({energy: run.energyProduction});
 
       let space: Space;

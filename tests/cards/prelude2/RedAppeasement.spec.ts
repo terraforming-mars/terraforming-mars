@@ -14,7 +14,7 @@ describe('RedAppeasement', () => {
 
   beforeEach(() => {
     card = new RedAppeasement();
-    [game, player, player2] = testGame(3, {turmoilExtension: true});
+    [game, player, player2] = testGame(3, {expansions: {turmoil: true}});
   });
 
   for (const run of [

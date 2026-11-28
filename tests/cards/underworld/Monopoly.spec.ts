@@ -19,7 +19,7 @@ describe('Monopoly', () => {
 
   beforeEach(() => {
     card = new Monopoly();
-    [game, player, opponent1, opponent2, opponent3] = testGame(4, {underworldExpansion: true});
+    [game, player, opponent1, opponent2, opponent3] = testGame(4, {expansions: {underworld: true}});
   });
 
   for (const run of [
@@ -121,7 +121,7 @@ describe('Monopoly', () => {
   });
 
   it('Works in solo', () => {
-    const [game, player] = testGame(1, {underworldExpansion: true});
+    const [game, player] = testGame(1, {expansions: {underworld: true}});
     player.underworldData.corruption = 1;
 
     expect(card.canPlay(player)).is.false;

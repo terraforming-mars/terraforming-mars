@@ -20,7 +20,7 @@ describe('CuriosityII', () => {
 
   beforeEach(() => {
     card = new CuriosityII();
-    [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
+    [game, player, player2] = testGame(2, {expansions: {ares: true}, aresHazards: false});
     game.phase = Phase.ACTION;
 
     player.playedCards.push(card);

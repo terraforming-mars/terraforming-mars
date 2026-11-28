@@ -10,7 +10,7 @@ describe('PROffice', () => {
     const card = new PROffice();
     const card2 = new Sponsors();
     const card3 = new AcquiredCompany();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
 
     expect(card.canPlay(player)).is.not.true;
 

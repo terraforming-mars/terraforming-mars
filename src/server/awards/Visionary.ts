@@ -15,7 +15,7 @@ export class Visionary implements IAward {
   /** Rulebook C p.15. */
   public marsBotScore(marsBot: IMarsBot): number {
     const positions = marsBot.marsBotBoard.tracks.map((track) => track.position).sort(numeric);
-    const index = marsBot.game.gameOptions.venusNextExtension ? 1 : 0;
+    const index = marsBot.game.gameOptions.expansions.venus ? 1 : 0;
     return positions[index] * 2;
   }
 }

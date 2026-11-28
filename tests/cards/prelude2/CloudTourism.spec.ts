@@ -45,7 +45,7 @@ describe('CloudTourism', () => {
   for (const run of earthEmbassyPlayTests) {
     it('play, compatible with earth embassy ' + JSON.stringify(run), () => {
       const card = new CloudTourism();
-      const [game, player] = testGame(1, {moonExpansion: true});
+      const [game, player] = testGame(1, {expansions: {moon: true}});
 
       if (run.played) {
         player.playedCards.push(new EarthEmbassy());

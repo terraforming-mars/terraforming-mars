@@ -12,7 +12,7 @@ describe('CeresSpaceport', () => {
 
   beforeEach(() => {
     card = new CeresSpaceport();
-    [/* game */, player] = testGame(1, {pathfindersExpansion: true});
+    [/* game */, player] = testGame(1, {expansions: {pathfinders: true}});
   });
 
   it('play', () => {

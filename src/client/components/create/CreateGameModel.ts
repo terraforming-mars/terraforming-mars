@@ -4,7 +4,7 @@ import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 import {NewPlayerModel} from '@/common/game/NewGameConfig';
 import {GoalSettings} from './goals/types';
-import {Expansion} from '@/common/cards/GameModule';
+import {Expansions} from '@/common/cards/GameModule';
 import {BoardName} from '@/common/boards/BoardName';
 import {ShowVP} from '@/common/game/ShowVP';
 
@@ -27,7 +27,7 @@ export type CreateGameModel = {
   escapeVelocityPenalty: number;
   escapeVelocityPeriod: number;
   escapeVelocityThreshold: number;
-  expansions: Record<Expansion, boolean>,
+  expansions: Expansions,
   fastModeOption: boolean;
   /** The milestones and awards settings. The form converts them to the game options. */
   goals: GoalSettings;

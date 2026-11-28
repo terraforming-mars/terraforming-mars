@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-syntax
 export enum CardName {
   // Standard projects:
   SELL_PATENTS_STANDARD_PROJECT = 'Sell Patents',

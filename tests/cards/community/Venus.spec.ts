@@ -22,7 +22,7 @@ describe('Venus', () => {
   beforeEach(() => {
     venus = new Venus();
     aerialMappers = new AerialMappers();
-    [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true, venus: true}});
     game.colonies.push(venus);
   });
 
@@ -57,7 +57,7 @@ describe('Venus', () => {
   });
 
   it('Should build, reds', () => {
-    [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true, turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true, venus: true, turmoil: true}});
     game.colonies.push(venus);
     venus.isActive = true;
 

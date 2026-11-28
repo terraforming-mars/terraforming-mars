@@ -25,7 +25,7 @@ describe('Atmoscoop', () => {
 
   beforeEach(() => {
     card = new Atmoscoop();
-    [game, player] = testGame(2, {venusNextExtension: true});
+    [game, player] = testGame(2, {expansions: {venus: true}});
     dirigibles = new Dirigibles();
     floatingHabs = new FloatingHabs();
   });
@@ -145,7 +145,7 @@ describe('Atmoscoop', () => {
     {megacredits: 31, titanium: 0, reds: true, temperature: -2, venus: 14, expected: true},
   ] as const) {
     it('Can play ' + JSON.stringify(run), () => {
-      [game, player] = testGame(2, {venusNextExtension: true, turmoilExtension: true});
+      [game, player] = testGame(2, {expansions: {venus: true, turmoil: true}});
       player.tagsForTest = {science: 3};
       if (run.reds) {
         setRulingParty(game, PartyName.REDS, 'rp01');

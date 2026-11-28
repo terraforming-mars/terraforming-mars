@@ -6,7 +6,7 @@ import {testGame} from '../TestingUtils';
 describe('VolcanicEruptions', () => {
   it('resolve play', () => {
     const card = new VolcanicEruptions();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     turmoil.chairman = player2;
     turmoil.dominantParty = new Kelvinists();

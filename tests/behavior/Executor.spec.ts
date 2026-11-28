@@ -62,7 +62,7 @@ describe('Executor', () => {
   let executor: Executor;
 
   beforeEach(() => {
-    [game, player, player2, player3] = testGame(3, {turmoilExtension: true, venusNextExtension: true, underworldExpansion: true});
+    [game, player, player2, player3] = testGame(3, {expansions: {turmoil: true, venus: true, underworld: true}});
 
     fake = fakeCard({name: 'Fake Card' as CardName});
     executor = new Executor();

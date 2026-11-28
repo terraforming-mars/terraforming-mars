@@ -34,7 +34,7 @@ import {Tropicalist} from './amazonisPlanitia/Tropicalist';
 import {Collector} from './terraCimmeria/Collector';
 import {Firestarter} from './terraCimmeria/Firestarter';
 import {Gambler} from './terraCimmeria/Gambler';
-import {Spacefarer} from './terraCimmeria/Spacefarer';
+import {TSpacefarer} from './terraCimmeria/TSpacefarer';
 import {TerraPioneer} from './terraCimmeria/TerraPioneer';
 import {Risktaker} from './underworld/Risktaker';
 import {Tunneler} from './underworld/Tunneler';
@@ -63,7 +63,7 @@ import {BoardName} from '../../common/boards/BoardName';
 import {Architect} from './Architect';
 import {Legend4} from './modular/Legend4';
 import {Metallurgist} from './Metallurgist';
-import {Spacefarer4} from './terraCimmeria/Spacefarer4';
+import {Spacefarer} from './modular/Spacefarer';
 import {Terraformer29} from './modular/Terraformer29';
 import {Terran5} from './modular/Terran5';
 import {Tycoon10} from './modular/Tycoon10';
@@ -122,8 +122,8 @@ export const milestoneManifest: MAManifest<MilestoneName, IMilestone> = {
     'Rim Settler': {Factory: RimSettler, random: 'both'},
     'Risktaker': {Factory: Risktaker, compatibility: 'underworld'},
     'Smith': {Factory: Smith},
-    'T. Spacefarer': {Factory: Spacefarer},
-    'Spacefarer4': {Factory: Spacefarer4, random: 'modular'},
+    'T. Spacefarer': {Factory: TSpacefarer},
+    'Spacefarer': {Factory: Spacefarer, random: 'modular'},
     'Specialist': {Factory: Specialist},
     'Sponsor': {Factory: Sponsor, random: 'both'},
     'T. Collector': {Factory: Collector},

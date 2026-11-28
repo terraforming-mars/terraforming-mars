@@ -14,9 +14,9 @@ import {recordingMarsBot} from '../corps/RecordingMarsBot';
 describe('InvasiveSpecies', () => {
   for (const run of [
     {options: {}, titan: false, expected: ['gainMc(5)']},
-    {options: {venusNextExtension: true}, titan: false, expected: ['gainMc(2)', 'addFloaters(1)']},
-    {options: {coloniesExtension: true}, titan: true, expected: ['gainMc(2)', 'addFloaters(1)']},
-    {options: {coloniesExtension: true}, titan: false, expected: ['gainMc(2)']},
+    {options: {expansions: {venus: true}}, titan: false, expected: ['gainMc(2)', 'addFloaters(1)']},
+    {options: {expansions: {colonies: true}}, titan: true, expected: ['gainMc(2)', 'addFloaters(1)']},
+    {options: {expansions: {colonies: true}}, titan: false, expected: ['gainMc(2)']},
   ] as const) {
     it('gains 5 M€, or 2 M€ and a floater with Venus Next or Titan: ' + JSON.stringify(run), () => {
       const [game, human] = testGame(1, run.options);

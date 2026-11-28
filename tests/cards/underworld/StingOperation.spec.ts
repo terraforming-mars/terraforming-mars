@@ -15,7 +15,7 @@ describe('StingOperation', () => {
   for (const run of canPlayRuns) {
     it('canPlay ' + JSON.stringify(run), () => {
       const card = new StingOperation();
-      const [game, player] = testGame(3, {underworldExpansion: true});
+      const [game, player] = testGame(3, {expansions: {underworld: true}});
       zip(run.corruption, game.players).map(([corruption, player]) => player.underworldData.corruption = corruption);
 
       expect(card.canPlay(player)).eq(run.expected);
@@ -27,7 +27,7 @@ describe('StingOperation', () => {
 
   it('play', () => {
     const card = new StingOperation();
-    const [/* game */, player, player2, player3] = testGame(3, {underworldExpansion: true});
+    const [/* game */, player, player2, player3] = testGame(3, {expansions: {underworld: true}});
 
     player.underworldData.corruption = 3;
     player2.underworldData.corruption = 4;
@@ -50,7 +50,7 @@ describe('StingOperation', () => {
 
   it('play - target self', () => {
     const card = new StingOperation();
-    const [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
+    const [game, player, player2, player3] = testGame(3, {expansions: {underworld: true}});
 
     player.underworldData.corruption = 4;
     player2.underworldData.corruption = 4;

@@ -15,7 +15,7 @@ describe('HighCircles', () => {
   let turmoil: Turmoil;
   beforeEach(() => {
     card = new HighCircles();
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
     turmoil = player.game.turmoil!;
   });
 

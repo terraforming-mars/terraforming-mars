@@ -24,7 +24,7 @@ describe('MindSetMars', () => {
 
   beforeEach(() => {
     card = new MindSetMars();
-    [game, player, player2] = testGame(3, {turmoilExtension: true});
+    [game, player, player2] = testGame(3, {expansions: {turmoil: true}});
     player.playedCards.push(card);
     turmoil = game.turmoil!;
   });

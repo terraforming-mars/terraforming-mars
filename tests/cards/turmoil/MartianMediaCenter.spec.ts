@@ -6,7 +6,7 @@ import {testGame} from '../../TestGame';
 describe('MartianMediaCenter', () => {
   it('Should play', () => {
     const card = new MartianMediaCenter();
-    const [game, player] = testGame(1, {turmoilExtension: true});
+    const [game, player] = testGame(1, {expansions: {turmoil: true}});
 
     expect(card.canPlay(player)).is.not.true;
 

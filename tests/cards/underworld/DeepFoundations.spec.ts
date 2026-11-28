@@ -12,7 +12,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('DeepFoundations', () => {
   it('can play', () => {
     const card = new DeepFoundations();
-    const [/* game */, player] = testGame(1, {underworldExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {underworld: true}});
     expect(card.canPlay(player)).is.true;
   });
 
@@ -26,7 +26,7 @@ describe('DeepFoundations', () => {
   ] as const) {
     it('can act ' + JSON.stringify(run), () => {
       const card = new DeepFoundations();
-      const [/* game */, player] = testGame(1, {underworldExpansion: true});
+      const [/* game */, player] = testGame(1, {expansions: {underworld: true}});
       player.playedCards.push(card);
 
       player.megaCredits = run.mc;
@@ -37,7 +37,7 @@ describe('DeepFoundations', () => {
 
   it('action', () => {
     const card = new DeepFoundations();
-    const [game, player] = testGame(1, {underworldExpansion: true});
+    const [game, player] = testGame(1, {expansions: {underworld: true}});
     player.playedCards.push(card);
 
     player.megaCredits = 22;
@@ -53,7 +53,7 @@ describe('DeepFoundations', () => {
 
   it('action, spend steel', () => {
     const card = new DeepFoundations();
-    const [game, player] = testGame(1, {underworldExpansion: true});
+    const [game, player] = testGame(1, {expansions: {underworld: true}});
     player.playedCards.push(card);
 
     player.megaCredits = 20;
@@ -75,7 +75,8 @@ describe('DeepFoundations', () => {
 
   it('Will not excavate on a space with a tile', () => {
     const card = new DeepFoundations();
-    const [game, player] = testGame(1, {underworldExpansion: true, aresExtension: true});
+    // aresHazards is only here because the old test had it.
+    const [game, player] = testGame(1, {expansions: {underworld: true, ares: true}, aresHazards: true});
     player.playedCards.push(card);
 
     player.megaCredits = 20 + 8; // 22 for the action, 8 for the dust storm

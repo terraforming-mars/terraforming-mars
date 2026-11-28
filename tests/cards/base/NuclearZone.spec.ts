@@ -30,7 +30,7 @@ describe('NuclearZone', () => {
   for (const run of redsRuns) {
     it('Works with reds ' + JSON.stringify(run), () => {
       const card = new NuclearZone();
-      const [game, player/* , player2 */] = testGame(2, {turmoilExtension: true});
+      const [game, player/* , player2 */] = testGame(2, {expansions: {turmoil: true}});
       setTemperature(game, run.temperature);
       testRedsCosts(() => player.canPlay(card), player, card.cost, run.expected);
     });

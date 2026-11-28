@@ -13,7 +13,7 @@ describe('Visionary', () => {
   ] as const) {
     it('MarsBot scores its least advanced track doubled, the second least with Venus: ' + JSON.stringify(run), () => {
       const tracks = run.venus ? [...THARSIS_MARSBOT_BOARD, VENUS_MARSBOT_TRACK] : THARSIS_MARSBOT_BOARD;
-      const [game] = testGame(1, {venusNextExtension: run.venus});
+      const [game] = testGame(1, {expansions: {venus: run.venus}});
       const marsBot = fakeMarsBot({tracks, game});
       setAllTracks(marsBot, 6);
       setTrack(marsBot, Tag.BUILDING, 1);

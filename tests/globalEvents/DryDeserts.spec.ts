@@ -18,7 +18,7 @@ describe('DryDeserts', () => {
 
   beforeEach(() => {
     card = new DryDeserts();
-    [game, player, player2] = testGame(2, {turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     turmoil = game.turmoil!;
   });
 

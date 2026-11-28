@@ -18,7 +18,7 @@ describe('SolarFarm', () => {
 
   beforeEach(() => {
     card = new SolarFarm();
-    [game, player] = testGame(2, {aresExtension: true, aresHazards: true});
+    [game, player] = testGame(2, {expansions: {ares: true}, aresHazards: true});
   });
 
   it('Play', () => {

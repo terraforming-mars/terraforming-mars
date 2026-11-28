@@ -23,7 +23,7 @@ describe('NewPartner', () => {
 
   beforeEach(() => {
     card = new NewPartner();
-    [game, player] = testGame(2, {preludeExtension: true});
+    [game, player] = testGame(2, {expansions: {prelude: true}});
     smeltingPlant = new SmeltingPlant();
     donation = new Donation();
     hugeAsteroid = new HugeAsteroid();

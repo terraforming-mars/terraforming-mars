@@ -39,10 +39,11 @@ import {EnergyTapping} from '../src/server/cards/base/EnergyTapping';
 import {cast} from '@/common/utils/utils';
 import {Timer} from '../src/common/Timer';
 import {FakeClock} from './common/FakeClock';
+import {DEFAULT_EXPANSIONS} from '@/common/cards/GameModule';
 
 function playerWithRunningTimer(): [Player, FakeClock] {
   const player = new Player('blue', 'blue', false, 0, 'p-blue');
-  Game.newInstance('gameid', [player], player, 'spectatorid');
+  Game.newInstance('gameid', [player], player.id, 'spectatorid');
   player.clearWaitingFor();
   const clock = new FakeClock();
   Reflect.set(Timer, 'lastStoppedAt', 0);
@@ -66,7 +67,7 @@ describe('Player', () => {
 
   it('Should throw error if nothing to process', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    Game.newInstance('gameid', [player], player, 'spectatorid');
+    Game.newInstance('gameid', [player], player.id, 'spectatorid');
     player.clearWaitingFor();
 
     expect(() => player.process({type: 'option'})).to.throw('Not waiting for anything');
@@ -127,7 +128,7 @@ describe('Player', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2 = new Player('red', 'red', false, 0, 'p-red');
     const player3 = new Player('yellow', 'yellow', false, 0, 'p-yellow');
-    Game.newInstance('gameid', [player, player2, player3], player, 'spectatorid');
+    Game.newInstance('gameid', [player, player2, player3], player.id, 'spectatorid');
     player2.production.add(Resource.ENERGY, 2);
     player3.production.add(Resource.ENERGY, 2);
     player.playedCards.push(new LunarBeam());
@@ -142,7 +143,7 @@ describe('Player', () => {
     const card = new PowerSupplyConsortium();
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2 = new Player('red', 'red', false, 0, 'p-red');
-    Game.newInstance('gameid', [player, player2], player, 'spectatorid');
+    Game.newInstance('gameid', [player, player2], player.id, 'spectatorid');
     player.clearWaitingFor();
 
     player.playedCards.push(new LunarBeam());
@@ -165,7 +166,7 @@ describe('Player', () => {
     const redPlayer = new Player('red', 'red', false, 0, 'p-red');
 
     player.production.add(Resource.HEAT, 2);
-    Game.newInstance('gameid', [player, redPlayer], player, 'spectatorid');
+    Game.newInstance('gameid', [player, redPlayer], player.id, 'spectatorid');
     player.defer(card.play(player));
     runAllActions(player.game);
     cast(player.getWaitingFor(), SelectAmount);
@@ -180,7 +181,7 @@ describe('Player', () => {
   it('Runs SaturnSystems when other player plays card', () => {
     const player1 = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2 = new Player('red', 'red', false, 0, 'p-red');
-    Game.newInstance('gto', [player1, player2], player1, 'spectatorid');
+    Game.newInstance('gto', [player1, player2], player1.id, 'spectatorid');
     const card = new IoMiningIndustries();
     const corporationCard = new SaturnSystems();
     expect(player1.production.megacredits).to.eq(0);
@@ -190,7 +191,7 @@ describe('Player', () => {
   });
   it('Chains onend functions from player inputs', function(done) {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    Game.newInstance('gameid', [player], player, 'spectatorid');
+    Game.newInstance('gameid', [player], player.id, 'spectatorid');
     const mockOption3 = new SelectOption('Mock select option 3').andThen(() => {
       return undefined;
     });
@@ -211,14 +212,14 @@ describe('Player', () => {
   it('Omits buffer gas for non solo games', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2= new Player('red', 'red', false, 0, 'p-red');
-    Game.newInstance('gameid', [player, player2], player, 'spectatorid');
+    Game.newInstance('gameid', [player, player2], player.id, 'spectatorid');
     const option = player.getStandardProjectOption();
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).to.be.undefined;
   });
   it('Omit buffer gas for solo games without 63 TR', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    Game.newInstance('gameid', [player], player, 'spectatorid');
+    Game.newInstance('gameid', [player], player.id, 'spectatorid');
     const option = player.getStandardProjectOption();
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).to.be.undefined;
@@ -226,7 +227,7 @@ describe('Player', () => {
 
   it('Include buffer gas for solo games with 63 TR', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    Game.newInstance('gameid', [player], player, 'spectatorid', {soloTR: true});
+    Game.newInstance('gameid', [player], player.id, 'spectatorid', {soloTR: true});
     const option = player.getStandardProjectOption();
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).not.to.be.undefined;
@@ -355,7 +356,7 @@ describe('Player', () => {
 
   it('removes tags from card played from self replicating robots', () => {
     const player = TestPlayer.BLUE.newPlayer();
-    Game.newInstance('gameid', [player], player, 'spectatorid');
+    Game.newInstance('gameid', [player], player.id, 'spectatorid');
     const srr = new SelfReplicatingRobots();
     player.stock.megacredits = 10;
     player.playedCards.push(srr);
@@ -371,7 +372,7 @@ describe('Player', () => {
 
   it('addResourceTo', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
 
     const log = game.gameLog;
 
@@ -403,7 +404,7 @@ describe('Player', () => {
   it('addResourceTo with Mons Insurance hook does not remove when no credits', () => {
     const player1 = new Player('blue', 'blue', false, 0, 'p-blue');
     const player2 = new Player('red', 'red', false, 0, 'p-red');
-    const game = Game.newInstance('gameid', [player1, player2], player1, 'spectatorid');
+    const game = Game.newInstance('gameid', [player1, player2], player1.id, 'spectatorid');
     player1.megaCredits = 0;
     player1.production.add(Resource.MEGACREDITS, -5);
     player2.megaCredits = 3;
@@ -416,7 +417,7 @@ describe('Player', () => {
 
   it('addResourceTo, logZero', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
 
     const log = game.gameLog;
 
@@ -440,7 +441,7 @@ describe('Player', () => {
 
   it('removeResourcesFrom', () => {
     const player = new Player('blue', 'blue', false, 0, 'p-blue');
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid');
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid');
 
     const log = game.gameLog;
     log.length = 0; // Empty it out.
@@ -480,7 +481,7 @@ describe('Player', () => {
   it('Turmoil player action', () => {
     const player = TestPlayer.BLUE.newPlayer();
 
-    const game = Game.newInstance('gameid', [player], player, 'spectatorid', {turmoilExtension: true});
+    const game = Game.newInstance('gameid', [player], player.id, 'spectatorid', {expansions: {...DEFAULT_EXPANSIONS, turmoil: true}});
 
     const turmoil = game.turmoil!;
 
@@ -514,7 +515,7 @@ describe('Player', () => {
   });
 
   it('Prelude action cycle', () => {
-    const [game, player1, player2] = testGame(2, {preludeExtension: true});
+    const [game, player1, player2] = testGame(2, {expansions: {prelude: true}});
 
     // None of these preludes require additional user input, so they're good for this test.
     const alliedBanks = new AlliedBanks();
@@ -571,7 +572,7 @@ describe('Player', () => {
   });
 
   it('Prelude fizzle', () => {
-    const [game, player] = testGame(1, {preludeExtension: true});
+    const [game, player] = testGame(1, {expansions: {prelude: true}});
 
     const alliedBanks = new AlliedBanks();
     const loan = new Loan();
@@ -670,7 +671,7 @@ describe('Player', () => {
   });
 
   it('Increasing venus sets globalParameterSteps', () => {
-    const [game, player, player2] = testGame(2, {venusNextExtension: true, solarPhaseOption: true});
+    const [game, player, player2] = testGame(2, {expansions: {venus: true}, solarPhaseOption: true});
 
     game.phase = Phase.ACTION;
     game.increaseVenusScaleLevel(player, 1);
@@ -702,7 +703,7 @@ describe('Player', () => {
     }
 
     it('kp03 ruling: 6-heat option replaces 8-heat option', () => {
-      const [game, player] = testGame(1, {turmoilExtension: true});
+      const [game, player] = testGame(1, {expansions: {turmoil: true}});
       setRulingParty(game, PartyName.KELVINISTS, 'kp03');
       player.stock.add(Resource.HEAT, 10);
 
@@ -711,7 +712,7 @@ describe('Player', () => {
     });
 
     it('kp01 ruling: 8-heat option remains, 6-heat is not offered', () => {
-      const [game, player] = testGame(1, {turmoilExtension: true});
+      const [game, player] = testGame(1, {expansions: {turmoil: true}});
       setRulingParty(game, PartyName.KELVINISTS, 'kp01');
       player.stock.add(Resource.HEAT, 10);
 

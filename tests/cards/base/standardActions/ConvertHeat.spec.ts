@@ -17,7 +17,7 @@ describe('ConvertHeat', () => {
 
   beforeEach(() => {
     card = new ConvertHeat();
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
   });
 
   it('Can not act without heat', () => {

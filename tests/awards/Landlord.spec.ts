@@ -15,7 +15,7 @@ describe('Landlord', () => {
   const award = new Landlord();
 
   it('Simple test', () => {
-    const [game, player/* , player2 */] = testGame(2, {aresExtension: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {ares: true}});
     game.board = EmptyBoard.newInstance();
 
     expect(award.getScore(player)).to.eq(0);
@@ -28,7 +28,7 @@ describe('Landlord', () => {
   });
 
   it('Includes The Moon', () => {
-    const [/* game */, player/* , player2 */] = testGame(2, {moonExpansion: true});
+    const [/* game */, player/* , player2 */] = testGame(2, {expansions: {moon: true}});
 
     expect(award.getScore(player)).to.eq(0);
 
@@ -43,7 +43,7 @@ describe('Landlord', () => {
   });
 
   it('Co-owner counts on The Moon', () => {
-    const [/* game */, player, player2] = testGame(2, {moonExpansion: true});
+    const [/* game */, player, player2] = testGame(2, {expansions: {moon: true}});
 
     expect(award.getScore(player)).to.eq(0);
 
@@ -60,7 +60,7 @@ describe('Landlord', () => {
   });
 
   it('Exclude Landclaimed Ares hazard tile from land-based award', () => {
-    const [game, player/* , player2 */] = testGame(2, {aresExtension: true});
+    const [game, player/* , player2 */] = testGame(2, {expansions: {ares: true}});
 
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
     AresHazards.putHazardAt(game, firstSpace, TileType.DUST_STORM_MILD);

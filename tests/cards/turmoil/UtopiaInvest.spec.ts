@@ -8,7 +8,7 @@ import {churn} from '../../TestingUtils';
 describe('UtopiaInvest', () => {
   it('Should play', () => {
     const card = new UtopiaInvest();
-    const [/* game */, player] = testGame(2, {turmoilExtension: true});
+    const [/* game */, player] = testGame(2, {expansions: {turmoil: true}});
     cast(card.play(player), undefined);
 
     expect(player.production.titanium).to.eq(1);

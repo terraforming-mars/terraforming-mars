@@ -44,7 +44,7 @@ describe('InterplanetaryTrade', () => {
 
   it('Should only count wild tags up to the max amount of tag types existing (11 with venus)', () => {
     const card = new InterplanetaryTrade();
-    const [/* game */, player] = testGame(1, {venusNextExtension: true});
+    const [/* game */, player] = testGame(1, {expansions: {venus: true}});
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -59,7 +59,7 @@ describe('InterplanetaryTrade', () => {
 
   it('Should only count wild tags up to the max amount of tag types existing (12 with venus and moon)', () => {
     const card = new InterplanetaryTrade();
-    const [/* game */, player] = testGame(1, {venusNextExtension: true, moonExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {venus: true, moon: true}});
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());
@@ -74,7 +74,7 @@ describe('InterplanetaryTrade', () => {
 
   it('Should only count wild tags up to the max amount of tag types existing (13 with venus, moon, and Mars)', () => {
     const card = new InterplanetaryTrade();
-    const [/* game */, player] = testGame(1, {venusNextExtension: true, moonExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {venus: true, moon: true}});
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new SpaceElevator());
     player.playedCards.push(new MarsUniversity());

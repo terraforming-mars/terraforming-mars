@@ -15,7 +15,7 @@ describe('PrivateSecurity', () => {
 
   beforeEach(() => {
     card = new PrivateSecurity();
-    [/* game */, player, opponent1, opponent2] = testGame(3, {pathfindersExpansion: true});
+    [/* game */, player, opponent1, opponent2] = testGame(3, {expansions: {pathfinders: true}});
   });
 
   it('protects against Fish', () => {

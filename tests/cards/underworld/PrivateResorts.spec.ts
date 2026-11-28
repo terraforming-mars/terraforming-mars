@@ -7,7 +7,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('PrivateResorts', () => {
   it('canPlay', () => {
     const card = new PrivateResorts();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     maxOutOceans(player, 2);
     player.production.override({heat: 1});
@@ -24,7 +24,7 @@ describe('PrivateResorts', () => {
 
   it('Should play', () => {
     const card = new PrivateResorts();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     player.production.override({heat: 1});
 

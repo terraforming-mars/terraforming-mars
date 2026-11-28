@@ -40,7 +40,7 @@ describe('UnderworldExpansion', () => {
   let microbeCard2: IProjectCard;
 
   beforeEach(() => {
-    [game, player1, player2] = testGame(2, {underworldExpansion: true});
+    [game, player1, player2] = testGame(2, {expansions: {underworld: true}});
     underworldData = game.underworldData;
     dataCard1 = new Cryptocurrency();
     dataCard2 = new MartianCulture();
@@ -65,7 +65,7 @@ describe('UnderworldExpansion', () => {
   });
 
   it('sanity, Amazonis Planitia', () => {
-    const [game] = testGame(2, {underworldExpansion: true, boardName: BoardName.AMAZONIS_PLANITIA});
+    const [game] = testGame(2, {expansions: {underworld: true}, boardName: BoardName.AMAZONIS_PLANITIA});
     expect(game.underworldData.tokens).has.length(136);
   });
 
@@ -537,7 +537,7 @@ describe('UnderworldExpansion', () => {
   }
 
   it('maybeBlockAttack - disabled', () => {
-    [game, player1, player2] = testGame(2, {underworldExpansion: false});
+    [game, player1, player2] = testGame(2, {expansions: {underworld: false}});
     const tester = new MaybeBlockAttackTester();
 
     tester.run();
@@ -753,7 +753,7 @@ describe('UnderworldExpansion', () => {
   });
 
   it('Cannot identify the restricted space on Amazonis Planitia', () => {
-    const [game, player1] = testGame(2, {underworldExpansion: true, boardName: BoardName.AMAZONIS});
+    const [game, player1] = testGame(2, {expansions: {underworld: true}, boardName: BoardName.AMAZONIS});
     const restrictedSpace = game.board.spaces.filter((space) => space.spaceType === SpaceType.RESTRICTED)[0];
     expect(UnderworldExpansion.identifiableSpaces(player1)).to.not.include(restrictedSpace);
     expect(UnderworldExpansion.excavatableSpaces(player1)).to.not.include(restrictedSpace);

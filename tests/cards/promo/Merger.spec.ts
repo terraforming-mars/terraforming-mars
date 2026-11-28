@@ -52,7 +52,7 @@ describe('Merger', () => {
 
   beforeEach(() => {
     merger = new Merger();
-    [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {prelude: true, turmoil: true}});
 
     // Preset corporation deck for testing
     game.corporationDeck.drawPile = [new ArcadianCommunities(), new SaturnSystems(), new TerralabsResearch(), new Polyphemos()];
@@ -309,7 +309,7 @@ describe('Merger', () => {
       const corpNames = corporations.map(toName).join(', ');
 
       it(`(${corpNames}, ${candidate.name}, ${megacredits})`, () => {
-        [game, player, player2] = testGame(2, {preludeExtension: true, turmoilExtension: true});
+        [game, player, player2] = testGame(2, {expansions: {prelude: true, turmoil: true}});
         player.playCorporationCard(corporations[0]);
         if (corporations.length > 1) {
           player.playCorporationCard(corporations[1]);
@@ -390,7 +390,7 @@ describe('Merger', () => {
   });
 
   it('All corporation first actions count as a single action', () => {
-    const [game, player, player2] = testGame(2, {venusNextExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {venus: true}});
     const inventrix = new Inventrix(); // Draw 3 cards
     const ambient = new Ambient(); // Raise venus 2 steps
     player.playCorporationCard(inventrix);
@@ -439,7 +439,7 @@ describe('Merger', () => {
       CardName.CREDICOR, CardName.ECOLINE, CardName.HELION,
       CardName.INVENTRIX, CardName.MINING_GUILD, CardName.PHOBOLOG,
     ];
-    const [game, player, player2] = testGame(2, {preludeExtension: true, promoCardsOption: true, customCorporationsList});
+    const [game, player, player2] = testGame(2, {expansions: {prelude: true, promo: true}, customCorporationsList});
 
     // Each player keeps one dealt corporation and discards the rest, as in initial card selection.
     for (const p of [player, player2]) {

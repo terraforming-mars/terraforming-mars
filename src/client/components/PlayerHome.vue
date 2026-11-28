@@ -180,6 +180,7 @@ import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 import {CardModel} from '@/common/models/CardModel';
 import {getCardOrThrow} from '../cards/ClientCardManifest';
 import {HomeMixin} from '@/client/mixins/HomeMixin';
+import {setDocumentTitle} from '@/client/utils/documentTitle';
 
 type PlayerHomeModel = {
   showHand: boolean;
@@ -342,6 +343,9 @@ export default defineComponent({
     isNotActive(cardModel: CardModel): boolean {
       return !getCardOrThrow(cardModel.name).hasAction;
     },
+  },
+  mounted() {
+    setDocumentTitle(this.game.name);
   },
 });
 

@@ -468,8 +468,22 @@ export class Player implements IPlayer {
     monsInsurance?.payDebt(this, undefined);
   }
 
+  public resolveNeutralPlayerAttack(
+    title: string | Message,
+    options?: {buttonLabel?: string, onAttack?: () => void}): SelectOption | undefined {
+    const attack = () => {
+      options?.onAttack?.();
+      this.resolveInsuranceInSoloGame();
+      return undefined;
+    };
+    if (this.game.monsInsuranceOwner !== this) {
+      return attack();
+    }
+    return new SelectOption(title, options?.buttonLabel).andThen(attack);
+  }
+
   public getColoniesCount() {
-    if (!this.game.gameOptions.coloniesExtension) {
+    if (!this.game.gameOptions.expansions.colonies) {
       return 0;
     }
 

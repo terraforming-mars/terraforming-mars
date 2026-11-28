@@ -37,7 +37,7 @@ export class PathfindersExpansion {
   }
 
   public static onCardPlayed(player: IPlayer, card: ICard) {
-    if (player.game.gameOptions.pathfindersExpansion === false) {
+    if (player.game.gameOptions.expansions.pathfinders === false) {
       return;
     }
     const tags = card.tags;
@@ -243,7 +243,7 @@ export class PathfindersExpansion {
       player.increaseTerraformRating();
       break;
     case 'venus_scale':
-      if (game.gameOptions.venusNextExtension) {
+      if (game.gameOptions.expansions.venus) {
         game.increaseVenusScaleLevel(player, 1);
       } else {
         console.warn('Unexpected state: gaining venus reward without a Venus Next in play.');

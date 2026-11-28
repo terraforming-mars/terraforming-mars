@@ -26,7 +26,7 @@ class UnPlayableCeo extends CeoCard {
 
 describe('DrawCeoCardFromDeck', () => {
   it('execute', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     let card: ICeoCard | undefined;
     const action = new DrawCeoCardFromDeck(player, 3).andThen((c) => card = c);
 
@@ -40,7 +40,7 @@ describe('DrawCeoCardFromDeck', () => {
   });
 
   it('one unplayable CEO', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     game.ceoDeck.drawPile.push(new UnPlayableCeo());
     let card: ICeoCard | undefined;
     const action = new DrawCeoCardFromDeck(player, 3).andThen((c) => card = c);
@@ -56,7 +56,7 @@ describe('DrawCeoCardFromDeck', () => {
   });
 
   it('No playable CEOs', () => {
-    const [game, player] = testGame(1, {ceoExtension: true});
+    const [game, player] = testGame(1, {expansions: {ceo: true}});
     expect(game.ceoDeck.discardPile).is.empty;
     game.ceoDeck.drawPile.push(new UnPlayableCeo(), new UnPlayableCeo(), new UnPlayableCeo());
 

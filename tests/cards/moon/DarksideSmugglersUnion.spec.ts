@@ -19,7 +19,7 @@ describe('DarksideSmugglersUnion', () => {
   beforeEach(() => {
     card = new DarksideSmugglersUnion();
     // Second player is ignored.
-    [game, player] = testGame(2, {coloniesExtension: true});
+    [game, player] = testGame(2, {expansions: {colonies: true}});
   });
 
   it('Should act', () => {

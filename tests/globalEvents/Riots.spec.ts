@@ -6,7 +6,7 @@ import {addCity, testGame} from '../TestingUtils';
 describe('Riots', () => {
   it('resolve play', () => {
     const card = new Riots();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     addCity(player);

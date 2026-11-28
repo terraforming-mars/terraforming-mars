@@ -81,24 +81,7 @@ export class GlobalEventDealer {
 
     const gameOptions = game.gameOptions;
     // TODO(kberg): Merge with GameCards.
-    const includes: Record<GameModule, boolean> = {
-      base: true,
-      corpera: gameOptions.corporateEra,
-      prelude: gameOptions.preludeExtension,
-      prelude2: gameOptions.prelude2Expansion,
-      venus: gameOptions.venusNextExtension,
-      colonies: gameOptions.coloniesExtension,
-      turmoil: gameOptions.turmoilExtension,
-      ares: gameOptions.aresExtension,
-      promo: gameOptions.promoCardsOption,
-      community: gameOptions.communityCardsOption,
-      moon: gameOptions.moonExpansion,
-      pathfinders: gameOptions.pathfindersExpansion,
-      ceo: gameOptions.ceoExtension,
-      starwars: gameOptions.starWarsExpansion,
-      underworld: gameOptions.underworldExpansion,
-      deltaProject: gameOptions.deltaProjectExpansion,
-    };
+    const includes: Record<GameModule, boolean> = {base: true, ...gameOptions.expansions};
 
     for (const manifest of ALL_MODULE_MANIFESTS) {
       if (includes[manifest.module] !== true) {

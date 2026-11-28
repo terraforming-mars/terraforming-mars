@@ -48,7 +48,7 @@ describe('RoboticWorkforce', () => {
 
   beforeEach(() => {
     card = new RoboticWorkforce();
-    [game, player, player2] = testGame(2, {moonExpansion: true});
+    [game, player, player2] = testGame(2, {expansions: {moon: true}});
   });
 
   it('Cannot play if no building cards to copy', () => {
@@ -123,7 +123,7 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Capital (Ares expansion)', () => {
-    [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
+    [game, player, player2] = testGame(2, {expansions: {ares: true}, aresHazards: false});
     const capitalAres = new CapitalAres();
     player.playedCards.push(capitalAres);
 
@@ -142,7 +142,7 @@ describe('RoboticWorkforce', () => {
   });
 
   it('Should work with Solar Farm (Ares expansion)', () => {
-    [game, player, player2] = testGame(2, {aresExtension: true, aresHazards: false});
+    [game, player, player2] = testGame(2, {expansions: {ares: true}, aresHazards: false});
     const solarFarm = new SolarFarm();
 
     // This space should have 2 plants bonus on default map
@@ -383,7 +383,7 @@ describe('RoboticWorkforce', () => {
       let include = false;
       if ((card.tags.includes(Tag.BUILDING) || card.tags.includes(Tag.WILD)) && card.play !== undefined) {
         // Create new players, set all productions to 2
-        [game, player, player2] = testGame(2, {turmoilExtension: true, aresExtension: true, aresHazards: false, moonExpansion: true, underworldExpansion: true});
+        [game, player, player2] = testGame(2, {expansions: {turmoil: true, ares: true, moon: true, underworld: true}, aresHazards: false});
 
         player.production.override({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
         player2.production.override({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});

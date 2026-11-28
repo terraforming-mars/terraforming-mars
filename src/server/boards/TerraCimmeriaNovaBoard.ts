@@ -39,7 +39,7 @@ export class TerraCimmeriaNovaBoard extends MarsBoard {
     const spaces = builder.build();
 
     // Remove colony bonuses when colonies is not in the game.
-    if (gameOptions.coloniesExtension !== true) {
+    if (gameOptions.expansions.colonies !== true) {
       spaces.forEach((space) => space.bonus = space.bonus.filter((bonus) => bonus !== COLONY));
     }
     return new TerraCimmeriaNovaBoard(spaces);

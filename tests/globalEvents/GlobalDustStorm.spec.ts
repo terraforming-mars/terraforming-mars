@@ -6,7 +6,7 @@ import {testGame} from '../TestingUtils';
 describe('GlobalDustStorm', () => {
   it('resolve play', () => {
     const card = new GlobalDustStorm();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
     player.tagsForTest = {building: 1};
     player2.tagsForTest = {building: 2};

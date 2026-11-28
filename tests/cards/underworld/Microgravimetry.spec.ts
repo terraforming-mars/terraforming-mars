@@ -14,7 +14,7 @@ describe('Microgravimetry', () => {
 
   beforeEach(() => {
     card = new Microgravimetry();
-    [game, player] = testGame(2, {underworldExpansion: true});
+    [game, player] = testGame(2, {expansions: {underworld: true}});
     player.playedCards.push(card);
   });
 

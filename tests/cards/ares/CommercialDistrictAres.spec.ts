@@ -16,7 +16,7 @@ describe('CommercialDistrictAres', () => {
 
   beforeEach(() => {
     card = new CommercialDistrictAres();
-    [game, player] = testGame(2, {aresExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Should play', () => {

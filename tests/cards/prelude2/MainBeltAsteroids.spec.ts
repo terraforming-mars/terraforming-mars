@@ -17,7 +17,7 @@ describe('MainBeltAsteroids', () => {
 
   beforeEach(() => {
     card = new MainBeltAsteroids();
-    [game, player] = testGame(2, {prelude2Expansion: true});
+    [game, player] = testGame(2, {expansions: {prelude2: true}});
   });
 
   it('Cannot play', () => {

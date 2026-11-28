@@ -15,7 +15,7 @@ describe('ExpeditionVehicles', () => {
   for (const run of onTilePlacedRuns) {
     it('onTilePlaced ' + run.idx, () => {
       const card = new ExpeditionVehicles();
-      const [game, player, player2] = testGame(2, {underworldExpansion: true});
+      const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
 
       const spaces = game.board.getAvailableSpacesOnLand(player);
       const neighbor = spaces[0];
@@ -34,7 +34,7 @@ describe('ExpeditionVehicles', () => {
 
   it('A neutral cube is not an adjacent tile', () => {
     const card = new ExpeditionVehicles();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const spaces = game.board.getAvailableSpacesOnLand(player);
     const neighbor = spaces[0];
@@ -54,7 +54,7 @@ describe('ExpeditionVehicles', () => {
   ] as const) {
     it('Does not draw during WGT' + JSON.stringify(run), () => {
       const card = new ExpeditionVehicles();
-      const [game, player] = testGame(2, {underworldExpansion: true});
+      const [game, player] = testGame(2, {expansions: {underworld: true}});
 
       const spaces = game.board.getAvailableSpacesForOcean(player);
       const space = spaces[0];

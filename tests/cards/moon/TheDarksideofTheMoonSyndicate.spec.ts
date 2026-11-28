@@ -20,7 +20,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   let moonData: MoonData;
 
   beforeEach(() => {
-    [game, player, player2, player3] = testGame(3, {moonExpansion: true});
+    [game, player, player2, player3] = testGame(3, {expansions: {moon: true}});
     card = new TheDarksideofTheMoonSyndicate();
     moonData = MoonExpansion.moonData(game);
   });
@@ -101,7 +101,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   });
 
   it('steal in solo mode', () => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     moonData = MoonExpansion.moonData(game);
 
     player.titanium = 0;

@@ -8,7 +8,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('Neutrinograph', () => {
   it('canPlay', () => {
     const card = new Neutrinograph();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     player.tagsForTest = {science: 4};
     expect(card.canPlay(player)).is.false;
@@ -18,7 +18,7 @@ describe('Neutrinograph', () => {
 
   it('play', () => {
     const card = new Neutrinograph();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
 

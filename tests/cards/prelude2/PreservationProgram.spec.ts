@@ -14,7 +14,7 @@ describe('PreservationProgram', () => {
 
   beforeEach(() => {
     card = new PreservationProgram();
-    [game, player] = testGame(2, {turmoilExtension: true});
+    [game, player] = testGame(2, {expansions: {turmoil: true}});
   });
 
   it('play', () => {

@@ -97,9 +97,6 @@ export const AWARD_RENAMES = new Map<string, AwardName>([
 
   // TODO(yournamehere): remove after YYYY-MM-DD
   // ['EdgeLord', 'Excavator'],
-
-  // TODO(kberg): remove after 2026-12-01
-  ['Edgedancer', 'Suburbian'],
 ]);
 
 export function maybeRenamedAward(name: string): AwardName {

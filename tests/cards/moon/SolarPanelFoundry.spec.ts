@@ -8,7 +8,7 @@ describe('SolarPanelFoundry', () => {
   let card: SolarPanelFoundry;
 
   beforeEach(() => {
-    [/* game */, player] = testGame(1, {moonExpansion: true});
+    [/* game */, player] = testGame(1, {expansions: {moon: true}});
     card = new SolarPanelFoundry();
   });
 

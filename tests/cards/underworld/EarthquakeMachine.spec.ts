@@ -16,7 +16,7 @@ describe('EarthquakeMachine', () => {
 
   beforeEach(() => {
     card = new EarthquakeMachine();
-    [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
+    [game, player, player2, player3] = testGame(3, {expansions: {underworld: true}});
   });
 
   const canPlayRuns = [

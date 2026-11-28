@@ -12,7 +12,7 @@ import {HELLAS_BONUS_OCEAN_COST} from '../../../src/common/constants';
 describe('SubterraneanSea', () => {
   it('canPlay', () => {
     const card = new SubterraneanSea();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     expect(card.canPlay(player)).is.false;
 
@@ -37,7 +37,7 @@ describe('SubterraneanSea', () => {
 
   it('play', () => {
     const card = new SubterraneanSea();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     const spaces = game.board.getAvailableSpacesOnLand(player);
     spaces[0].excavator = player;
@@ -58,7 +58,7 @@ describe('SubterraneanSea', () => {
     // so canAfford(card_cost + space_cost) failed with depleted MC, producing
     // SelectSpace([]) → InputError('No available spaces').
     const card = new SubterraneanSea();
-    const [game, player] = testGame(2, {underworldExpansion: true, boardName: BoardName.HELLAS});
+    const [game, player] = testGame(2, {expansions: {underworld: true}, boardName: BoardName.HELLAS});
 
     const hellasSpace = game.board.getSpaceOrThrow(SpaceName.HELLAS_OCEAN_TILE);
     hellasSpace.excavator = player;
@@ -77,7 +77,7 @@ describe('SubterraneanSea', () => {
 
   it('canPlay when Reds are in power', () => {
     const card = new SubterraneanSea();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true, turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true, turmoil: true}});
 
     // Card requirements
     const spaces = game.board.getAvailableSpacesOnLand(player);

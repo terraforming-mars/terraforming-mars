@@ -8,7 +8,7 @@ import {simulateFinishingAction} from '../../TestingUtils';
 describe('MiningMarketInsider', () => {
   it('effect', () => {
     const card = new MiningMarketInsider();
-    const [game, player, player2] = testGame(2, {underworldExpansion: true});
+    const [game, player, player2] = testGame(2, {expansions: {underworld: true}});
 
     player.playedCards.push(card);
 
@@ -30,7 +30,7 @@ describe('MiningMarketInsider', () => {
 
   it('canAct', () => {
     const card = new MiningMarketInsider();
-    const [/* game */, player] = testGame(1, {underworldExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {underworld: true}});
 
     card.resourceCount = 3;
     expect(card.canAct(player)).is.false;
@@ -40,7 +40,7 @@ describe('MiningMarketInsider', () => {
 
   it('action', () => {
     const card = new MiningMarketInsider();
-    const [/* game */, player] = testGame(1, {underworldExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {underworld: true}});
 
     card.resourceCount = 4;
     expect(player.cardsInHand).has.length(0);

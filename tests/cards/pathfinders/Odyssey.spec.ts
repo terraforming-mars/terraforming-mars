@@ -203,7 +203,7 @@ describe('Odyssey', () => {
   it('Be compatible with Diversity Global Event', () => {
     const diversity = new Diversity();
 
-    const [game, player] = testGame(2, {turmoilExtension: true});
+    const [game, player] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     // player has 8 tags.

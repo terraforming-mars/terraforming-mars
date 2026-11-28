@@ -79,7 +79,7 @@ describe('Underworld / StandardTechnology', () => {
 
   it('action uses overriddenCost for excavate (cost goes to zero)', () => {
     const excavateStandardProject = new ExcavateStandardProject();
-    [game, player] = testGame(1, {underworldExpansion: true});
+    [game, player] = testGame(1, {expansions: {underworld: true}});
     player.playedCards.push(card);
     player.standardProjectsThisGeneration.add(CardName.EXCAVATE_STANDARD_PROJECT);
     // Excavate costs 7, Standard Technology discounts by 8, floor is 0.
@@ -96,7 +96,7 @@ describe('Underworld / StandardTechnology', () => {
   });
 
   it('process validates discounted cost, not full cost (#8247)', () => {
-    [game, player] = testGame(1, {underworldExpansion: true});
+    [game, player] = testGame(1, {expansions: {underworld: true}});
     player.playedCards.push(card);
     player.standardProjectsThisGeneration.add(CardName.EXCAVATE_STANDARD_PROJECT);
     // Excavate costs 7, Standard Technology discounts by 8, floor is 0.

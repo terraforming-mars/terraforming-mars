@@ -261,7 +261,7 @@ describe('AmazonisPlanitiaBoard', () => {
   });
 
   it('double delegate bonus sends two delegates', () => {
-    const [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, turmoilExtension: true});
+    const [game, player] = testGame(2, {boardName: BoardName.AMAZONIS_PLANITIA, expansions: {turmoil: true}});
 
     addGreenery(player, '70');
     runAllActions(game);

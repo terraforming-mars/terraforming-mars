@@ -13,7 +13,7 @@ describe('CanyonSurvey', () => {
 
   beforeEach(() => {
     card = new CanyonSurvey();
-    [game, player] = testGame(1, {underworldExpansion: true});
+    [game, player] = testGame(1, {expansions: {underworld: true}});
   });
 
   it('play', () => {

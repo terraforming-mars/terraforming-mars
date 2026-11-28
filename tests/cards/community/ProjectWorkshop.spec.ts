@@ -173,7 +173,7 @@ describe('ProjectWorkshop', () => {
 
 
   it('Project Workshop and Reds taxes', () => {
-    [game, player] = testGame(1, {turmoilExtension: true});
+    [game, player] = testGame(1, {expansions: {turmoil: true}});
     card.play(player);
     player.playedCards.push(card);
     player.game.phase = Phase.ACTION;

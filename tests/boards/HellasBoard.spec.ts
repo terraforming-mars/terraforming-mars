@@ -20,7 +20,7 @@ describe('HellasBoard', () => {
   let player: TestPlayer;
 
   beforeEach(() => {
-    [game, player/* , player2 */] = testGame(2, {boardName: BoardName.HELLAS, aresExtension: true});
+    [game, player/* , player2 */] = testGame(2, {boardName: BoardName.HELLAS, expansions: {ares: true}});
     board = cast(game.board, HellasBoard);
   });
 

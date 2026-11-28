@@ -29,7 +29,7 @@ describe('MarsBoard', () => {
     player2 = TestPlayer.RED.newPlayer();
 
     // Rather than create a whole game around this test, I'm mocking data to make the tests pass.
-    const gameOptions: Partial<GameOptions> = {pathfindersExpansion: false};
+    const gameOptions: Partial<GameOptions> = {expansions: {...DEFAULT_GAME_OPTIONS.expansions, pathfinders: false}};
     Reflect.set(player, 'game', {gameOptions});
     Reflect.set(player2, 'game', {gameOptions});
   });
@@ -133,7 +133,7 @@ describe('MarsBoard', () => {
 
   it('Do not include land claimed hazard spaces for Arcadian Communities', () => {
     const card = new ArcadianCommunities();
-    const [/* game */, player] = testGame(2, {aresExtension: true, aresHazards: true});
+    const [/* game */, player] = testGame(2, {expansions: {ares: true}, aresHazards: true});
     player.playedCards.push(card);
     const board = player.game.board;
     const space = board.spaces.find(AresHandler.hasHazardTile);
@@ -142,7 +142,7 @@ describe('MarsBoard', () => {
   });
 
   it('getAvailableIsolatedSpaces ignores neutral player cubes', () => {
-    const [game, player] = testGame(2, {pathfindersExpansion: true, starWarsExpansion: true});
+    const [game, player] = testGame(2, {expansions: {pathfinders: true}});
     const board = game.board;
     const space = board.getSpaceOrThrow('15');
     const adjacent = board.getAdjacentSpaces(space)[0];
@@ -164,7 +164,7 @@ describe('MarsBoard', () => {
   });
 
   it('A cube reserves its own space', () => {
-    const [game, player] = testGame(2, {pathfindersExpansion: true});
+    const [game, player] = testGame(2, {expansions: {pathfinders: true}});
     const board = game.board;
     const space = board.getSpaceOrThrow('15');
 
@@ -216,15 +216,15 @@ describe('MarsBoard', () => {
       expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
     });
 
-    it('TEMPERATURE_4MC bonus is free when temperature is maxed out', () => {
-      space.bonus = [SpaceBonus.TEMPERATURE_4MC];
+    it('TEMPERATURE bonus is free when temperature is maxed out', () => {
+      space.bonus = [SpaceBonus.TEMPERATURE];
       setTemperature(game, constants.MAX_TEMPERATURE);
       player.megaCredits = 0;
       expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.true;
     });
 
-    it('TEMPERATURE_4MC bonus requires Vastitas Borealis Nova temperature cost', () => {
-      space.bonus = [SpaceBonus.TEMPERATURE_4MC];
+    it('TEMPERATURE bonus requires Vastitas Borealis Nova temperature cost', () => {
+      space.bonus = [SpaceBonus.TEMPERATURE];
       player.megaCredits = constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST - 1;
       expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
       player.megaCredits = constants.VASTITAS_BOREALIS_NOVA_BONUS_TEMPERATURE_COST;
@@ -240,7 +240,7 @@ describe('MarsBoard', () => {
     });
 
     it('Sums multiple unaffordable bonuses', () => {
-      space.bonus = [SpaceBonus.OCEAN, SpaceBonus.TEMPERATURE_4MC];
+      space.bonus = [SpaceBonus.OCEAN, SpaceBonus.TEMPERATURE];
       // Each bonus is checked independently, so M€ shortage on either fails.
       player.megaCredits = constants.HELLAS_BONUS_OCEAN_COST - 1;
       expect(MarsBoard.canAffordPlacementBonuses(player, space)).is.false;
@@ -249,7 +249,7 @@ describe('MarsBoard', () => {
     });
 
     it('Reds tax adds to OCEAN cost', () => {
-      [game, player] = testGame(1, {turmoilExtension: true});
+      [game, player] = testGame(1, {expansions: {turmoil: true}});
       setRulingParty(game, PartyName.REDS);
       space = game.board.getSpaceOrThrow('15');
       space.bonus = [SpaceBonus.OCEAN];
@@ -262,10 +262,10 @@ describe('MarsBoard', () => {
     });
 
     it('Reds tax not applied when global parameter is maxed', () => {
-      [game, player] = testGame(1, {turmoilExtension: true});
+      [game, player] = testGame(1, {expansions: {turmoil: true}});
       setRulingParty(game, PartyName.REDS);
       space = game.board.getSpaceOrThrow('15');
-      space.bonus = [SpaceBonus.TEMPERATURE_4MC];
+      space.bonus = [SpaceBonus.TEMPERATURE];
       setTemperature(game, constants.MAX_TEMPERATURE);
 
       player.megaCredits = 0;

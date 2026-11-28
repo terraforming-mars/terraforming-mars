@@ -14,7 +14,7 @@ describe('CrescentResearchAssociation', () => {
   let card: CrescentResearchAssociation;
 
   beforeEach(() => {
-    [game, player] = testGame(1, {moonExpansion: true});
+    [game, player] = testGame(1, {expansions: {moon: true}});
     card = new CrescentResearchAssociation();
   });
 

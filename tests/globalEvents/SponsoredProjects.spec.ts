@@ -9,7 +9,7 @@ import {testGame} from '../TestingUtils';
 describe('SponsoredProjects', () => {
   it('resolve play', () => {
     const card = new SponsoredProjects();
-    const [game, player, player2] = testGame(2, {turmoilExtension: true});
+    const [game, player, player2] = testGame(2, {expansions: {turmoil: true}});
     const turmoil = game.turmoil!;
 
     const ants = new Ants();

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-syntax
 export enum Priority {
   /** Legacy value that should not be further used. */
   SUPERPOWER = -1,

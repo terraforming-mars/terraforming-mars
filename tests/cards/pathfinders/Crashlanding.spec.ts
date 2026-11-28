@@ -35,7 +35,7 @@ describe('Crashlanding', () => {
 
   beforeEach(() => {
     card = new Crashlanding();
-    [game, player] = testGame(2, {pathfindersExpansion: true, aresExtension: true, aresHazards: false});
+    [game, player] = testGame(2, {expansions: {pathfinders: true, ares: true}, aresHazards: false});
     player.megaCredits = card.cost;
     dataCard = fakeCard({name: 'A' as CardName, resourceType: CardResource.DATA});
     microbeCard = fakeCard({name: 'B' as CardName, resourceType: CardResource.MICROBE});

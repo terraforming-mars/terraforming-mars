@@ -18,7 +18,7 @@ describe('OceanFarm', () => {
 
   beforeEach(() => {
     card = new OceanFarm();
-    [game, player, otherPlayer] = testGame(2, {aresExtension: true});
+    [game, player, otherPlayer] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Can play', () => {

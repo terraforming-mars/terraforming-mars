@@ -9,7 +9,7 @@ import {assertIsMaybeBlock} from '../../underworld/underworldAssertions';
 
 describe('CosmicRadiation', () => {
   it('can play', () => {
-    const [game, player1] = testGame(3, {moonExpansion: true});
+    const [game, player1] = testGame(3, {expansions: {moon: true}});
     const card = new CosmicRadiation();
     const moonData = MoonExpansion.moonData(game);
 
@@ -24,7 +24,7 @@ describe('CosmicRadiation', () => {
   });
 
   it('play', () => {
-    const [game, player1, player2, player3] = testGame(3, {moonExpansion: true});
+    const [game, player1, player2, player3] = testGame(3, {expansions: {moon: true}});
     const card = new CosmicRadiation();
     const moonData = MoonExpansion.moonData(game);
 
@@ -56,7 +56,7 @@ describe('CosmicRadiation', () => {
   });
 
   it('Compatible with underworld', () => {
-    const [game, player1, player2] = testGame(2, {moonExpansion: true, underworldExpansion: true});
+    const [game, player1, player2] = testGame(2, {expansions: {moon: true, underworld: true}});
     const card = new CosmicRadiation();
     const moonData = MoonExpansion.moonData(game);
 

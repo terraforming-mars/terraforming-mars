@@ -9,7 +9,7 @@ import {cast} from '../../../src/common/utils/utils';
 describe('SpacePrivateers', () => {
   it('canPlay', () => {
     const card = new SpacePrivateers();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     player.underworldData.corruption = 2;
     expect(card.canPlay(player)).is.false;
@@ -19,7 +19,7 @@ describe('SpacePrivateers', () => {
 
   it('play', () => {
     const card = new SpacePrivateers();
-    const [game, player] = testGame(2, {underworldExpansion: true});
+    const [game, player] = testGame(2, {expansions: {underworld: true}});
 
     cast(card.play(player), undefined);
     runAllActions(game);
@@ -28,7 +28,7 @@ describe('SpacePrivateers', () => {
 
   it('effect', () => {
     const card = new SpacePrivateers();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     player.playedCards.push(card);
     player.playCard(fakeCard({tags: [Tag.CRIME]}));
@@ -42,7 +42,7 @@ describe('SpacePrivateers', () => {
 
   it('canAct', () => {
     const card = new SpacePrivateers();
-    const [/* game */, player] = testGame(2, {underworldExpansion: true});
+    const [/* game */, player] = testGame(2, {expansions: {underworld: true}});
 
     card.resourceCount = 0;
     expect(card.canAct(player)).is.false;
@@ -57,7 +57,7 @@ describe('SpacePrivateers', () => {
   ] as const) {
     it('action ' + JSON.stringify(run), () => {
       const card = new SpacePrivateers();
-      const [game, player, player2, player3] = testGame(3, {underworldExpansion: true});
+      const [game, player, player2, player3] = testGame(3, {expansions: {underworld: true}});
 
       player.megaCredits = 0;
       player2.megaCredits = 4;

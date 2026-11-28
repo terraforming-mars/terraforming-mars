@@ -6,13 +6,13 @@ import {runAllActions} from '../../TestingUtils';
 describe('Forest Tunnels', () => {
   it('Can play', () => {
     const card = new ForestTunnels();
-    const [/* game */, player] = testGame(1, {underworldExpansion: true});
+    const [/* game */, player] = testGame(1, {expansions: {underworld: true}});
     expect(card.canPlay(player)).is.true;
   });
 
   it('play', () => {
     const card = new ForestTunnels();
-    const [game, player] = testGame(1, {underworldExpansion: true});
+    const [game, player] = testGame(1, {expansions: {underworld: true}});
 
     player.plants = 0;
     player.underworldData.tokens.push({token: 'nothing', shelter: false, active: false});

@@ -28,7 +28,7 @@ describe('Diversifier', () => {
   });
 
   it('Counts Leavitt science tag placement bonus', () => {
-    const [game, player] = testGame(1, {coloniesExtension: true});
+    const [game, player] = testGame(1, {expansions: {colonies: true}});
     const leavitt = new Leavitt();
     game.colonies = [leavitt];
 

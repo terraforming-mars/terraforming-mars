@@ -12,7 +12,7 @@ describe('VenusAllies', () => {
   let game: IGame;
   beforeEach(() => {
     card = new VenusAllies();
-    [game, player] = testGame(1, {venusNextExtension: true});
+    [game, player] = testGame(1, {expansions: {venus: true}});
   });
 
   it('Megacredits check', () => {

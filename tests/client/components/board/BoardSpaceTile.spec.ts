@@ -17,7 +17,6 @@ describe('BoardSpaceTile', () => {
           spaceType: SpaceType.LAND,
           highlight: undefined,
         },
-        aresExtension: false,
       },
     });
     expect(wrapper.exists()).to.be.true;

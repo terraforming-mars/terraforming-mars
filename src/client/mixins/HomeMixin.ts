@@ -1,12 +1,9 @@
 // Common code shared between PlayerHome and SpectatorHome:
-// hotkey navigation, the keyboard shortcuts dialog, tile view cycling,
-// and setting the document title on mount.
+// hotkey navigation, the keyboard shortcuts dialog, and tile view cycling.
 import {defineComponent} from 'vue';
-import {GameModel} from '@/common/models/GameModel';
 import {SpaceId} from '@/common/Types';
 import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import {nextTileView, TileView} from '@/client/components/board/TileView';
-import {setDocumentTitle} from '@/client/utils/documentTitle';
 
 type DataModel = {
   tileView: TileView;
@@ -22,13 +19,6 @@ export const HomeMixin = defineComponent({
       keyboardShortcutOpened: false,
       hotkeyTargets: [],
     };
-  },
-  computed: {
-    // Consumers must define `game`.
-    // eslint-disable-next-line vue/return-in-computed-property
-    game(): GameModel {
-      throw new Error('HomeMixin consumers must override the `game` computed property.');
-    },
   },
   methods: {
     navigatePage(event: KeyboardEvent) {
@@ -77,7 +67,6 @@ export const HomeMixin = defineComponent({
     },
   },
   mounted() {
-    setDocumentTitle(this.game.name);
     window.addEventListener('keydown', this.navigatePage);
     const targets = this.$el.getElementsByClassName('hotkey-target');
     for (let i = 0; i < targets.length; i++) {

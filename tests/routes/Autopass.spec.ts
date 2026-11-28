@@ -25,7 +25,7 @@ describe('Autopass', () => {
 
   it('fails when player not found', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('g' + player.id as GameId, [player], player, 'spectatorid');
+    const game = Game.newInstance('g' + player.id as GameId, [player], player.id, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     game.getPlayerById = () => {
       throw new Error('player does not exist');
@@ -39,7 +39,7 @@ describe('Autopass', () => {
 
   it('sets autopass', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-id', [player], player.id, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
 
     scaffolding.url = '/autopass?id=' + player.id + '&autopass=true';
@@ -51,7 +51,7 @@ describe('Autopass', () => {
 
   it('disables autopass', async () => {
     const player = TestPlayer.BLACK.newPlayer();
-    const game = Game.newInstance('game-id', [player], player, 'spectatorid');
+    const game = Game.newInstance('game-id', [player], player.id, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
     player.autopass = true;
 
@@ -65,7 +65,7 @@ describe('Autopass', () => {
   it('rejects a spectator id', async () => {
     const player = TestPlayer.BLACK.newPlayer();
     const player2 = TestPlayer.RED.newPlayer();
-    const game = Game.newInstance('game-id', [player, player2], player, 'spectatorid');
+    const game = Game.newInstance('game-id', [player, player2], player.id, 'spectatorid');
     await scaffolding.ctx.gameLoader.add(game);
 
     scaffolding.url = '/autopass?id=' + game.spectatorId + '&autopass=true';

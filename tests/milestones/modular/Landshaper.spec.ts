@@ -19,7 +19,7 @@ describe('Landshaper', () => {
 
   beforeEach(() => {
     milestone = new Landshaper();
-    [game, player] = testGame(2, {boardName: BoardName.ARABIA_TERRA, moonExpansion: true});
+    [game, player] = testGame(2, {boardName: BoardName.ARABIA_TERRA, expansions: {moon: true}});
     spaces = game.board.getAvailableSpacesOnLand(player);
   });
 

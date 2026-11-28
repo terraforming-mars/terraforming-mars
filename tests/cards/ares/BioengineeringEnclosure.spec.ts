@@ -17,7 +17,7 @@ describe('BioengineeringEnclosure', () => {
   beforeEach(() => {
     animalHost = new Birds();
     card = new BioengineeringEnclosure();
-    [game, player] = testGame(2, {aresExtension: true});
+    [game, player] = testGame(2, {expansions: {ares: true}});
   });
 
   it('Can not play without a science tag', () => {

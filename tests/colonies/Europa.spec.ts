@@ -17,7 +17,7 @@ describe('Europa', () => {
 
   beforeEach(() => {
     europa = new Europa();
-    [game, player, player2] = testGame(2, {coloniesExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true}});
     game.colonies.push(europa);
   });
 
@@ -30,7 +30,7 @@ describe('Europa', () => {
   });
 
   it('Should build, reds', () => {
-    [game, player, player2] = testGame(2, {coloniesExtension: true, venusNextExtension: true, turmoilExtension: true});
+    [game, player, player2] = testGame(2, {expansions: {colonies: true, venus: true, turmoil: true}});
     game.colonies.push(europa);
 
     expect(player.colonies.getPlayableColonies()).includes(europa);

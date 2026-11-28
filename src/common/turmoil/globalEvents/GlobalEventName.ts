@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-syntax
 export enum GlobalEventName {
     GLOBAL_DUST_STORM = 'Global Dust Storm',
     SPONSORED_PROJECTS = 'Sponsored Projects',

@@ -17,7 +17,7 @@ describe('Constructor', () => {
 
   beforeEach(() => {
     award = new Constructor();
-    [game, player] = testGame(2, {coloniesExtension: true});
+    [game, player] = testGame(2, {expansions: {colonies: true}});
     board = game.board;
   });
 

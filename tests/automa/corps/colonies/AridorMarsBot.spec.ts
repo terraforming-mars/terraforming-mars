@@ -31,7 +31,7 @@ describe('AridorMarsBot', () => {
   }
 
   it('adds a colony tile to the game at setup, active, and builds no colony', () => {
-    const [game] = testGame(1, {coloniesExtension: true});
+    const [game] = testGame(1, {expansions: {colonies: true}});
     const {marsBot, calls} = recordingMarsBot({game});
     const titan = new Titan();
     game.discardedColonies = [titan];
@@ -45,7 +45,7 @@ describe('AridorMarsBot', () => {
   });
 
   it('adds nothing at setup when every colony tile is already in play', () => {
-    const [game] = testGame(1, {coloniesExtension: true});
+    const [game] = testGame(1, {expansions: {colonies: true}});
     const {marsBot} = recordingMarsBot({game});
     game.discardedColonies = [];
     const inPlay = game.colonies.slice();

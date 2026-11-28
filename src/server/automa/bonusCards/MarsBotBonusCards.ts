@@ -85,3 +85,8 @@ export function createBonusCard(name: BonusCardName): MarsBotBonusCard {
   }
   return new Klass();
 }
+
+/** Checks whether `name` is a bonus card's name, rather than a project card's. */
+export function isBonusCardName(name: string): name is BonusCardName {
+  return Object.hasOwn(CARD_CLASSES, name);
+}

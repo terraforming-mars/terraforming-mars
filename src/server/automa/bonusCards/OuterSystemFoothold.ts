@@ -23,7 +23,15 @@ export class OuterSystemFoothold extends MarsBotBonusCard {
     bonusDeck.discardPile.push(...self);
     if (drawn !== undefined) {
       bonusDeck.discard(drawn);
-      marsBot.game.log('MarsBot (${0}): draws and discards ${1}', (b) => b.bonusCardName(this.name).bonusCardName(drawn.name));
+      marsBot.game.log('MarsBot (${0}): draws and discards ${1}', (b) => {
+        b.bonusCardName(this.name);
+        // The bonus deck also holds project cards a corporation put there
+        if (drawn instanceof MarsBotBonusCard) {
+          b.bonusCardName(drawn.name);
+        } else {
+          b.cardName(drawn.name);
+        }
+      });
     }
     return false;
   }

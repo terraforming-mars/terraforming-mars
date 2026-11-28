@@ -4,7 +4,8 @@ import {SeededRandom} from '../../src/common/utils/Random';
 import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {BonusCardName} from '@/common/automa/BonusCardName';
 import {BoardName} from '@/common/boards/BoardName';
-import {toName} from '@/common/utils/utils';
+import {Asteroid} from '@/server/cards/base/Asteroid';
+import {Tardigrades} from '@/server/cards/base/Tardigrades';
 
 describe('MarsBotBonusDeck', () => {
   const logger = {log: () => {}};
@@ -121,7 +122,7 @@ describe('MarsBotBonusDeck', () => {
       const expansionDeck = MarsBotBonusDeck.create(
         new SeededRandom(42), {venus: run.venus, colonies: run.colonies, boardName: run.boardName, modularMA: run.modularMA});
 
-      const drawnNames = expansionDeck.drawPile.map(toName);
+      const drawnNames = expansionDeck.drawPile.map((card) => card.name);
       expect(drawnNames).to.have.members(expected);
       expect(expansionDeck.discardPile).to.be.empty;
     });
@@ -162,7 +163,19 @@ describe('MarsBotBonusDeck', () => {
 
     expect(restored.drawPile).to.deep.eq(expansionDeck.drawPile);
     expect(restored.discardPile).to.deep.eq(expansionDeck.discardPile);
-    const restoredNames = [...restored.drawPile, ...restored.discardPile].map(toName);
+    const restoredNames = [...restored.drawPile, ...restored.discardPile].map((card) => card.name);
     expect(restoredNames).to.have.members(names);
+  });
+
+  it('serialization round trip with project cards', () => {
+    const expansionDeck = MarsBotBonusDeck.create(new SeededRandom(42), {venus: true, colonies: true});
+    expansionDeck.drawPile.unshift(createBonusCard(BonusCardName.INTERFACE_HYPERLINK));
+    expansionDeck.drawPile.push(new Asteroid());
+    expansionDeck.discard(expansionDeck.draw(logger)!, expansionDeck.draw(logger)!, new Tardigrades());
+
+    const restored = MarsBotBonusDeck.deserialize(expansionDeck.serialize(), new SeededRandom(42));
+
+    expect(restored.drawPile).to.deep.eq(expansionDeck.drawPile);
+    expect(restored.discardPile).to.deep.eq(expansionDeck.discardPile);
   });
 });

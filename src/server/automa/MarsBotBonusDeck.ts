@@ -1,10 +1,14 @@
 import {MarsBotBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCard';
-import {createBonusCard} from '@/server/automa/bonusCards/MarsBotBonusCards';
+import {createBonusCard, isBonusCardName} from '@/server/automa/bonusCards/MarsBotBonusCards';
 import {BonusCardName} from '@/common/automa/BonusCardName';
 import {BoardName} from '@/common/boards/BoardName';
+import {CardName} from '@/common/cards/CardName';
+import {IProjectCard} from '@/server/cards/IProjectCard';
+import {newProjectCard} from '@/server/createCard';
 import {Deck} from '../cards/Deck';
 import {SerializedDeck} from '../cards/SerializedDeck';
 import {Random} from '../../common/utils/Random';
+import {inplaceRemove} from '../../common/utils/utils';
 
 /** The bonus cards in the base game deck (B01-B08), before any expansion swaps some out. */
 export const BASE_BONUS_CARDS: ReadonlyArray<BonusCardName> = [
@@ -18,6 +22,25 @@ export const BASE_BONUS_CARDS: ReadonlyArray<BonusCardName> = [
   BonusCardName.CORPORATE_COMPETITION,
 ];
 
+/**
+ * A card in MarsBot's bonus deck: a bonus card, or a project card a corporation put there.
+ *
+ * MarsBot plays a project card drawn from the bonus deck like one from its action deck.
+ */
+export type MarsBotBonusDeckCard = MarsBotBonusCard | IProjectCard;
+
+/** Creates a bonus deck card from its saved name: a bonus card, or else a project card. */
+function deserializeCard(name: BonusCardName | CardName): MarsBotBonusDeckCard {
+  if (isBonusCardName(name)) {
+    return createBonusCard(name);
+  }
+  const card = newProjectCard(name);
+  if (card === undefined) {
+    throw new Error(`Cannot restore MarsBot bonus deck card ${name}`);
+  }
+  return card;
+}
+
 /** The Corporate Competition card that replaces B08 on each board other than Tharsis (rulebook C, p.8). */
 const CORPORATE_COMPETITION_FOR_BOARD: Partial<Record<BoardName, BonusCardName>> = {
   [BoardName.HELLAS]: BonusCardName.CORPORATE_COMPETITION_HELLAS,
@@ -28,8 +51,8 @@ const CORPORATE_COMPETITION_FOR_BOARD: Partial<Record<BoardName, BonusCardName>>
 };
 
 /** The MarsBot bonus card deck. */
-export class MarsBotBonusDeck extends Deck<MarsBotBonusCard, BonusCardName> {
-  public constructor(deck: Array<MarsBotBonusCard>, discarded: Array<MarsBotBonusCard>, random: Random) {
+export class MarsBotBonusDeck extends Deck<MarsBotBonusDeckCard, BonusCardName | CardName> {
+  public constructor(deck: Array<MarsBotBonusDeckCard>, discarded: Array<MarsBotBonusDeckCard>, random: Random) {
     super('marsbot', deck, discarded, random);
   }
 
@@ -68,9 +91,31 @@ export class MarsBotBonusDeck extends Deck<MarsBotBonusCard, BonusCardName> {
     return deck;
   }
 
-  public static deserialize(d: SerializedDeck<BonusCardName>, random: Random): MarsBotBonusDeck {
-    const deck = d.drawPile.map(createBonusCard);
-    const discarded = d.discardPile.map(createBonusCard);
+  public static deserialize(d: SerializedDeck<BonusCardName | CardName>, random: Random): MarsBotBonusDeck {
+    const deck = d.drawPile.map(deserializeCard);
+    const discarded = d.discardPile.map(deserializeCard);
     return new MarsBotBonusDeck(deck, discarded, random);
+  }
+
+  /**
+   * Removes the bonus card `bonusCardName` from the draw pile, or else the discard pile.
+   *
+   * Returns the card, or undefined when neither pile holds it.
+   */
+  public findAndRemove(bonusCardName: BonusCardName): MarsBotBonusCard | undefined {
+    for (const pile of [this.drawPile, this.discardPile]) {
+      const card = pile.find((bonusDeckCard): bonusDeckCard is MarsBotBonusCard => bonusDeckCard instanceof MarsBotBonusCard && bonusDeckCard.name === bonusCardName);
+      if (card !== undefined) {
+        inplaceRemove(pile, card);
+        return card;
+      }
+    }
+    return undefined;
+  }
+
+  /** Removes the bonus card `bonusCardName` from both piles. */
+  public removeByName(bonusCardName: BonusCardName): void {
+    this.drawPile = this.drawPile.filter((card) => card.name !== bonusCardName);
+    this.discardPile = this.discardPile.filter((card) => card.name !== bonusCardName);
   }
 }

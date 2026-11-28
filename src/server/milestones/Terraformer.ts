@@ -13,9 +13,13 @@ export class Terraformer implements IMilestone {
   public getScore(player: IPlayer): number {
     return player.terraformRating;
   }
+  private target(player: IPlayer): number {
+    return player.game.turmoil ? this.terraformRatingTurmoil : this.terraformRating;
+  }
   public canClaim(player: IPlayer): boolean {
-    const target = player.game.turmoil ? this.terraformRatingTurmoil : this.terraformRating;
-    const score = this.getScore(player);
-    return score >= target;
+    return this.getScore(player) >= this.target(player);
+  }
+  public stepsToMeet(player: IPlayer): number {
+    return Math.max(0, this.target(player) - this.getScore(player));
   }
 }

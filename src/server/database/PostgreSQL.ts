@@ -63,8 +63,6 @@ const metrics = {
 export class PostgreSQL implements IDatabase {
   protected trimCount = POSTGRES_TRIM_COUNT;
   protected compressOnWrite = DB_COMPRESS_ON_WRITE;
-  // The last save of each game that hasn't finished writing.
-  private savesInProgress = new Map<GameId, Promise<void>>();
 
   protected statistics = {
     saveCount: 0,
@@ -391,23 +389,6 @@ export class PostgreSQL implements IDatabase {
     // starts before this one finishes gets the next id.
     const thisSaveId = game.lastSaveId;
     game.lastSaveId = thisSaveId + 1;
-
-    // One game's saves write in the order they were taken, because each one rewrites the game's
-    // single log row.
-    const previous = this.savesInProgress.get(game.id) ?? Promise.resolve();
-    const write = () => this.write(game, thisSaveId, gameJSON, gameCompressed, log, options);
-    const thisSave = previous.then(write, write);
-    this.savesInProgress.set(game.id, thisSave);
-    try {
-      await thisSave;
-    } finally {
-      if (this.savesInProgress.get(game.id) === thisSave) {
-        this.savesInProgress.delete(game.id);
-      }
-    }
-  }
-
-  private async write(game: IGame, thisSaveId: number, gameJSON: string, gameCompressed: Buffer | null, log: string, options: string): Promise<void> {
     try {
       await tx(this.pool, async (client) => {
         // xmax = 0 is described at https://stackoverflow.com/questions/39058213/postgresql-upsert-differentiate-inserted-and-updated-rows-using-system-columns-x

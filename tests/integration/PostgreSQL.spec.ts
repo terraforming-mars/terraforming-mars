@@ -823,33 +823,5 @@ describeDatabaseSuite({
       expect((await db.getGameVersion(game.id, 2)).lastSaveId).eq(2);
       expect(game.lastSaveId).eq(3);
     });
-
-    it('writes overlapping saves of one game in the order they were taken', async () => {
-      const db = dbFactory();
-      const player = TestPlayer.BLACK.newPlayer();
-      const game = Game.newInstance('game-id-in-order', [player], player, 'spectatorid');
-      await db.awaitAllSaves();
-
-      // Holds the first connection back until the second save is written, or 200ms pass.
-      let secondWritten = () => {};
-      const secondDone = new Promise<void>((resolve) => {
-        secondWritten = resolve;
-      });
-      const pool = db.getPool();
-      const connect = pool.connect.bind(pool);
-      pool.connect = async () => {
-        pool.connect = connect;
-        await Promise.race([secondDone, new Promise((resolve) => setTimeout(resolve, 200))]);
-        return connect();
-      };
-
-      const first = db.saveGame(game);
-      game.log('one more');
-      const second = db.saveGame(game).then(secondWritten);
-      await Promise.all([first, second]);
-
-      const loaded = await db.getGame(game.id);
-      expect(loaded.gameLog).has.length(game.gameLog.length);
-    });
   },
 });

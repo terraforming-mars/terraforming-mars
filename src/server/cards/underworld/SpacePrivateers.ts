@@ -11,6 +11,9 @@ import {PlayerInput} from '../../PlayerInput';
 import {Resource} from '../../../common/Resource';
 import {message} from '../../logs/MessageBuilder';
 import {all} from '../Options';
+import {OrOptions} from '@/server/inputs/OrOptions';
+import {SelectOption} from '@/server/inputs/SelectOption';
+import {SelectPlayer} from '@/server/inputs/SelectPlayer';
 
 export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
   constructor() {
@@ -51,24 +54,76 @@ export class SpacePrivateers extends Card implements IProjectCard, IActionCard {
   }
 
   action(player: IPlayer): PlayerInput | undefined {
-    // TODO(kberg): Attacker should decide attack order.
+    return this.selectNextTarget(player, player.opponents, this.resourceCount);
+  }
 
-    // If a player is Mons Insurance, this probably won't go in preferred player order.
-    // TODO(kberg): devise a Mons Insurance solution.
-
-    const targets = player.opponents;
-    const mc = this.resourceCount;
-    for (const target of targets) {
-      target.maybeBlockAttack(player, message('Lose ${0} M€', (b) => b.number(mc)), (proceed) => {
-        if (proceed) {
-          target.stock.steal(Resource.MEGACREDITS, mc, player, {log: true});
-        } else {
-          player.removeResourceFrom(this, 1, {log: true});
-        }
-        return undefined;
-      });
+  /*
+   * Players in `remaining` that can still be attacked.
+   */
+  private targets(remaining: ReadonlyArray<IPlayer>): ReadonlyArray<IPlayer> {
+    if (this.resourceCount === 0) {
+      return [];
     }
-    return undefined;
+    return remaining.filter((p) => p.megaCredits > 0);
+  }
+
+  /*
+   * Asks `player` which of `remaining` to attack next, one target at a time.
+   *
+   * Each attack resolves completely before the next choice.
+   */
+  private selectNextTarget(player: IPlayer, remaining: ReadonlyArray<IPlayer>, mc: number): PlayerInput | undefined {
+    const targets = this.targets(remaining);
+    if (targets.length <= 1) {
+      this.attackInOrder(player, remaining, mc);
+      return undefined;
+    }
+    return new OrOptions(
+      new SelectPlayer(targets, 'Select player', 'Attack')
+        .andThen((target) => {
+          const rest = remaining.filter((p) => p !== target);
+          this.attack(player, target, rest, mc, () => this.selectNextTarget(player, rest, mc));
+          return undefined;
+        }),
+      new SelectOption('Attack the remaining players in any order', 'Attack')
+        .andThen(() => {
+          this.attackInOrder(player, remaining, mc);
+          return undefined;
+        }),
+    ).setTitle('Select the next player to attack');
+  }
+
+  /* Attacks `remaining` in order, one at a time, without asking `player`. */
+  private attackInOrder(player: IPlayer, remaining: ReadonlyArray<IPlayer>, mc: number) {
+    const target = this.targets(remaining)[0];
+    if (target === undefined) {
+      return;
+    }
+    const rest = remaining.filter((p) => p !== target);
+    this.attack(player, target, rest, mc, () => {
+      this.attackInOrder(player, rest, mc);
+      return undefined;
+    });
+  }
+
+  /*
+   * Attacks `target`, then gives `player` the input from `next`.
+   *
+   * `rest` are the players still waiting to be attacked.
+   */
+  private attack(player: IPlayer, target: IPlayer, rest: ReadonlyArray<IPlayer>, mc: number, next: () => PlayerInput | undefined) {
+    target.maybeBlockAttack(player, message('Lose ${0} M€', (b) => b.number(mc)), (proceed) => {
+      if (proceed) {
+        target.stock.steal(Resource.MEGACREDITS, mc, player, {log: true});
+      } else {
+        player.removeResourceFrom(this, 1, {log: true});
+        if (this.resourceCount === 0 && rest.some((p) => p.megaCredits > 0)) {
+          player.game.log('${0} has no fighters left on ${1}, so the attack ends', (b) => b.player(player).card(this));
+        }
+      }
+      player.defer(next);
+      return undefined;
+    });
   }
 
   onCardPlayed(player: IPlayer, card: ICard): PlayerInput | undefined | void {

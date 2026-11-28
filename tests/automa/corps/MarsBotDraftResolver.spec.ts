@@ -85,15 +85,18 @@ describe('MarsBotDraftResolver', () => {
       expect(picked).to.eq(buildingCard);
     });
 
-    it('counts the Event tag an event card shows', () => {
-      // Asteroid is an event with a Space tag, so it shows two tags and Carbonate Processing shows one.
-      const eventPriority: MarsBotDraftPriority = {type: 'tags', tags: [Tag.EVENT]};
-      for (const run of [
-        {priority: eventPriority, hand: [earthCard, spaceCard]},
-        {priority: {type: 'mostTags'} as const, hand: [buildingCard, spaceCard]},
-      ]) {
-        expect(resolver().pickCard(run.hand, run.priority)).to.eq(spaceCard);
-      }
+    // Asteroid is an event with a Space tag, so it shows two tags and Carbonate Processing shows one.
+    const eventPriority: MarsBotDraftPriority = {type: 'tags', tags: [Tag.EVENT]};
+    for (const run of [
+      {priority: eventPriority, hand: [earthCard, spaceCard], expected: spaceCard},
+      {priority: {type: 'mostTags'} as const, hand: [buildingCard, spaceCard], expected: spaceCard},
+    ]) {
+      it(`counts the Event tag an event card shows, ${run.priority.type} priority`, () => {
+        expect(resolver().pickCard(run.hand, run.priority)).to.eq(run.expected);
+      });
+    }
+
+    it('counts the Event tag an event card shows when discarding after a draft', () => {
       const {discarded} = resolver().discardAfterDraft([spaceCard, earthCard], eventPriority);
 
       expect(discarded).to.deep.eq([earthCard]);
@@ -147,31 +150,48 @@ describe('MarsBotDraftResolver', () => {
       expect(picked).to.eq(buildingCard);
     });
 
+    const powerCard = fakeCard({tags: [Tag.POWER]});
+    const jovianCard = fakeCard({tags: [Tag.JOVIAN]});
+    const twoJovianCard = fakeCard({tags: [Tag.JOVIAN, Tag.JOVIAN]});
+
     // Rulebook B p.3 makes Aridor's priority a track, not an ordered tag list. Our reading is that
     // both tags on a shared track match alike and more matches win.
-    it('scores the tags on a shared track alike', () => {
-      const powerCard = fakeCard({tags: [Tag.POWER]});
-      const jovianCard = fakeCard({tags: [Tag.JOVIAN]});
-      const twoJovianCard = fakeCard({tags: [Tag.JOVIAN, Tag.JOVIAN]});
-      const marsBotBoard = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
-      // Leave track 4 (Power and Jovian) behind.
-      marsBotBoard.tracks.forEach((track, i) => {
-        if (i !== 4) {
-          track.advance();
-        }
-      });
-      expect(marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()].tags).deep.eq([Tag.POWER, Tag.JOVIAN]);
+    for (const run of [
+      {
+        name: 'Jovian then Power in the kept order',
+        shuffler: keepOrder,
+        hand: [jovianCard, powerCard],
+        expected: jovianCard,
+      },
+      {
+        name: 'Jovian then Power in the reversed order',
+        shuffler: reverseOrder,
+        hand: [jovianCard, powerCard],
+        expected: powerCard,
+      },
+      {
+        name: 'Power then two Jovian in the kept order',
+        shuffler: keepOrder,
+        hand: [powerCard, twoJovianCard],
+        expected: twoJovianCard,
+      },
+    ]) {
+      it(`scores the tags on a shared track alike, ${run.name}`, () => {
+        const marsBotBoard = new MarsBotBoard(THARSIS_MARSBOT_BOARD);
+        // Leave track 4 (Power and Jovian) behind.
+        marsBotBoard.tracks.forEach((track, i) => {
+          if (i !== 4) {
+            track.advance();
+          }
+        });
+        const leastAdvanced = marsBotBoard.definitions[marsBotBoard.getLeastAdvancedTrackIndex()];
+        expect(leastAdvanced.tags).deep.eq([Tag.POWER, Tag.JOVIAN]);
 
-      for (const run of [
-        {shuffler: keepOrder, hand: [jovianCard, powerCard], expected: jovianCard},
-        {shuffler: reverseOrder, hand: [jovianCard, powerCard], expected: powerCard},
-        {shuffler: keepOrder, hand: [powerCard, twoJovianCard], expected: twoJovianCard},
-      ]) {
         const picked = new MarsBotDraftResolver(marsBotBoard, run.shuffler).pickCard(run.hand, priority);
 
         expect(picked).to.eq(run.expected);
-      }
-    });
+      });
+    }
   });
 
   describe('pickCard, mostTags priority', () => {

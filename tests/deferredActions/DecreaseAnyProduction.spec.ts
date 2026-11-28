@@ -58,7 +58,7 @@ describe('DecreaseAnyProduction', () => {
     const selectPlayer = cast(decreaseAnyProduction.execute(), SelectPlayer);
     runAllActions(game);
 
-    expect(selectPlayer.players).deep.eq([player, player3]);
+    expect(selectPlayer.players).deep.eq([player3, player]);
   });
 
   it('multiple targets', () => {
@@ -69,7 +69,8 @@ describe('DecreaseAnyProduction', () => {
     const selectPlayer = cast(decreaseAnyProduction.execute(), SelectPlayer);
     runAllActions(game);
 
-    expect(selectPlayer.players).deep.eq([player, player2, player3]);
+    expect(selectPlayer.players).deep.eq([player2, player3, player]);
+    expect(selectPlayer.toModel().markSelf).is.true;
 
     selectPlayer.cb(player3);
 

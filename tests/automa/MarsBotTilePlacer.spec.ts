@@ -299,7 +299,7 @@ describe('MarsBotTilePlacer', () => {
     return fake;
   }
 
-  // Each run puts MarsBot's city on `expected` rather than `loser`, with no flipped card needed to decide.
+  // Each run puts MarsBot's city on `expected` rather than `loser`, with no revealed card needed to decide.
   for (const run of [
     {
       // 63 is polar and has no icons, 24 is not polar and has two.

@@ -23,7 +23,7 @@ const DEFAULT_TIEBREAKERS: ReadonlyArray<TiebreakerName> = ['oceans', 'icons'];
 /**
  * The tiebreakers each map's player aid lists, in order.
  *
- * The flipped project card always comes last (rulebook C, p.10).
+ * The revealed project card always comes last (rulebook C, p.10).
  */
 const MAP_TIEBREAKERS: Partial<Record<BoardName, ReadonlyArray<TiebreakerName>>> = {
   [BoardName.HELLAS]: ['oceans', 'polarRegion', 'icons'],
@@ -58,7 +58,7 @@ const SPECIAL_HEX_ICONS = 2.5;
  * Tiebreakers (after type-specific rules), on Tharsis:
  *   1. Adjacent to as many oceans as possible.
  *   2. Cover the most placement bonus icons.
- *   3. Random (flip a project card, use cost to count through tied spaces).
+ *   3. Random (reveal a project card, use cost to count through tied spaces).
  *
  * The other maps reorder these and add their own, see `MAP_TIEBREAKERS`.
  */
@@ -409,7 +409,7 @@ export class MarsBotTilePlacer {
   }
 
   /**
-   * Breaks a tie by flipping a project card and counting its cost through the tied spaces.
+   * Breaks a tie by revealing a project card and counting its cost through the tied spaces.
    *
    * Counting starts at 1 on the first space and goes back to the first after passing the last. A cost
    * of 0 picks the last space.
